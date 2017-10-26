@@ -17,7 +17,4 @@
 % number of Prolog threads and then returns to the toplevel, so you can
 % (re-)load code, debug, etc.
 server(Port) :-
-        http_server(http_dispatch, [port(Port)]).
-
-
-
+   http_server(http_dispatch, [port(Port)]).
