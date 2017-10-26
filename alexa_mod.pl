@@ -207,6 +207,22 @@ intent_dictOut("getANewFact",_,DictOut):-
 	answers(RandomMessage),
 	my_json_answer(RandomMessage,DictOut).
 
+intent_dictOut("forget",_,DictOut):-
+	retractall(alexa_mod:sessionid_fact(_,_)),
+	my_json_answer("I am a blank slate",DictOut).
+
+intent_dictOut("KBdump",DictIn,DictOut):-
+	%get_dict(session,DictIn,SessionObject),
+	%get_dict(sessionId,SessionObject,SessionId),
+	findall(Message,
+			(alexa_mod:sessionid_fact(SessionId,Rule),
+			 phrase(sentence(Rule),Sentence),
+			 atomics_to_string(Sentence," ",Message)			 
+			),
+			Messages),
+	atomic_list_concat(Messages,". ",Message),
+	my_json_answer(Message,DictOut).
+
 intent_dictOut("remember",DictIn,DictOut):-
 	get_dict(session,DictIn,SessionObject),
 	get_dict(sessionId,SessionObject,SessionId),
@@ -215,16 +231,14 @@ intent_dictOut("remember",DictIn,DictOut):-
 	get_dict(slots,IntentObject,SlotsObject),
 	get_dict(mySlot,SlotsObject,MySlotObject),
 	get_dict(value,MySlotObject,Value),
-	split_string(Value," ","",StringList),
-	maplist(string_lower,StringList,StringListLow),
-	maplist(atom_string,AtomList,StringListLow),
-	(phrase(sentence(Rule),AtomList) ->
-	 (assertz(sessionid_fact(SessionId,Rule)),
-	  my_json_answer(Value,DictOut));
-	  my_json_answer(Value,DictOut)).
+	portray_clause(user_error,Value),
+	make_atomlist(Value,AtomList),
+	( phrase(sentence(Rule),AtomList) ->
+	  (assertz(alexa_mod:sessionid_fact(SessionId,Rule)),my_json_answer(Value,DictOut))
+	).
 
 intent_dictOut("question",DictIn,DictOut):-
-	writeln(user_error,walrus),
+	%writeln(user_error,walrus),
 	get_dict(session,DictIn,SessionObject),
 	get_dict(sessionId,SessionObject,SessionId),
 	get_dict(request,DictIn,RequestObject),
@@ -233,14 +247,10 @@ intent_dictOut("question",DictIn,DictOut):-
 	get_dict(questionSlot,SlotsObject,MySlotObject),
 	get_dict(value,MySlotObject,Value),
 	portray_clause(user_error,Value),
-	((
-	  split_string(Value," ","",StringList),
-	  maplist(string_lower,StringList,StringListLow),
-	  maplist(atom_string,AtomList,StringListLow),
-
-	  phrase(question(Query),AtomList),prove_question(Query,SessionId,Answer)) ->
-	 my_json_answer(Answer,DictOut);
-	 my_json_answer(Value,DictOut)
+	make_atomlist(Value,AtomList),
+	( phrase(question(Query),AtomList),
+	  prove_question(Query,SessionId,Answer) -> my_json_answer(Answer,DictOut)
+	; otherwise -> my_json_answer('Unable to answer your question',DictOut)
 	).
 
 
@@ -248,7 +258,8 @@ intent_dictOut(_,_,DictOut):-
 	my_json_answer('Error parsing',DictOut).
 
 prove_question(Query,SessionId,Answer):-
-	findall(Rule,sessionid_fact(SessionId,Rule),Rulebase),
+	portray_clause(user_error,Query),
+	findall(Rule,alexa_mod:sessionid_fact(SessionId,Rule),Rulebase),
 	prove_rb(Query,Rulebase),
 	transform(Query,Clauses),
 	phrase(sentence(Clauses),AnswerAtomList),
@@ -288,6 +299,11 @@ string_rule(String,Rule):-
 	split_string(StringL," ","",Split),
 	maplist(atom_string,AtomList,Split),
 	phrase(sentence(Rule),AtomList).
+
+make_atomlist(Value,AtomList):-
+	split_string(Value," ","",StringList),
+	maplist(string_lower,StringList,StringListLow),
+	maplist(atom_string,AtomList,StringListLow).
 
 
 
@@ -365,3 +381,51 @@ my_copy_element(X,Ys):-
     member(X1,Ys),
     copy_term(X1,X).
 
+
+testDict(InDict):-
+InDict =
+	_{
+	  session: _SessionDict,
+	  request: _{
+		type: "IntentRequest",
+		requestId: "EdwRequestId.0368645b-9a20-4c84-9fa4-57fa9ca96936",
+		intent: _{
+		  name: "forget",
+		  slots: _{}
+		},
+		locale: "en-GB",
+		timestamp: "2017-10-26T14:05:21Z"
+	  },
+	  context: _ContextDict,
+	  version: "1.0"
+	},
+%%% details
+SessionDict =
+	_{
+		new: false,
+		sessionId: "SessionId.f9aae3a0-f8ce-4528-bf07-9c9a3f1922eb",
+		application: _{
+		  applicationId: "amzn1.ask.skill.a6672692-f5df-4e91-a17a-dfcc48f38919"
+		},
+		attributes: _{},
+		user: _{
+		  userId: "amzn1.ask.account.AGHOMUHPSYW7CI7XL5ZCQVH3RZVBUEGDVBTKKWWZQ35UQZDCZILOYCOLES4YXYO2RILIBTKF42YNHAUHTNSB5KLEDB7FJTUQQ2UQGDXVCFRMN3URKXEXMIAQUVGI2XA7HBINTZUNOYZGQG6QGSM4M67DSYRAWEDUFPEJQAXULWC3WGQ2SAKGABVCZJXRQMSESG755HXLYHCRVNI"
+		}
+	  },
+ContextDict =
+	_{
+		'AudioPlayer': _{
+		  playerActivity: "IDLE"
+		},
+		'System': _{
+		  application: _{
+			applicationId: "amzn1.ask.skill.a6672692-f5df-4e91-a17a-dfcc48f38919"
+		  },
+		  user: _{
+			userId: "amzn1.ask.account.AGHOMUHPSYW7CI7XL5ZCQVH3RZVBUEGDVBTKKWWZQ35UQZDCZILOYCOLES4YXYO2RILIBTKF42YNHAUHTNSB5KLEDB7FJTUQQ2UQGDXVCFRMN3URKXEXMIAQUVGI2XA7HBINTZUNOYZGQG6QGSM4M67DSYRAWEDUFPEJQAXULWC3WGQ2SAKGABVCZJXRQMSESG755HXLYHCRVNI"
+		  },
+		  device: _{
+			supportedInterfaces: _{}
+		  }
+		}
+	  }.
