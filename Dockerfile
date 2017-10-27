@@ -1,8 +1,9 @@
-FROM swipl:latest
+FROM swipl:7.6.0
 
 # Run the image as a non-root user
-#RUN adduser -D myuser
+RUN useradd -m -s /bin/sh myuser
 USER myuser
+WORKDIR /home/myuser
 
 ADD basic_site.pl $HOME
 ADD alexa_mod.pl $HOME
