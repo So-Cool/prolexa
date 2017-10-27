@@ -1,7 +1,5 @@
 :-module(alexa_mod,[alexa/1]).
 
-:- use_module(authenticate_alexa).
-
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_json)).
 :- use_module(library(http/http_open)).
@@ -104,11 +102,11 @@ prove_question(Query,SessionId,Answer):-
 	phrase(sentence(Clauses),AnswerAtomList),
 	atomics_to_string(AnswerAtomList," ",Answer).
 
-get_id(Dict,Id):-
+get_id(_Dict,_Id):-
   true.
-	%get_dict(session,Dict,SessionObject),
+	%get_dict(session,_Dict,SessionObject),
 	%get_dict(application,SessionObject,ApplicationObject),
-	%get_dict(applicationId,ApplicationObject,Id).
+	%get_dict(applicationId,ApplicationObject,_Id).
 
 application_id(X):-
 	X= "amzn1.ask.skill.a27eb505-fcef-49bf-8975-3e1a6d7b7c74".
