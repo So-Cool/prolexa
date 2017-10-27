@@ -1,8 +1,19 @@
 # Prolexa: Amazon Alexa and Prolog integration #
 
-## Test the server ##
+## Localhost workflow (Docker) ##
+To build:
 ```
-curl -v POST http://localhost:5000/alexa -d @testjson --header "Content-Type: application/json"
+docker build . -t prolexa
+```
+
+To run:
+```
+docker run -it -p 4000:4000 prolexa
+```
+
+To test the server:
+```
+curl -v POST http://localhost:4000/alexa -d @testjson --header "Content-Type: application/json"
 ```
 
 ## Heroku workflow ##
