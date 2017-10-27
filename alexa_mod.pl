@@ -30,7 +30,7 @@ handle_dict(DictIn,DictOut) :-
 
 	application_id(Id),
 	*/
-	get_intent(DictIn,IntentName),
+	IntentName = DictIn.request.intent.name,
 	intent_dictOut(IntentName,DictIn,DictOut).
 
 handle_dict(_DictIn,DictOut):-
@@ -39,11 +39,6 @@ handle_dict(_DictIn,DictOut):-
 	      response: _{outputSpeech:_{type: "PlainText", text: "Error Id did not match"}},
               version:"1.0"
 	     }.
-
-get_intent(DictIn,IntentName):-
-	get_dict(request,DictIn,RequestObject),
-	get_dict(intent,RequestObject,IntentObject),
-	get_dict(name,IntentObject,IntentName).
 
 /*
  *  Steps needed
@@ -61,40 +56,31 @@ intent_dictOut("forget",_,DictOut):-
 	my_json_answer("I am a blank slate",DictOut).
 
 intent_dictOut("KBdump",DictIn,DictOut):-
-	%get_dict(session,DictIn,SessionObject),
-	%get_dict(sessionId,SessionObject,SessionId),
+	SessionId=DictIn.session.sessionId,
 	findall(Message,
 			(alexa_mod:sessionid_fact(SessionId,Rule),
 			 phrase(sentence(Rule),Sentence),
 			 atomics_to_string(Sentence," ",Message)
 			),
 			Messages),
-	atomic_list_concat(Messages,". ",Message),
+	( Messages = [] -> Message = "I know nothing"
+	; otherwise -> atomic_list_concat(Messages,". ",Message)
+	),
 	my_json_answer(Message,DictOut).
 
 intent_dictOut("remember",DictIn,DictOut):-
-	get_dict(session,DictIn,SessionObject),
-	get_dict(sessionId,SessionObject,SessionId),
-	get_dict(request,DictIn,RequestObject),
-	get_dict(intent,RequestObject,IntentObject),
-	get_dict(slots,IntentObject,SlotsObject),
-	get_dict(mySlot,SlotsObject,MySlotObject),
-	get_dict(value,MySlotObject,Value),
+	SessionId=DictIn.session.sessionId,
+	Value=DictIn.request.intent.slots.mySlot.value,
 	portray_clause(user_error,Value),
 	make_atomlist(Value,AtomList),
 	( phrase(sentence(Rule),AtomList) ->
 	  (assertz(alexa_mod:sessionid_fact(SessionId,Rule)),my_json_answer(Value,DictOut))
+	; otherwise -> my_json_answer('Unable to parse this',DictOut)
 	).
 
 intent_dictOut("question",DictIn,DictOut):-
-	%writeln(user_error,walrus),
-	get_dict(session,DictIn,SessionObject),
-	get_dict(sessionId,SessionObject,SessionId),
-	get_dict(request,DictIn,RequestObject),
-	get_dict(intent,RequestObject,IntentObject),
-	get_dict(slots,IntentObject,SlotsObject),
-	get_dict(questionSlot,SlotsObject,MySlotObject),
-	get_dict(value,MySlotObject,Value),
+	SessionId=DictIn.session.sessionId,
+	Value=DictIn.request.intent.slots.questionSlot.value,
 	portray_clause(user_error,Value),
 	make_atomlist(Value,AtomList),
 	( phrase(question(Query),AtomList),
@@ -103,7 +89,7 @@ intent_dictOut("question",DictIn,DictOut):-
 	).
 
 intent_dictOut(_,_,DictOut):-
-	my_json_answer('Error parsing',DictOut).
+	my_json_answer('Unknown error',DictOut).
 
 prove_question(Query,SessionId,Answer):-
 	portray_clause(user_error,Query),
@@ -216,51 +202,3 @@ my_copy_term(Old,_New):-
 my_copy_element(X,Ys):-
     member(X1,Ys),
     copy_term(X1,X).
-
-testDict(InDict):-
-InDict =
-	_{
-	  session: _SessionDict,
-	  request: _{
-		type: "IntentRequest",
-		requestId: "EdwRequestId.0368645b-9a20-4c84-9fa4-57fa9ca96936",
-		intent: _{
-		  name: "forget",
-		  slots: _{}
-		},
-		locale: "en-GB",
-		timestamp: "2017-10-26T14:05:21Z"
-	  },
-	  context: _ContextDict,
-	  version: "1.0"
-	},
-%%% details
-SessionDict =
-	_{
-		new: false,
-		sessionId: "SessionId.f9aae3a0-f8ce-4528-bf07-9c9a3f1922eb",
-		application: _{
-		  applicationId: "amzn1.ask.skill.a6672692-f5df-4e91-a17a-dfcc48f38919"
-		},
-		attributes: _{},
-		user: _{
-		  userId: "amzn1.ask.account.AGHOMUHPSYW7CI7XL5ZCQVH3RZVBUEGDVBTKKWWZQ35UQZDCZILOYCOLES4YXYO2RILIBTKF42YNHAUHTNSB5KLEDB7FJTUQQ2UQGDXVCFRMN3URKXEXMIAQUVGI2XA7HBINTZUNOYZGQG6QGSM4M67DSYRAWEDUFPEJQAXULWC3WGQ2SAKGABVCZJXRQMSESG755HXLYHCRVNI"
-		}
-	  },
-ContextDict =
-	_{
-		'AudioPlayer': _{
-		  playerActivity: "IDLE"
-		},
-		'System': _{
-		  application: _{
-			applicationId: "amzn1.ask.skill.a6672692-f5df-4e91-a17a-dfcc48f38919"
-		  },
-		  user: _{
-			userId: "amzn1.ask.account.AGHOMUHPSYW7CI7XL5ZCQVH3RZVBUEGDVBTKKWWZQ35UQZDCZILOYCOLES4YXYO2RILIBTKF42YNHAUHTNSB5KLEDB7FJTUQQ2UQGDXVCFRMN3URKXEXMIAQUVGI2XA7HBINTZUNOYZGQG6QGSM4M67DSYRAWEDUFPEJQAXULWC3WGQ2SAKGABVCZJXRQMSESG755HXLYHCRVNI"
-		  },
-		  device: _{
-			supportedInterfaces: _{}
-		  }
-		}
-	  }.
