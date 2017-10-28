@@ -48,9 +48,11 @@ handle_dict(_DictIn,DictOut):-
 * 3. Make the json responce
 */
 
+%%% stuff for Prolog skill %%%
+
 intent_dictOut("getANewFact",_,DictOut):-
-	answers(RandomMessage),
-	my_json_answer(RandomMessage,DictOut).
+	random_fact(Fact),
+	my_json_answer(Fact,DictOut).
 
 intent_dictOut("forget",_,DictOut):-
 	retractall(alexa_mod:sessionid_fact(_,_)),
@@ -58,10 +60,10 @@ intent_dictOut("forget",_,DictOut):-
 
 intent_dictOut("KBdump",DictIn,DictOut):-
 	SessionId=DictIn.session.sessionId,
-	findall(Message,
+	findall(Msg,
 			(alexa_mod:sessionid_fact(SessionId,Rule),
 			 phrase(sentence(Rule),Sentence),
-			 atomics_to_string(Sentence," ",Message)
+			 atomics_to_string(Sentence," ",Msg)
 			),
 			Messages),
 	( Messages = [] -> Message = "I know nothing"
@@ -89,20 +91,33 @@ intent_dictOut("question",DictIn,DictOut):-
 	; otherwise -> Answer='I am afraid I can\'t answer your question'
 	),my_json_answer(Answer,DictOut).
 
+%%% this one is for Epi skill
+
 intent_dictOut("utterance",DictIn,DictOut):-
 	SessionId=DictIn.session.sessionId,
-	Value=DictIn.request.intent.slots.utteranceSlot.value,
-	portray_clause(user_error,Value),
-	make_atomlist(Value,AtomList),
-	( phrase(sentence(Rule),AtomList) ->
-	  (assertz(alexa_mod:sessionid_fact(SessionId,Rule)),Answer=Value)
-	; phrase(question(Query),AtomList),
-	  prove_question(Query,SessionId,Answer) -> true
-	; otherwise -> Answer='I am afraid I don\'t understand'
-	),my_json_answer(Answer,DictOut).
+	Utterance=DictIn.request.intent.slots.utteranceSlot.value,
+	process_utterance(SessionId,Utterance,Answer),
+	my_json_answer(Answer,DictOut).
 
 intent_dictOut(_,_,DictOut):-
 	my_json_answer('Unknown error',DictOut).
+
+process_utterance(SessionId,Utterance,Answer):-
+	portray_clause(user_error,Utterance),
+	make_atomlist(Utterance,AtomList),
+	( phrase(sentence(Rule),AtomList) ->
+	  (assertz(alexa_mod:sessionid_fact(SessionId,Rule)),Answer=Utterance)
+	; phrase(question(Query),AtomList),
+	  prove_question(Query,SessionId,Answer) -> true
+	; phrase(command(g(Goal,Answer)),AtomList),
+	  call(Goal) -> true
+	; otherwise -> Answer='I am afraid I don\'t understand'
+	).
+
+make_atomlist(Value,AtomList):-
+	split_string(Value," ","",StringList),
+	maplist(string_lower,StringList,StringListLow),
+	maplist(atom_string,AtomList,StringListLow).
 
 prove_question(Query,SessionId,Answer):-
 	portray_clause(user_error,Query),
@@ -133,16 +148,25 @@ my_json_answer(Message,X):-
 go:-
 	json_write_dict(current_output,_{version:"1.0", shouldEndSession: false, response: _{outputSpeech:_{type: "PlainText", text: "Wally is a walrus"}}}).
 
-answers(X):-
+random_fact(X):-
 	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
-
-make_atomlist(Value,AtomList):-
-	split_string(Value," ","",StringList),
-	maplist(string_lower,StringList,StringListLow),
-	maplist(atom_string,AtomList,StringListLow).
 
 
 %%% grammar %%%
+
+utterance(C) --> sword,sentence(C).
+utterance(C) --> qword,question(C).
+utterance(C) --> cword,command(C).
+
+sword --> [].
+sword --> [that]. 
+
+qword --> [].
+%qword --> [if]. 
+%qword --> [whether]. 
+
+cword --> [].
+cword --> [to]. 
 
 sentence(C) --> determiner(N,M1,M2,C),
                 noun(N,M1),
@@ -197,6 +221,33 @@ my_copy_element(X,Ys):-
     member(X1,Ys),
     copy_term(X1,X).
 
+command(g(random_fact(Fact),Fact)) --> getanewfact.
+command(g(retractall(alexa_mod:sessionid_fact(_,_)),"I am a blank slate")) --> forget. 
+command(g(all_facts(Answer),Answer)) --> kbdump. 
+
+getanewfact --> getanewfact1.
+getanewfact --> [tell,me],getanewfact1.
+
+getanewfact1 --> [anything].
+getanewfact1 --> [a,random,fact].
+getanewfact1 --> [something,i,'don\'t',know].
+
+kbdump --> [tell,me,everything].
+kbdump --> [spill,the,beans].
+
+forget --> [forget,everything].
+
+all_facts(Answer):-
+	findall(Msg,
+			(alexa_mod:sessionid_fact(_,Rule),
+			 phrase(sentence(Rule),Sentence),
+			 atomics_to_string(Sentence," ",Msg)
+			),
+			Messages),
+	( Messages = [] -> Answer = "I know nothing"
+	; otherwise -> atomic_list_concat(Messages,". ",Answer)
+	).
+
 
 %%% generating intents from grammar %%%
 
@@ -210,7 +261,7 @@ intents:-
 						synonyms:[]
 					}
 			},
-		( ( phrase(alexa_mod:sentence(_),S) ; phrase(alexa_mod:question(_),S) ),
+		( phrase(alexa_mod:utterance(_),S),
 		  atomics_to_string(S," ",SS)
 		),
 		L),
