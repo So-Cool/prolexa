@@ -41,6 +41,31 @@ handle_dict(_DictIn,DictOut):-
               version:"1.0"
 	     }.
 
+get_id(_Dict,_Id):-
+  true.
+	%get_dict(session,_Dict,SessionObject),
+	%get_dict(application,SessionObject,ApplicationObject),
+	%get_dict(applicationId,ApplicationObject,_Id).
+
+application_id(X):-
+	X= "amzn1.ask.skill.a27eb505-fcef-49bf-8975-3e1a6d7b7c74".
+
+my_json_answer(Message,X):-
+	X = _{
+	      response: _{
+			  shouldEndSession: false,
+			  outputSpeech:_{type: "PlainText", text: Message}
+			 },
+              version:"1.0"
+	     }.
+
+go:-
+	json_write_dict(current_output,_{version:"1.0", shouldEndSession: false, response: _{outputSpeech:_{type: "PlainText", text: "Wally is a walrus"}}}).
+
+random_fact(X):-
+	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
+
+
 /*
  *  Steps needed
 * 1. check the app id
@@ -123,13 +148,28 @@ make_atomlist(Value,AtomList):-
 	maplist(string_lower,StringList,StringListLow),
 	maplist(atom_string,AtomList,StringListLow).
 
+
+%%% meta-interpreter %%%
+
 prove_question(Query,SessionId,Answer):-
-	portray_clause(user_error,Query),
+	%portray_clause(user_error,Query),
 	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
 	prove_rb(Query,Rulebase),
 	transform(Query,Clauses),
 	phrase(sentence(Clauses),AnswerAtomList),
 	atomics_to_string(AnswerAtomList," ",Answer).
+
+explain_question(Query,SessionId,Answer):-
+	%portray_clause(user_error,Query),
+	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
+	( prove_rb(Query,Rulebase,Proof) ->
+		maplist(p2m,Proof,Msg),
+		phrase(sentence1([(Query:-true)]),L),
+		atomic_list_concat([therefore|L]," ",Last),
+		reverse([Last|Msg],Messages),
+		atomic_list_concat(Messages,"; ",Answer)
+	; Answer = 'This is as yet unexplained'
+	).
 
 implied([Rule],SessionId):-
 	%portray_clause(user_error,Rule),
@@ -145,30 +185,37 @@ body2rules((A,B),Rs0,Rs):-!,
 	body2rules(B,Rs1,Rs).
 body2rules(A,Rs0,[(A:-true)|Rs0]).
 
-get_id(_Dict,_Id):-
-  true.
-	%get_dict(session,_Dict,SessionObject),
-	%get_dict(application,SessionObject,ApplicationObject),
-	%get_dict(applicationId,ApplicationObject,_Id).
+prove_rb(Q,RB):-
+	prove_rb(Q,RB,[],_P).
 
-application_id(X):-
-	X= "amzn1.ask.skill.a27eb505-fcef-49bf-8975-3e1a6d7b7c74".
+prove_rb(Q,RB,RP):-
+	prove_rb(Q,RB,[],P),
+	reverse(P,RP).
 
-my_json_answer(Message,X):-
-	X = _{
-	      response: _{
-			  shouldEndSession: false,
-			  outputSpeech:_{type: "PlainText", text: Message}
-			 },
-              version:"1.0"
-	     }.
+prove_rb(true,_Rulebase,P,P):-!.
+prove_rb((A,B),Rulebase,P0,P):-!,
+	find_clause((A:-C),Rule,Rulebase),
+	conj_append(C,B,D),
+    prove_rb(D,Rulebase,[p((A,B),Rule)|P0],P).
+prove_rb(A,Rulebase,P0,P):-
+    find_clause((A:-B),Rule,Rulebase),
+	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
 
-go:-
-	json_write_dict(current_output,_{version:"1.0", shouldEndSession: false, response: _{outputSpeech:_{type: "PlainText", text: "Wally is a walrus"}}}).
+find_clause(Clause,Rule,[Rule|_Rules]):-
+	copy_term(Rule,[Clause]).	% do not instantiate Rule
+find_clause(Clause,Rule,[_Rule|Rules]):-
+	find_clause(Clause,Rule,Rules).
 
-random_fact(X):-
-	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
+transform((A,B),[(A:-true)|Rest]):-!,
+    transform(B,Rest).
+transform(A,[(A:-true)]).
 
+conj_append(true,Ys,Ys).
+conj_append(X,Ys,(X,Ys)):-	% single-element conjunction
+	X\=true, 
+	X\=(_One,_TheOther).
+conj_append((X,Xs),Ys,(X,Zs)):-
+	conj_append(Xs,Ys,Zs).
 
 %%% grammar %%%
 
@@ -197,21 +244,23 @@ sentence1([(L:-true)]) --> proper_noun(N,X),
 verb_phrase(s,M) --> [is],property(s,M).
 verb_phrase(p,M) --> [are], property(p,M).
 
+property(N,M) --> adjective(N,M).
 property(s,M) --> [a], noun(s,M).
 property(p,M) --> noun(p,M).
-property(_N,X=>mortal(X)) --> [mortal].
+%property(_N,X=>mortal(X)) --> [mortal].
 
 determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
+determiner(p,X=>B,X=>H,[(H:-B)])	--> [all].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
 proper_noun(s,caroline) --> [caroline].
 proper_noun(s,george) --> [george].
 proper_noun(s,peter) --> [peter].
 
-noun(s,X=>human(X)) --> [human].
-noun(p,X=>human(X)) --> [humans].
-noun(s,X=>living_being(X)) --> [living],[being].
-noun(p,X=>living_being(X)) --> [living],[beings].
+%noun(s,X=>human(X)) --> [human].
+%noun(p,X=>human(X)) --> [humans].
+%noun(s,X=>living_being(X)) --> [living],[being].
+%noun(p,X=>living_being(X)) --> [living],[beings].
 
 question(Q) --> qword,question1(Q).
 
@@ -221,26 +270,37 @@ question1(Q) --> [is], proper_noun(N,X),
 %question1((Q1,Q2)) --> [are],[some],noun(p,sk=>Q1),
 %					  property(p,sk=>Q2).
 
-prove_rb(true,_Rulebase):-!.
-prove_rb((A,B),Rulebase):-!,
-    prove_rb(A,Rulebase),
-    prove_rb(B,Rulebase).
-prove_rb(A,Rulebase):-
-    find_clause((A:-B),Rulebase),
-    prove_rb(B,Rulebase).
+% lexicon, driven by predicates
+adjective(_,M)		--> [Adj],    {pred2gr(_P,1,a/Adj, M)}.
+noun(s,M)			--> [Noun],   {pred2gr(_P,1,n/Noun,M)}.
+noun(p,M)			--> [Noun_p], {pred2gr(_P,1,n/Noun,M),noun_s2p(Noun,Noun_p)}.
+iverb(s,M)			--> [Verb_s], {pred2gr(_P,1,v/Verb,M),verb_p2s(Verb,Verb_s)}.
+iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 
-find_clause(Clause,[Rule|_Rules]):-
-    my_copy_element(Clause,Rule).
-find_clause(Clause,[_Rule|Rules]):-
-    find_clause(Clause,Rules).
+% unary predicates for adjectives, nouns and verbs
+pred(human,   1,[a/human,n/human]).
+pred(mortal,  1,[a/mortal,n/mortal]).
+%pred(man,     1,[a/male,n/man]).
+%pred(woman,   1,[a/female,n/woman]).
+%pred(married, 1,[a/married]).
+%pred(bachelor,1,[n/bachelor]).
+pred(mammal,  1,[n/mammal]).
 
-transform((A,B),[(A:-true)|Rest]):-!,
-    transform(B,Rest).
-transform(A,[(A:-true)]).
+pred2gr(P,1,C/W,X=>Lit):-
+	pred(P,1,L),
+	member(C/W,L),
+	Lit=..[P,X].
 
-my_copy_element(X,Ys):-
-    member(X1,Ys),
-    copy_term(X1,X).
+noun_s2p(Noun_s,Noun_p):-
+	( Noun_s=woman -> Noun_p=women
+	; Noun_s=man -> Noun_p=men
+	; atom_concat(Noun_s,s,Noun_p)
+	).
+
+verb_p2s(Verb_p,Verb_s):-
+	( Verb_p=fly -> Verb_s=flies
+	; 	atom_concat(Verb_p,s,Verb_s)
+	).
 
 command(C) --> cword,command1(C).
 
@@ -248,6 +308,17 @@ command1(g(random_fact(Fact),Fact)) --> getanewfact.
 command1(g(retractall(alexa_mod:sessionid_fact(_,C)),"I erased it from my memory")) --> forget,sentence(C). 
 command1(g(retractall(alexa_mod:sessionid_fact(_,_)),"I am a blank slate")) --> forgetall. 
 command1(g(all_facts(Answer),Answer)) --> kbdump. 
+command1(g(all_answers(PN,Answer),Answer)) --> [tell,me,about],proper_noun(s,PN).
+command1(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
+command1(g(mr(Answer),Answer)) --> explain_mr.
+
+explain_mr --> ask,mr.
+
+ask --> [ask],proper_noun(s,_),[to].
+ask --> [].
+
+mr --> [explain,mendelian,randomisation].
+mr --> [explain,mendelian,randomization].
 
 getanewfact --> getanewfact1.
 getanewfact --> [tell,me],getanewfact1.
@@ -264,16 +335,31 @@ forget --> [forget].
 forgetall --> [forget,everything].
 
 all_facts(Answer):-
-	findall(Msg,
-			(alexa_mod:sessionid_fact(_,Rule),
-			 phrase(sentence1(Rule),Sentence),
-			 atomics_to_string(Sentence," ",Msg)
-			),
-			Messages),
-	( Messages = [] -> Answer = "I know nothing"
+	findall(R,alexa_mod:sessionid_fact(_ID,R),Rules),
+	maplist(r2m,Rules,Messages),
+	( Messages=[] -> Answer = "I know nothing"
 	; otherwise -> atomic_list_concat(Messages,". ",Answer)
 	).
 
+r2m(Rule,Message):-
+	phrase(sentence1(Rule),Sentence),
+	atomics_to_string(Sentence," ",Message).
+
+all_answers(PN,Answer):-
+	findall(Q,(pred(P,1,_),Q=..[P,PN]),Queries),
+	maplist(q2m,Queries,Msg),
+	delete(Msg,"",Messages),
+	( Messages=[] -> atomic_list_concat(['I know nothing about',PN],' ',Answer)
+	; otherwise -> atomic_list_concat(Messages,". ",Answer)
+	).
+
+q2m(Query,Message):-
+	( prove_question(Query,_,Message) -> true
+	; otherwise -> Message=""
+	).
+
+p2m(p(_,Rule),Message):-
+	r2m(Rule,Message).
 
 %%% generating intents from grammar %%%
 
@@ -340,3 +426,7 @@ test:-
 		writeln(Output),
 		test
 	).
+
+
+mr('In epidemiology, Mendelian randomization is a method of using measured variation in genes of known function to examine the causal effect of a modifiable exposure on disease in observational studies. The design was first proposed in 1986 and subsequently described by Gray and Wheatley as a method for obtaining unbiased estimates of the effects of a putative causal variable without conducting a traditional randomised trial. These authors also coined the term Mendelian randomization. The design has a powerful control for reverse causation and confounding which otherwise bedevil epidemiological studies. Its current hero is George Davey-Smith.').
+
