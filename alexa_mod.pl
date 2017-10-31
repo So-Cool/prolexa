@@ -105,8 +105,12 @@ intent_dictOut(_,_,DictOut):-
 process_utterance(SessionId,Utterance,Answer):-
 	portray_clause(user_error,Utterance),
 	make_atomlist(Utterance,AtomList),
-	( phrase(sentence(Rule),AtomList) ->
-		(assertz(alexa_mod:sessionid_fact(SessionId,Rule)),Answer=Utterance)
+	( phrase(sentence(Rule),AtomList),
+	  implied(Rule,SessionId) ->
+		atomic_list_concat(['I already knew that',Utterance],' ',Answer)
+	; phrase(sentence(Rule),AtomList) ->
+		assertz(alexa_mod:sessionid_fact(SessionId,Rule)),
+		atomic_list_concat(['Thanks for telling me that',Utterance],' ',Answer)
 	; phrase(question(Query),AtomList),
 	  prove_question(Query,SessionId,Answer) -> true
 	; phrase(command(g(Goal,Answer)),AtomList),
@@ -121,11 +125,25 @@ make_atomlist(Value,AtomList):-
 
 prove_question(Query,SessionId,Answer):-
 	portray_clause(user_error,Query),
-	findall(Rule,alexa_mod:sessionid_fact(SessionId,Rule),Rulebase),
+	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
 	prove_rb(Query,Rulebase),
 	transform(Query,Clauses),
 	phrase(sentence(Clauses),AnswerAtomList),
 	atomics_to_string(AnswerAtomList," ",Answer).
+
+implied([Rule],SessionId):-
+	%portray_clause(user_error,Rule),
+	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
+	\+(\+((numbervars(Rule,0,_),
+	     Rule=(H:-B),
+	     body2rules(B,Rulebase,RB2),
+	     prove_rb(H,RB2)
+	   ))).
+
+body2rules((A,B),Rs0,Rs):-!,
+	body2rules(A,Rs0,Rs1),
+	body2rules(B,Rs1,Rs).
+body2rules(A,Rs0,[(A:-true)|Rs0]).
 
 get_id(_Dict,_Id):-
   true.
@@ -154,9 +172,9 @@ random_fact(X):-
 
 %%% grammar %%%
 
-utterance(C) --> sword,sentence(C).
-utterance(C) --> qword,question(C).
-utterance(C) --> cword,command(C).
+utterance(C) --> sentence(C).
+utterance(C) --> question(C).
+utterance(C) --> command(C).
 
 sword --> [].
 sword --> [that]. 
@@ -168,11 +186,12 @@ qword --> [].
 cword --> [].
 cword --> [to]. 
 
-sentence(C) --> determiner(N,M1,M2,C),
+sentence(C) --> sword,sentence1(C).
+
+sentence1(C) --> determiner(N,M1,M2,C),
                 noun(N,M1),
                 verb_phrase(N,M2).
-
-sentence([(L:-true)]) --> proper_noun(N,X),
+sentence1([(L:-true)]) --> proper_noun(N,X),
                           verb_phrase(N,X=>L).
 
 verb_phrase(s,M) --> [is],property(s,M).
@@ -183,7 +202,7 @@ property(p,M) --> noun(p,M).
 property(_N,X=>mortal(X)) --> [mortal].
 
 determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
-determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
+%determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
 proper_noun(s,caroline) --> [caroline].
 proper_noun(s,george) --> [george].
@@ -194,11 +213,13 @@ noun(p,X=>human(X)) --> [humans].
 noun(s,X=>living_being(X)) --> [living],[being].
 noun(p,X=>living_being(X)) --> [living],[beings].
 
-question(Q) --> [who],[is], property(s,_X=>Q).
-question(Q) --> [is], proper_noun(N,X),
+question(Q) --> qword,question1(Q).
+
+question1(Q) --> [who],[is], property(s,_X=>Q).
+question1(Q) --> [is], proper_noun(N,X),
                 property(N,X=>Q).
-question((Q1,Q2)) --> [are],[some],noun(p,sk=>Q1),
-					  property(p,sk=>Q2).
+%question1((Q1,Q2)) --> [are],[some],noun(p,sk=>Q1),
+%					  property(p,sk=>Q2).
 
 prove_rb(true,_Rulebase):-!.
 prove_rb((A,B),Rulebase):-!,
@@ -221,10 +242,12 @@ my_copy_element(X,Ys):-
     member(X1,Ys),
     copy_term(X1,X).
 
-command(g(random_fact(Fact),Fact)) --> getanewfact.
-command(g(retractall(alexa_mod:sessionid_fact(_,C)),"I erased it from my memory")) --> forgetthat,sentence(C). 
-command(g(retractall(alexa_mod:sessionid_fact(_,_)),"I am a blank slate")) --> forgetall. 
-command(g(all_facts(Answer),Answer)) --> kbdump. 
+command(C) --> cword,command1(C).
+
+command1(g(random_fact(Fact),Fact)) --> getanewfact.
+command1(g(retractall(alexa_mod:sessionid_fact(_,C)),"I erased it from my memory")) --> forget,sentence(C). 
+command1(g(retractall(alexa_mod:sessionid_fact(_,_)),"I am a blank slate")) --> forgetall. 
+command1(g(all_facts(Answer),Answer)) --> kbdump. 
 
 getanewfact --> getanewfact1.
 getanewfact --> [tell,me],getanewfact1.
@@ -236,14 +259,14 @@ getanewfact1 --> [something,i,'don\'t',know].
 kbdump --> [tell,me,everything].
 kbdump --> [spill,the,beans].
 
-forgetthat --> [forget,that].
+forget --> [forget].
 
 forgetall --> [forget,everything].
 
 all_facts(Answer):-
 	findall(Msg,
 			(alexa_mod:sessionid_fact(_,Rule),
-			 phrase(sentence(Rule),Sentence),
+			 phrase(sentence1(Rule),Sentence),
 			 atomics_to_string(Sentence," ",Msg)
 			),
 			Messages),
@@ -305,3 +328,15 @@ intents:-
 					]
 				}
 			   ).
+
+
+%%% test %%%
+
+test:-
+	read(Input),
+	( Input=stop -> true
+	; otherwise ->
+		process_utterance(1,Input,Output),
+		writeln(Output),
+		test
+	).
