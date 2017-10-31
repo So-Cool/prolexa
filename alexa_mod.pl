@@ -106,7 +106,7 @@ process_utterance(SessionId,Utterance,Answer):-
 	portray_clause(user_error,Utterance),
 	make_atomlist(Utterance,AtomList),
 	( phrase(sentence(Rule),AtomList) ->
-	  (assertz(alexa_mod:sessionid_fact(SessionId,Rule)),Answer=Utterance)
+		(assertz(alexa_mod:sessionid_fact(SessionId,Rule)),Answer=Utterance)
 	; phrase(question(Query),AtomList),
 	  prove_question(Query,SessionId,Answer) -> true
 	; phrase(command(g(Goal,Answer)),AtomList),
@@ -222,7 +222,8 @@ my_copy_element(X,Ys):-
     copy_term(X1,X).
 
 command(g(random_fact(Fact),Fact)) --> getanewfact.
-command(g(retractall(alexa_mod:sessionid_fact(_,_)),"I am a blank slate")) --> forget. 
+command(g(retractall(alexa_mod:sessionid_fact(_,C)),"I erased it from my memory")) --> forgetthat,sentence(C). 
+command(g(retractall(alexa_mod:sessionid_fact(_,_)),"I am a blank slate")) --> forgetall. 
 command(g(all_facts(Answer),Answer)) --> kbdump. 
 
 getanewfact --> getanewfact1.
@@ -235,7 +236,9 @@ getanewfact1 --> [something,i,'don\'t',know].
 kbdump --> [tell,me,everything].
 kbdump --> [spill,the,beans].
 
-forget --> [forget,everything].
+forgetthat --> [forget,that].
+
+forgetall --> [forget,everything].
 
 all_facts(Answer):-
 	findall(Msg,
