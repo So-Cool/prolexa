@@ -27,11 +27,11 @@ explain_question(Query,SessionId,Answer):-
 prove_rule([Rule],SessionId):-
 	%portray_clause(user_error,Rule),
 	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
-	\+(\+((numbervars(Rule,0,_),
+	try((numbervars(Rule,0,_),
 	     Rule=(H:-B),
 	     body2rules(B,Rulebase,RB2),
 	     prove_rb(H,RB2)
-	   ))).
+	   )).
 
 body2rules((A,B),Rs0,Rs):-!,
 	body2rules(A,Rs0,Rs1),
@@ -53,6 +53,10 @@ prove_rb((A,B),Rulebase,P0,P):-!,
 prove_rb(A,Rulebase,P0,P):-
     find_clause((A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
+prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+	find_clause(d((A:-B,not(C))),Rule,Rulebase),
+	prove_rb(B,Rulebase,P0,P),
+	not prove_rb(C,Rulebase,P,_).
 
 find_clause(Clause,Rule,[Rule|_Rules]):-
 	copy_term(Rule,[Clause]).	% do not instantiate Rule

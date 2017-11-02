@@ -79,7 +79,7 @@ nl_shell(Rulebase):-
 
 handle_input(Input,Rulebase):-
 	( Input = stop	-> true
-	; Input = help -> show_help
+	; Input = help -> show_help,nl_shell(Rulebase)
 	; Input = call(Q)	-> call(Q),nl_shell(Rulebase)
 	% show Rulebase as sentences
 	; Input = show	-> show_rules(Rulebase),nl_shell(Rulebase)

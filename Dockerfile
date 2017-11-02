@@ -7,6 +7,10 @@ WORKDIR /home/myuser
 
 ADD basic_site.pl $HOME
 ADD alexa_mod.pl $HOME
+ADD grammar.pl $HOME
+ADD meta.pl $HOME
+ADD library.pl $HOME
+ADD aux_swi.pl $HOME
 
 ENV PORT 4000
 EXPOSE 4000
