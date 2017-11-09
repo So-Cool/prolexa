@@ -55,9 +55,18 @@ my_json_answer(Message,X):-
 	X = _{
 	      response: _{
 			  shouldEndSession: false,
-			  outputSpeech:_{type: "PlainText", text: Message}
+			  outputSpeech:
+				  _{
+					  type: "PlainText", 
+					  text: Message
+				  }
 			 },
-              version:"1.0"
+              version:"1.0", 
+           card: _{
+			  type: "Simple",
+			  content: "How about checking your credit score?",
+			  title: "German Credit Data"
+			}
 	     }.
 
 
