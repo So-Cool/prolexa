@@ -112,6 +112,14 @@ handle_intent("utterance",DictIn,DictOut):-
 	handle_utterance(SessionId,Utterance,Answer),
 	my_json_answer(Answer,DictOut).
 
+%%% this one is for Test skill
+
+handle_intent("catchAllIntent",DictIn,DictOut):-
+	SessionId=DictIn.session.sessionId,
+	Utterance=DictIn.request.intent.slots.utteranceSlot.value,
+	handle_utterance(SessionId,Utterance,Answer),
+	my_json_answer(Answer,DictOut).
+
 handle_intent(_,_,DictOut):-
 	my_json_answer('Please try again',DictOut).
 
