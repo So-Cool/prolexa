@@ -11,8 +11,8 @@ iverb(s,M)			--> [Verb_s], {pred2gr(_P,1,v/Verb,M),verb_p2s(Verb,Verb_s)}.
 iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 
 % unary predicates for adjectives, nouns and verbs
-%pred(human,   1,[a/human,n/human]).
-%pred(mortal,  1,[a/mortal,n/mortal]).
+pred(human,   1,[a/human,n/human]).
+pred(mortal,  1,[a/mortal,n/mortal]).
 %pred(man,     1,[a/male,n/man]).
 %pred(woman,   1,[a/female,n/woman]).
 %pred(married, 1,[a/married]).
@@ -68,8 +68,8 @@ determiner(p,X=>B,X=>H,[d(H:-B)])	 --> [most].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
 proper_noun(s,tweety) --> [tweety].
-proper_noun(s,george) --> [george].
-%proper_noun(s,peter) --> [peter].
+%proper_noun(s,george) --> [george].
+proper_noun(s,peter) --> [peter].
 
 %%% questions %%%
 
@@ -87,17 +87,37 @@ question1(Q) --> [does],proper_noun(_,X),verb_phrase(_,X=>Q).
 
 %%% commands %%%
 
-command(C) --> cword,command1(C).
+command(g(random_fact(Fact),Fact)) --> getanewfact.
+command(g(retractall(alexa_mod:sessionid_fact(_,C)),"I erased it from my memory")) --> forget,sentence(C). 
+command(g(retractall(alexa_mod:sessionid_fact(_,_)),"I am a blank slate")) --> forgetall. 
+command(g(all_facts(Answer),Answer)) --> kbdump. 
+command(g(all_answers(PN,Answer),Answer)) --> tellmeabout,proper_noun(s,PN).
+command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
 
-command1(g(random_fact(Fact),Fact)) --> getanewfact.
-command1(g(retractall(alexa_mod:sessionid_fact(_,C)),"I erased it from my memory")) --> forget,sentence(C). 
-command1(g(retractall(alexa_mod:sessionid_fact(_,_)),"I am a blank slate")) --> forgetall. 
-command1(g(all_facts(Answer),Answer)) --> kbdump. 
-command1(g(all_answers(PN,Answer),Answer)) --> [tell,me,about],proper_noun(s,PN).
-command1(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
+command(g(true,"Today\'s lecture gives an introduction to Artificial Intelligence with Logic Programming")) --> todayslecture. 
+command(g(true,"Today\'s lecture is given by Professor Peter Flach")) --> todaysteacher. 
+command(g(pf(A),A)) --> peterflach. 
+command(g(rr(A),A)) --> thanks.
 
-cword --> [].
-cword --> [to]. 
+todayslecture --> [what,'today\'s',lecture,is,about].
+todayslecture --> [what,is,'today\'s',lecture,about].
+
+todaysteacher --> [who,teaches,'today\'s',lecture].
+todaysteacher --> [who,teaches,it].
+
+peterflach --> [who,is],hepf.
+peterflach --> [tell,me,more,about],hepf.
+
+hepf --> [he].
+hepf --> [peter,flach].
+
+pf("According to Wikipedia, Pieter Adriaan Flach (born April 8, 1961, Sneek) is a Dutch computer scientist and a Professor of Artificial Intelligence in the Department of Computer Science at the University of Bristol. Flach received an MSc Electrical Engineering from Universiteit Twente in 1987 and a PhD in Computer Science from Tilburg University in 1995. Flach\'s research interests are in data mining and machine learning.").
+
+thanks --> [thank,you].
+thanks --> [thanks].
+thanks --> [great,thanks].
+
+rr(A):-random_member(A,["no worries","the pleasure is entirely mine","any time, peter","happy to be of help"]).
 
 getanewfact --> getanewfact1.
 getanewfact --> [tell,me],getanewfact1.
@@ -106,12 +126,21 @@ getanewfact1 --> [anything].
 getanewfact1 --> [a,random,fact].
 getanewfact1 --> [something,i,'don\'t',know].
 
-kbdump --> [tell,me,everything].
 kbdump --> [spill,the,beans].
+kbdump --> [tell,me],allyouknow.
 
 forget --> [forget].
 
-forgetall --> [forget,everything].
+forgetall --> [forget],allyouknow.
+
+allyouknow --> all.
+allyouknow --> all,[you,know].
+
+all --> [all].
+all --> [everything].
+
+tellmeabout --> [tell,me,about].
+tellmeabout --> [tell,me],all,[about].
 
 all_facts(Answer):-
 	findall(R,alexa_mod:sessionid_fact(_ID,R),Rules),
@@ -139,6 +168,9 @@ q2m(Query,Message):-
 
 p2m(p(_,Rule),Message):-
 	r2m(Rule,Message).
+p2m(n(Fact),Message):-
+	r2m([(Fact:-true)],FM),
+	atomic_list_concat(['It is not known that',FM]," ",Message).
 
 
 %%% generating intents from grammar %%%
@@ -161,7 +193,9 @@ intents:-
 		  atomics_to_string(S," ",SS)
 		),
 		L),
-	json_write(current_output,
+	% Stream=current_output,
+	open('intents.json',write,Stream,[]),
+	json_write(Stream,
 				_{
 				  intents: [
 					_{
@@ -197,5 +231,6 @@ intents:-
 						}
 					]
 				}
-			   ).
+			   ),
+		close(Stream).
 

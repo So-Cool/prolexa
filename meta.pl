@@ -5,7 +5,6 @@
 %%% meta-interpreter %%%
 
 prove_question(Query,SessionId,Answer):-
-	%portray_clause(user_error,Query),
 	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
 	prove_rb(Query,Rulebase),
 	transform(Query,Clauses),
@@ -13,7 +12,6 @@ prove_question(Query,SessionId,Answer):-
 	atomics_to_string(AnswerAtomList," ",Answer).
 
 explain_question(Query,SessionId,Answer):-
-	%portray_clause(user_error,Query),
 	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
 	( prove_rb(Query,Rulebase,Proof) ->
 		maplist(p2m,Proof,Msg),
@@ -21,11 +19,10 @@ explain_question(Query,SessionId,Answer):-
 		atomic_list_concat([therefore|L]," ",Last),
 		reverse([Last|Msg],Messages),
 		atomic_list_concat(Messages,"; ",Answer)
-	; Answer = 'This is as yet unexplained'
+	; Answer = 'This does not follow from what I know'
 	).
 
 prove_rule([Rule],SessionId):-
-	%portray_clause(user_error,Rule),
 	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
 	try((numbervars(Rule,0,_),
 	     Rule=(H:-B),
@@ -53,7 +50,7 @@ prove_rb((A,B),Rulebase,P0,P):-!,
 prove_rb(A,Rulebase,P0,P):-
     find_clause((A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
-prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+prove_rb(A,Rulebase,P0,[p(A,Rule),n(C)|P]):-
 	find_clause(d((A:-B,not(C))),Rule,Rulebase),
 	prove_rb(B,Rulebase,P0,P),
 	not prove_rb(C,Rulebase,P,_).

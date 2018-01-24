@@ -96,7 +96,7 @@ handle_intent("KBdump",DictIn,DictOut):-
 handle_intent("remember",DictIn,DictOut):-
 	SessionId=DictIn.session.sessionId,
 	Value=DictIn.request.intent.slots.mySlot.value,
-	portray_clause(user_error,Value),
+	write_debug(Value),
 	make_atomlist(Value,AtomList),
 	( phrase(sentence(Rule),AtomList) ->
 	  (assertz(alexa_mod:sessionid_fact(SessionId,Rule)),Answer=Value)
@@ -106,7 +106,7 @@ handle_intent("remember",DictIn,DictOut):-
 handle_intent("question",DictIn,DictOut):-
 	SessionId=DictIn.session.sessionId,
 	Value=DictIn.request.intent.slots.questionSlot.value,
-	portray_clause(user_error,Value),
+	write_debug(Value),
 	make_atomlist(Value,AtomList),
 	( phrase(question(Query),AtomList),
 	  prove_question(Query,SessionId,Answer) -> true
@@ -136,25 +136,29 @@ random_fact(X):-
 	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
 
 handle_utterance(SessionId,Utterance,Answer):-
-	portray_clause(user_error,Utterance),
+	write_debug(Utterance),
 	make_atomlist(Utterance,AtomList),
 	( phrase(sentence(Rule),AtomList),
 	  prove_rule(Rule,SessionId) ->
 		atomic_list_concat(['I already knew that',Utterance],' ',Answer)
 	; phrase(sentence(Rule),AtomList) ->
 		assertz(alexa_mod:sessionid_fact(SessionId,Rule)),
-		atomic_list_concat(['Thanks for telling me that',Utterance],' ',Answer)
+		atomic_list_concat(['I will remember that',Utterance],' ',Answer)
 	; phrase(question(Query),AtomList),
 	  prove_question(Query,SessionId,Answer) -> true
 	; phrase(command(g(Goal,Answer)),AtomList),
 	  call(Goal) -> true
-	; otherwise -> Answer='I am afraid I don\'t understand'
-	).
+	; otherwise -> atomic_list_concat(['I heard you say',Utterance,'but I\'m afraid I don\'t understand'],' ',Answer)
+	),
+	write_debug(Answer).
 
 make_atomlist(Value,AtomList):-
 	split_string(Value," ","",StringList),
 	maplist(string_lower,StringList,StringListLow),
 	maplist(atom_string,AtomList,StringListLow).
+
+write_debug(Atom):-
+	writeln(user_error,Atom).
 
 
 %%% test %%%
