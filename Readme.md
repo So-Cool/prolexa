@@ -1,5 +1,10 @@
 # Prolexa: Amazon Alexa and Prolog integration #
 
+## Generating intent json for Alexa ##
+```
+swipl -g "intents, halt." grammar.pl > prolexa_intent.json
+```
+
 ## Localhost workflow (Docker) ##
 To build:
 ```
