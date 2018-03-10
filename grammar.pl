@@ -94,16 +94,19 @@ command(g(all_facts(Answer),Answer)) --> kbdump.
 command(g(all_answers(PN,Answer),Answer)) --> tellmeabout,proper_noun(s,PN).
 command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
 
-command(g(true,"Today\'s lecture gives an introduction to Artificial Intelligence with Logic Programming")) --> todayslecture. 
-command(g(true,"Today\'s lecture is given by Professor Peter Flach")) --> todaysteacher. 
+command(g(true,"I can do a little bit of logical reasoning. You can talk with me about humans and birds.")) --> [what,can,you,do,for,me,minerva]. 
+command(g(true,"Your middle name is Adriaan")) --> [what,is,my,middle,name]. 
+command(g(true,"Today\'s seminar is entitled The Value of Evaluation - Towards trustworthy machine learning applications")) --> todaysseminar. 
+command(g(true,"Today\'s seminar is given by Professor Peter Flach")) --> todaysspeaker. 
 command(g(pf(A),A)) --> peterflach. 
 command(g(rr(A),A)) --> thanks.
 
-todayslecture --> [what,'today\'s',lecture,is,about].
-todayslecture --> [what,is,'today\'s',lecture,about].
+todaysseminar --> [what,'today\'s',seminar,is,about].
+todaysseminar --> [what,is,'today\'s',seminar,about].
 
-todaysteacher --> [who,teaches,'today\'s',lecture].
-todaysteacher --> [who,teaches,it].
+todaysspeaker --> [who,gives,'today\'s',seminar].
+todaysspeaker --> [who,gives,it].
+todaysspeaker --> [who,is,the,speaker].
 
 peterflach --> [who,is],hepf.
 peterflach --> [tell,me,more,about],hepf.
@@ -111,7 +114,7 @@ peterflach --> [tell,me,more,about],hepf.
 hepf --> [he].
 hepf --> [peter,flach].
 
-pf("According to Wikipedia, Pieter Adriaan Flach (born April 8, 1961, Sneek) is a Dutch computer scientist and a Professor of Artificial Intelligence in the Department of Computer Science at the University of Bristol. Flach received an MSc Electrical Engineering from Universiteit Twente in 1987 and a PhD in Computer Science from Tilburg University in 1995. Flach\'s research interests are in data mining and machine learning.").
+pf("According to Wikipedia, Pieter Adriaan Flach is a Dutch computer scientist and a Professor of Artificial Intelligence in the Department of Computer Science at the University of Bristol.").
 
 thanks --> [thank,you].
 thanks --> [thanks].
@@ -141,36 +144,6 @@ all --> [everything].
 
 tellmeabout --> [tell,me,about].
 tellmeabout --> [tell,me],all,[about].
-
-all_facts(Answer):-
-	findall(R,alexa_mod:sessionid_fact(_ID,R),Rules),
-	maplist(r2m,Rules,Messages),
-	( Messages=[] -> Answer = "I know nothing"
-	; otherwise -> atomic_list_concat(Messages,". ",Answer)
-	).
-
-r2m(Rule,Message):-
-	phrase(sentence1(Rule),Sentence),
-	atomics_to_string(Sentence," ",Message).
-
-all_answers(PN,Answer):-
-	findall(Q,(pred(P,1,_),Q=..[P,PN]),Queries),
-	maplist(q2m,Queries,Msg),
-	delete(Msg,"",Messages),
-	( Messages=[] -> atomic_list_concat(['I know nothing about',PN],' ',Answer)
-	; otherwise -> atomic_list_concat(Messages,". ",Answer)
-	).
-
-q2m(Query,Message):-
-	( prove_question(Query,_,Message) -> true
-	; otherwise -> Message=""
-	).
-
-p2m(p(_,Rule),Message):-
-	r2m(Rule,Message).
-p2m(n(Fact),Message):-
-	r2m([(Fact:-true)],FM),
-	atomic_list_concat(['It is not known that',FM]," ",Message).
 
 
 %%% generating intents from grammar %%%

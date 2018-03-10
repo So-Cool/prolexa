@@ -4,12 +4,52 @@
 
 %%% meta-interpreter %%%
 
-prove_question(Query,SessionId,Answer):-
+all_facts(Answer):-
+	findall(R,alexa_mod:sessionid_fact(_ID,R),Rules),
+	maplist(r2m,Rules,Messages),
+	( Messages=[] -> Answer = "I know nothing"
+	; otherwise -> atomic_list_concat(Messages,". ",Answer)
+	).
+
+r2m(Rule,Message):-
+	phrase(sentence1(Rule),Sentence),
+	atomics_to_string(Sentence," ",Message).
+
+all_answers(PN,Answer):-
+	findall(Q,(pred(P,1,_),Q=..[P,PN]),Queries),
+	maplist(q2m,Queries,Msg),
+	delete(Msg,"",Messages),
+	( Messages=[] -> atomic_list_concat(['I know nothing about',PN],' ',Answer)
+	; otherwise -> atomic_list_concat(Messages,". ",Answer)
+	).
+
+q2m(Query,Message):-
+	( prove_question1(Query,_,Message) -> true
+	; otherwise -> Message=""
+	).
+
+p2m(p(_,Rule),Message):-
+	r2m(Rule,Message).
+p2m(n(Fact),Message):-
+	r2m([(Fact:-true)],FM),
+	atomic_list_concat(['It is not known that',FM]," ",Message).
+
+prove_question1(Query,SessionId,Answer):-
 	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
 	prove_rb(Query,Rulebase),
 	transform(Query,Clauses),
 	phrase(sentence(Clauses),AnswerAtomList),
 	atomics_to_string(AnswerAtomList," ",Answer).
+
+% this version always succeeds
+prove_question(Query,SessionId,Answer):-
+	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
+	( prove_rb(Query,Rulebase) ->
+		transform(Query,Clauses),
+		phrase(sentence(Clauses),AnswerAtomList),
+		atomics_to_string(AnswerAtomList," ",Answer)
+	; Answer = 'This does not follow from what I know'
+	).	
 
 explain_question(Query,SessionId,Answer):-
 	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
@@ -19,7 +59,7 @@ explain_question(Query,SessionId,Answer):-
 		atomic_list_concat([therefore|L]," ",Last),
 		reverse([Last|Msg],Messages),
 		atomic_list_concat(Messages,"; ",Answer)
-	; Answer = 'This does not follow from what I know'
+	; Answer = 'This cannot be explained by what I know'
 	).
 
 prove_rule([Rule],SessionId):-

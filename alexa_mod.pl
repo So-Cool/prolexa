@@ -11,63 +11,26 @@
 :- dynamic sessionid_fact/2.
 
 alexa(Request):-
-	/*
-	setup_call_cleanup(open('output.txt',append,Stream,[alias(myout)]),
-			   authenticate_alexa(Request),
-			   close(Stream)),
-	*/
 	http_read_json_dict(Request,DictIn),
-	handle_dict(DictIn,DictOut),
-	%my_json_answer(hello,DictOut),
-	reply_json(DictOut).
+	RequestType = DictIn.request.type,
+	( RequestType = "LaunchRequest" -> my_json_answer("I am Minerva, how can I help?",_DictOut)
+    ; RequestType = "SessionEndedRequest" -> my_json_answer("Goodbye",_DictOut)
+	; RequestType = "IntentRequest" -> 	IntentName = DictIn.request.intent.name,
+										handle_intent(IntentName,DictIn,_DictOut)
+	).
 
-handle_dict(DictIn,DictOut) :-
-	/*
-	setup_call_cleanup(
-			   open('recieved.txt',append,Stream,[]),
-			   (get_id(DictIn,Id),
-			    format(Stream,"Id: ~w\n",[Id])),
-			   close(Stream)
-			  ),
-
-	application_id(Id),
-	*/
-	IntentName = DictIn.request.intent.name,
-	handle_intent(IntentName,DictIn,DictOut).
-
-handle_dict(_DictIn,DictOut):-
+my_json_answer(Message,DictOut):-
 	DictOut = _{
-	      shouldEndSession: false,
-	      response: _{outputSpeech:_{type: "PlainText", text: "Error Id did not match"}},
-              version:"1.0"
-	     }.
-
-get_id(_Dict,_Id):-
-  true.
-	%get_dict(session,_Dict,SessionObject),
-	%get_dict(application,SessionObject,ApplicationObject),
-	%get_dict(applicationId,ApplicationObject,_Id).
-
-application_id(X):-
-	X= "amzn1.ask.skill.a27eb505-fcef-49bf-8975-3e1a6d7b7c74".
-
-my_json_answer(Message,X):-
-	X = _{
 	      response: _{
-			  shouldEndSession: false,
-			  outputSpeech:
-				  _{
-					  type: "PlainText", 
-					  text: Message
-				  }
-			 },
-              version:"1.0", 
-           card: _{
-			  type: "Simple",
-			  content: "How about checking your credit score?",
-			  title: "German Credit Data"
-			}
-	     }.
+	      				outputSpeech: _{
+	      								type: "PlainText", 
+	      								text: Message
+	      							},
+	      				shouldEndSession: false
+	      			},
+              version:"1.0"
+	     },
+	reply_json(DictOut).
 
 
 %%% stuff for Prolog skill %%%
@@ -113,7 +76,7 @@ handle_intent("question",DictIn,DictOut):-
 	; otherwise -> Answer='I am afraid I can\'t answer your question'
 	),my_json_answer(Answer,DictOut).
 
-%%% this one is for Socrates skill
+%%% this one is for Minerva skill
 
 handle_intent("utterance",DictIn,DictOut):-
 	SessionId=DictIn.session.sessionId,
@@ -148,7 +111,7 @@ handle_utterance(SessionId,Utterance,Answer):-
 	  prove_question(Query,SessionId,Answer) -> true
 	; phrase(command(g(Goal,Answer)),AtomList),
 	  call(Goal) -> true
-	; otherwise -> atomic_list_concat(['I heard you say',Utterance,'but I\'m afraid I don\'t understand'],' ',Answer)
+	; otherwise -> atomic_list_concat(['I heard you say',Utterance,'but I\'m afraid I don\'t understand what you want me to do'],' ',Answer)
 	),
 	write_debug(Answer).
 

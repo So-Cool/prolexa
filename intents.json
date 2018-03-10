@@ -6329,15 +6329,18 @@
 	},
 	{"name": {"synonyms": [], "value":"explain why peter flies"}},
 	{
-	  "name": {"synonyms": [], "value":"what today's lecture is about"}
+	  "name": {"synonyms": [], "value":"what can you do for me minerva"}
+	},
+	{"name": {"synonyms": [], "value":"what is my middle name"}},
+	{
+	  "name": {"synonyms": [], "value":"what today's seminar is about"}
 	},
 	{
-	  "name": {"synonyms": [], "value":"what is today's lecture about"}
+	  "name": {"synonyms": [], "value":"what is today's seminar about"}
 	},
-	{
-	  "name": {"synonyms": [], "value":"who teaches today's lecture"}
-	},
-	{"name": {"synonyms": [], "value":"who teaches it"}},
+	{"name": {"synonyms": [], "value":"who gives today's seminar"}},
+	{"name": {"synonyms": [], "value":"who gives it"}},
+	{"name": {"synonyms": [], "value":"who is the speaker"}},
 	{"name": {"synonyms": [], "value":"who is he"}},
 	{"name": {"synonyms": [], "value":"who is peter flach"}},
 	{"name": {"synonyms": [], "value":"tell me more about he"}},
