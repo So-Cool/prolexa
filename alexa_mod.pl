@@ -99,21 +99,25 @@ random_fact(X):-
 	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
 
 handle_utterance(SessionId,Utterance,Answer):-
-	write_debug(Utterance),
+	write_debug(utterance(Utterance)),
 	make_atomlist(Utterance,AtomList),
 	( phrase(sentence(Rule),AtomList),
 	  prove_rule(Rule,SessionId) ->
+		write_debug(rule(Rule)),
 		atomic_list_concat(['I already knew that',Utterance],' ',Answer)
 	; phrase(sentence(Rule),AtomList) ->
+		write_debug(rule(Rule)),
 		assertz(alexa_mod:sessionid_fact(SessionId,Rule)),
 		atomic_list_concat(['I will remember that',Utterance],' ',Answer)
 	; phrase(question(Query),AtomList),
+	  write_debug(query(Query)),
 	  prove_question(Query,SessionId,Answer) -> true
 	; phrase(command(g(Goal,Answer)),AtomList),
+	  write_debug(goal(Goal)),
 	  call(Goal) -> true
-	; otherwise -> atomic_list_concat(['I heard you say',Utterance,'but I\'m afraid I don\'t understand what you want me to do'],' ',Answer)
+	; otherwise -> atomic_list_concat(['I heard you say: ',Utterance,', but I\'m afraid I don\'t understand what you want me to do'],' ',Answer)
 	),
-	write_debug(Answer).
+	write_debug(answer(Answer)).
 
 make_atomlist(Value,AtomList):-
 	split_string(Value," ","",StringList),
@@ -121,7 +125,7 @@ make_atomlist(Value,AtomList):-
 	maplist(atom_string,AtomList,StringListLow).
 
 write_debug(Atom):-
-	writeln(user_error,Atom).
+	writeln(user_error,Atom),flush_output(user_error).
 
 
 %%% test %%%
