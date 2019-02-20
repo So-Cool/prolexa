@@ -68,7 +68,7 @@ determiner(p,X=>B,X=>H,[d(H:-B)])	 --> [most].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
 proper_noun(s,tweety) --> [tweety].
-proper_noun(s,raul) --> [raul].
+proper_noun(s,paul) --> [paul].
 proper_noun(s,peter) --> [peter].
 
 %%% questions %%%

@@ -163,6 +163,14 @@
 	{"name": {"synonyms": [], "value":"tweety is a penguin"}},
 	{"name": {"synonyms": [], "value":"tweety is a sparrow"}},
 	{"name": {"synonyms": [], "value":"tweety flies"}},
+	{"name": {"synonyms": [], "value":"paul is human"}},
+	{"name": {"synonyms": [], "value":"paul is mortal"}},
+	{"name": {"synonyms": [], "value":"paul is a human"}},
+	{"name": {"synonyms": [], "value":"paul is a mortal"}},
+	{"name": {"synonyms": [], "value":"paul is a bird"}},
+	{"name": {"synonyms": [], "value":"paul is a penguin"}},
+	{"name": {"synonyms": [], "value":"paul is a sparrow"}},
+	{"name": {"synonyms": [], "value":"paul flies"}},
 	{"name": {"synonyms": [], "value":"peter is human"}},
 	{"name": {"synonyms": [], "value":"peter is mortal"}},
 	{"name": {"synonyms": [], "value":"peter is a human"}},
@@ -1604,6 +1612,14 @@
 	{"name": {"synonyms": [], "value":"that tweety is a penguin"}},
 	{"name": {"synonyms": [], "value":"that tweety is a sparrow"}},
 	{"name": {"synonyms": [], "value":"that tweety flies"}},
+	{"name": {"synonyms": [], "value":"that paul is human"}},
+	{"name": {"synonyms": [], "value":"that paul is mortal"}},
+	{"name": {"synonyms": [], "value":"that paul is a human"}},
+	{"name": {"synonyms": [], "value":"that paul is a mortal"}},
+	{"name": {"synonyms": [], "value":"that paul is a bird"}},
+	{"name": {"synonyms": [], "value":"that paul is a penguin"}},
+	{"name": {"synonyms": [], "value":"that paul is a sparrow"}},
+	{"name": {"synonyms": [], "value":"that paul flies"}},
 	{"name": {"synonyms": [], "value":"that peter is human"}},
 	{"name": {"synonyms": [], "value":"that peter is mortal"}},
 	{"name": {"synonyms": [], "value":"that peter is a human"}},
@@ -2818,6 +2834,13 @@
 	{"name": {"synonyms": [], "value":"is tweety a bird"}},
 	{"name": {"synonyms": [], "value":"is tweety a penguin"}},
 	{"name": {"synonyms": [], "value":"is tweety a sparrow"}},
+	{"name": {"synonyms": [], "value":"is paul human"}},
+	{"name": {"synonyms": [], "value":"is paul mortal"}},
+	{"name": {"synonyms": [], "value":"is paul a human"}},
+	{"name": {"synonyms": [], "value":"is paul a mortal"}},
+	{"name": {"synonyms": [], "value":"is paul a bird"}},
+	{"name": {"synonyms": [], "value":"is paul a penguin"}},
+	{"name": {"synonyms": [], "value":"is paul a sparrow"}},
 	{"name": {"synonyms": [], "value":"is peter human"}},
 	{"name": {"synonyms": [], "value":"is peter mortal"}},
 	{"name": {"synonyms": [], "value":"is peter a human"}},
@@ -2841,6 +2864,22 @@
 	{"name": {"synonyms": [], "value":"does tweety are sparrows"}},
 	{"name": {"synonyms": [], "value":"does tweety flies"}},
 	{"name": {"synonyms": [], "value":"does tweety fly"}},
+	{"name": {"synonyms": [], "value":"does paul is human"}},
+	{"name": {"synonyms": [], "value":"does paul is mortal"}},
+	{"name": {"synonyms": [], "value":"does paul is a human"}},
+	{"name": {"synonyms": [], "value":"does paul is a mortal"}},
+	{"name": {"synonyms": [], "value":"does paul is a bird"}},
+	{"name": {"synonyms": [], "value":"does paul is a penguin"}},
+	{"name": {"synonyms": [], "value":"does paul is a sparrow"}},
+	{"name": {"synonyms": [], "value":"does paul are human"}},
+	{"name": {"synonyms": [], "value":"does paul are mortal"}},
+	{"name": {"synonyms": [], "value":"does paul are humans"}},
+	{"name": {"synonyms": [], "value":"does paul are mortals"}},
+	{"name": {"synonyms": [], "value":"does paul are birds"}},
+	{"name": {"synonyms": [], "value":"does paul are penguins"}},
+	{"name": {"synonyms": [], "value":"does paul are sparrows"}},
+	{"name": {"synonyms": [], "value":"does paul flies"}},
+	{"name": {"synonyms": [], "value":"does paul fly"}},
 	{"name": {"synonyms": [], "value":"does peter is human"}},
 	{"name": {"synonyms": [], "value":"does peter is mortal"}},
 	{"name": {"synonyms": [], "value":"does peter is a human"}},
@@ -3211,6 +3250,14 @@
 	  "name": {"synonyms": [], "value":"forget tweety is a sparrow"}
 	},
 	{"name": {"synonyms": [], "value":"forget tweety flies"}},
+	{"name": {"synonyms": [], "value":"forget paul is human"}},
+	{"name": {"synonyms": [], "value":"forget paul is mortal"}},
+	{"name": {"synonyms": [], "value":"forget paul is a human"}},
+	{"name": {"synonyms": [], "value":"forget paul is a mortal"}},
+	{"name": {"synonyms": [], "value":"forget paul is a bird"}},
+	{"name": {"synonyms": [], "value":"forget paul is a penguin"}},
+	{"name": {"synonyms": [], "value":"forget paul is a sparrow"}},
+	{"name": {"synonyms": [], "value":"forget paul flies"}},
 	{"name": {"synonyms": [], "value":"forget peter is human"}},
 	{"name": {"synonyms": [], "value":"forget peter is mortal"}},
 	{"name": {"synonyms": [], "value":"forget peter is a human"}},
@@ -5039,6 +5086,26 @@
 	  "name": {"synonyms": [], "value":"forget that tweety is a sparrow"}
 	},
 	{"name": {"synonyms": [], "value":"forget that tweety flies"}},
+	{"name": {"synonyms": [], "value":"forget that paul is human"}},
+	{
+	  "name": {"synonyms": [], "value":"forget that paul is mortal"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"forget that paul is a human"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"forget that paul is a mortal"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"forget that paul is a bird"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"forget that paul is a penguin"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"forget that paul is a sparrow"}
+	},
+	{"name": {"synonyms": [], "value":"forget that paul flies"}},
 	{
 	  "name": {"synonyms": [], "value":"forget that peter is human"}
 	},
@@ -6275,11 +6342,16 @@
 	  "name": {"synonyms": [], "value":"tell me everything you know"}
 	},
 	{"name": {"synonyms": [], "value":"tell me about tweety"}},
+	{"name": {"synonyms": [], "value":"tell me about paul"}},
 	{"name": {"synonyms": [], "value":"tell me about peter"}},
 	{"name": {"synonyms": [], "value":"tell me all about tweety"}},
+	{"name": {"synonyms": [], "value":"tell me all about paul"}},
 	{"name": {"synonyms": [], "value":"tell me all about peter"}},
 	{
 	  "name": {"synonyms": [], "value":"tell me everything about tweety"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"tell me everything about paul"}
 	},
 	{
 	  "name": {"synonyms": [], "value":"tell me everything about peter"}
@@ -6306,6 +6378,26 @@
 	  "name": {"synonyms": [], "value":"explain why tweety is a sparrow"}
 	},
 	{"name": {"synonyms": [], "value":"explain why tweety flies"}},
+	{"name": {"synonyms": [], "value":"explain why paul is human"}},
+	{
+	  "name": {"synonyms": [], "value":"explain why paul is mortal"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"explain why paul is a human"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"explain why paul is a mortal"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"explain why paul is a bird"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"explain why paul is a penguin"}
+	},
+	{
+	  "name": {"synonyms": [], "value":"explain why paul is a sparrow"}
+	},
+	{"name": {"synonyms": [], "value":"explain why paul flies"}},
 	{
 	  "name": {"synonyms": [], "value":"explain why peter is human"}
 	},
@@ -6332,12 +6424,9 @@
 	  "name": {"synonyms": [], "value":"what can you do for me minerva"}
 	},
 	{"name": {"synonyms": [], "value":"what is my middle name"}},
-	{
-	  "name": {"synonyms": [], "value":"what today's seminar is about"}
-	},
-	{
-	  "name": {"synonyms": [], "value":"what is today's seminar about"}
-	},
+	{"name": {"synonyms": [], "value":"what today is about"}},
+	{"name": {"synonyms": [], "value":"what is today about"}},
+	{"name": {"synonyms": [], "value":"what is happening today"}},
 	{"name": {"synonyms": [], "value":"who gives today's seminar"}},
 	{"name": {"synonyms": [], "value":"who gives it"}},
 	{"name": {"synonyms": [], "value":"who is the speaker"}},
@@ -6346,6 +6435,27 @@
 	{"name": {"synonyms": [], "value":"tell me more about he"}},
 	{
 	  "name": {"synonyms": [], "value":"tell me more about peter flach"}
+	},
+	{"name": {"synonyms": [], "value":"what is that"}},
+	{"name": {"synonyms": [], "value":"what is interactive A.I."}},
+	{
+	  "name": {
+	    "synonyms": [],
+	    "value":"what is interactive artificial intelligence"
+	  }
+	},
+	{"name": {"synonyms": [], "value":"tell me more about that"}},
+	{
+	  "name": {
+	    "synonyms": [],
+	    "value":"tell me more about interactive A.I."
+	  }
+	},
+	{
+	  "name": {
+	    "synonyms": [],
+	    "value":"tell me more about interactive artificial intelligence"
+	  }
 	},
 	{"name": {"synonyms": [], "value":"thank you"}},
 	{"name": {"synonyms": [], "value":"thanks"}},
