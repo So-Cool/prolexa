@@ -115,7 +115,7 @@ handle_utterance(SessionId,Utterance,Answer):-
 	; phrase(command(g(Goal,Answer)),AtomList),
 	  write_debug(goal(Goal)),
 	  call(Goal) -> true
-	; otherwise -> atomic_list_concat(['I heard you say: ',Utterance,', but I\'m afraid I don\'t understand what you want me to do'],' ',Answer)
+	; otherwise -> atomic_list_concat(['I heard you say, ',Utterance,', could you rephrase that please?'],' ',Answer)
 	),
 	write_debug(answer(Answer)).
 

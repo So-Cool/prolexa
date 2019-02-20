@@ -68,7 +68,7 @@ determiner(p,X=>B,X=>H,[d(H:-B)])	 --> [most].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
 proper_noun(s,tweety) --> [tweety].
-%proper_noun(s,george) --> [george].
+proper_noun(s,raul) --> [raul].
 proper_noun(s,peter) --> [peter].
 
 %%% questions %%%
@@ -96,13 +96,15 @@ command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:
 
 command(g(true,"I can do a little bit of logical reasoning. You can talk with me about humans and birds.")) --> [what,can,you,do,for,me,minerva]. 
 command(g(true,"Your middle name is Adriaan")) --> [what,is,my,middle,name]. 
-command(g(true,"Today\'s seminar is entitled The Value of Evaluation - Towards trustworthy machine learning applications")) --> todaysseminar. 
+command(g(true,"Today you can find out about ten new Centres for Doctoral Training in Bristol, including one on Interactive Artificial Intelligence")) --> today. 
 command(g(true,"Today\'s seminar is given by Professor Peter Flach")) --> todaysspeaker. 
 command(g(pf(A),A)) --> peterflach. 
+command(g(iai(A),A)) --> what. 
 command(g(rr(A),A)) --> thanks.
 
-todaysseminar --> [what,'today\'s',seminar,is,about].
-todaysseminar --> [what,is,'today\'s',seminar,about].
+today --> [what,today,is,about].
+today --> [what,is,today,about].
+today --> [what,is,happening,today].
 
 todaysspeaker --> [who,gives,'today\'s',seminar].
 todaysspeaker --> [who,gives,it].
@@ -111,10 +113,19 @@ todaysspeaker --> [who,is,the,speaker].
 peterflach --> [who,is],hepf.
 peterflach --> [tell,me,more,about],hepf.
 
+what --> [what,is],iai.
+what --> [tell,me,more,about],iai.
+
 hepf --> [he].
 hepf --> [peter,flach].
 
+iai --> [that].
+iai --> [interactive,'A.I.'].
+iai --> [interactive,artificial,intelligence].
+
 pf("According to Wikipedia, Pieter Adriaan Flach is a Dutch computer scientist and a Professor of Artificial Intelligence in the Department of Computer Science at the University of Bristol.").
+
+iai("The Centre for Doctoral Training in Interactive Artificial Intelligence will train the next generation of innovators in human-in-the-loop AI systems, enabling them to responsibly solve societally important problems. You can ask Peter for more information.").
 
 thanks --> [thank,you].
 thanks --> [thanks].

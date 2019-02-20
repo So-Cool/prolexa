@@ -48,7 +48,7 @@ prove_question(Query,SessionId,Answer):-
 		transform(Query,Clauses),
 		phrase(sentence(Clauses),AnswerAtomList),
 		atomics_to_string(AnswerAtomList," ",Answer)
-	; Answer = 'This does not follow from what I know'
+	; Answer = 'Sorry, I don\'t think this is the case'
 	).	
 
 explain_question(Query,SessionId,Answer):-
@@ -59,7 +59,7 @@ explain_question(Query,SessionId,Answer):-
 		atomic_list_concat([therefore|L]," ",Last),
 		reverse([Last|Msg],Messages),
 		atomic_list_concat(Messages,"; ",Answer)
-	; Answer = 'This cannot be explained by what I know'
+	; Answer = 'Sorry, I don\'t think this is the case'
 	).
 
 prove_rule([Rule],SessionId):-
