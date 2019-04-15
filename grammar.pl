@@ -68,7 +68,7 @@ determiner(p,X=>B,X=>H,[d(H:-B)])	 --> [most].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
 proper_noun(s,tweety) --> [tweety].
-proper_noun(s,paul) --> [paul].
+proper_noun(s,dek) --> [dek].
 proper_noun(s,peter) --> [peter].
 
 %%% questions %%%
@@ -96,8 +96,9 @@ command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:
 
 command(g(true,"I can do a little bit of logical reasoning. You can talk with me about humans and birds.")) --> [what,can,you,do,for,me,minerva]. 
 command(g(true,"Your middle name is Adriaan")) --> [what,is,my,middle,name]. 
-command(g(true,"Today you can find out about ten new Centres for Doctoral Training in Bristol, including one on Interactive Artificial Intelligence")) --> today. 
-command(g(true,"Today\'s seminar is given by Professor Peter Flach")) --> todaysspeaker. 
+command(g(true,"Today is the first day of this year\'s BrisSynBio conference. The keynote is the highlight of the day.")) --> today. 
+%command(g(true,"Today you can find out about ten new Centres for Doctoral Training in Bristol, including one on Interactive Artificial Intelligence")) --> today. 
+command(g(true,"Today\'s keynote is given by Professor Peter Flach")) --> todaysspeaker. 
 command(g(pf(A),A)) --> peterflach. 
 command(g(iai(A),A)) --> what. 
 command(g(rr(A),A)) --> thanks.
@@ -181,39 +182,44 @@ intents:-
 	open('intents.json',write,Stream,[]),
 	json_write(Stream,
 				_{
-				  intents: [
-					_{
-					  name: 'AMAZON.CancelIntent',
-					  samples: []
-					},
-					_{
-					  name: 'AMAZON.HelpIntent',
-					  samples: []
-					},
-					_{
-					  name: 'AMAZON.StopIntent',
-					  samples: []
-					},
-					_{
-					  name: utterance,
-					  samples: [
-						'{utteranceSlot}'
-					  ],
-					  slots: [
-						_{
-						  name: utteranceSlot,
-						  type: utteranceSlot,
-						  samples: []
+				    interactionModel: _{
+        				languageModel: _{
+            				invocationName: minerva,
+            				intents: [
+								_{
+								  name: 'AMAZON.CancelIntent',
+								  samples: []
+								},
+								_{
+								  name: 'AMAZON.HelpIntent',
+								  samples: []
+								},
+								_{
+								  name: 'AMAZON.StopIntent',
+								  samples: []
+								},
+								_{
+								  name: utterance,
+								  samples: [
+									'{utteranceSlot}'
+								  ],
+								  slots: [
+									_{
+									  name: utteranceSlot,
+									  type: utteranceSlot,
+									  samples: []
+									}
+								  ]
+							  }
+							  ],
+							  types: [
+									_{
+										name:utteranceSlot,
+										values:L
+									}
+								]
+							}
 						}
-					  ]
-				  }
-				  ],
-				  types: [
-						_{
-							name:utteranceSlot,
-							values:L
-						}
-					]
 				}
 			   ),
 		close(Stream).
