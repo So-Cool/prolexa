@@ -96,9 +96,9 @@ command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:
 
 command(g(true,"I can do a little bit of logical reasoning. You can talk with me about humans and birds.")) --> [what,can,you,do,for,me,minerva]. 
 command(g(true,"Your middle name is Adriaan")) --> [what,is,my,middle,name]. 
-command(g(true,"Today is the first day of this year\'s BrisSynBio conference. The keynote is the highlight of the day.")) --> today. 
-%command(g(true,"Today you can find out about ten new Centres for Doctoral Training in Bristol, including one on Interactive Artificial Intelligence")) --> today. 
-command(g(true,"Today\'s keynote is given by Professor Peter Flach")) --> todaysspeaker. 
+%command(g(true,"Today is the first day of this year\'s BrisSynBio conference. The keynote is the highlight of the day.")) --> today. 
+command(g(true,"Today you can find out about postgraduate study at the University of Bristol. This presentation is about the Centre for Doctoral Training in Interactive Artificial Intelligence")) --> today. 
+command(g(true,"The presenter is the Centre Director, Professor Peter Flach")) --> todaysspeaker. 
 command(g(pf(A),A)) --> peterflach. 
 command(g(iai(A),A)) --> what. 
 command(g(rr(A),A)) --> thanks.
