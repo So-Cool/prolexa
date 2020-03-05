@@ -7,7 +7,7 @@
 :- use_module(library(http/http_open)).
 :- use_module(library(ssl)).
 :- use_module(library(clpfd)).
-:- use_module(alexa_mod).
+:- use_module(prolexa).
 
 %:- initialization http_daemon.
 

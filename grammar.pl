@@ -88,8 +88,8 @@ question1(Q) --> [does],proper_noun(_,X),verb_phrase(_,X=>Q).
 %%% commands %%%
 
 command(g(random_fact(Fact),Fact)) --> getanewfact.
-command(g(retractall(alexa_mod:sessionid_fact(_,C)),"I erased it from my memory")) --> forget,sentence(C). 
-command(g(retractall(alexa_mod:sessionid_fact(_,_)),"I am a blank slate")) --> forgetall. 
+command(g(retractall(prolexa:sessionid_fact(_,C)),"I erased it from my memory")) --> forget,sentence(C). 
+command(g(retractall(prolexa:sessionid_fact(_,_)),"I am a blank slate")) --> forgetall. 
 command(g(all_facts(Answer),Answer)) --> kbdump. 
 command(g(all_answers(PN,Answer),Answer)) --> tellmeabout,proper_noun(s,PN).
 command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
@@ -158,6 +158,10 @@ tellmeabout --> [tell,me,about].
 tellmeabout --> [tell,me],all,[about].
 
 
+random_fact(X):-
+	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
+
+
 %%% generating intents from grammar %%%
 
 utterance(C) --> sentence(C).
@@ -174,7 +178,7 @@ intents:-
 						synonyms:[]
 					}
 			},
-		( phrase(alexa_mod:utterance(_),S),
+		( phrase(prolexa:utterance(_),S),
 		  atomics_to_string(S," ",SS)
 		),
 		L),
