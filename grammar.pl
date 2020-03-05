@@ -1,6 +1,11 @@
-%%% grammar %%%
+%%% Definite Clause Grammer for utterances %%%
+
+utterance(C) --> sentence(C).
+utterance(C) --> question(C).
+utterance(C) --> command(C).
 
 :- op(600, xfy, '=>').
+
 
 %%% lexicon, driven by predicates %%%
 
@@ -40,6 +45,7 @@ verb_p2s(Verb_p,Verb_s):-
 	; 	atom_concat(Verb_p,s,Verb_s)
 	).
 
+
 %%% sentences %%%
 
 sentence(C) --> sword,sentence1(C).
@@ -71,6 +77,7 @@ proper_noun(s,tweety) --> [tweety].
 proper_noun(s,dek) --> [dek].
 proper_noun(s,peter) --> [peter].
 
+
 %%% questions %%%
 
 question(Q) --> qword,question1(Q).
@@ -85,6 +92,7 @@ question1(Q) --> [does],proper_noun(_,X),verb_phrase(_,X=>Q).
 %question1((Q1,Q2)) --> [are,some],noun(p,sk=>Q1),
 %					  property(p,sk=>Q2).
 
+
 %%% commands %%%
 
 command(g(random_fact(Fact),Fact)) --> getanewfact.
@@ -96,7 +104,6 @@ command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:
 
 command(g(true,"I can do a little bit of logical reasoning. You can talk with me about humans and birds.")) --> [what,can,you,do,for,me,minerva]. 
 command(g(true,"Your middle name is Adriaan")) --> [what,is,my,middle,name]. 
-%command(g(true,"Today is the first day of this year\'s BrisSynBio conference. The keynote is the highlight of the day.")) --> today. 
 command(g(true,"Today you can find out about postgraduate study at the University of Bristol. This presentation is about the Centre for Doctoral Training in Interactive Artificial Intelligence")) --> today. 
 command(g(true,"The presenter is the Centre Director, Professor Peter Flach")) --> todaysspeaker. 
 command(g(pf(A),A)) --> peterflach. 
@@ -160,71 +167,4 @@ tellmeabout --> [tell,me],all,[about].
 
 random_fact(X):-
 	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
-
-
-%%% generating intents from grammar %%%
-
-utterance(C) --> sentence(C).
-utterance(C) --> question(C).
-utterance(C) --> command(C).
-
-intents:-
-	findall(
-			_{
-				%id:null,
-				name:
-					_{
-						value:SS,
-						synonyms:[]
-					}
-			},
-		( phrase(prolexa:utterance(_),S),
-		  atomics_to_string(S," ",SS)
-		),
-		L),
-	% Stream=current_output,
-	open('intents.json',write,Stream,[]),
-	json_write(Stream,
-				_{
-				    interactionModel: _{
-        				languageModel: _{
-            				invocationName: minerva,
-            				intents: [
-								_{
-								  name: 'AMAZON.CancelIntent',
-								  samples: []
-								},
-								_{
-								  name: 'AMAZON.HelpIntent',
-								  samples: []
-								},
-								_{
-								  name: 'AMAZON.StopIntent',
-								  samples: []
-								},
-								_{
-								  name: utterance,
-								  samples: [
-									'{utteranceSlot}'
-								  ],
-								  slots: [
-									_{
-									  name: utteranceSlot,
-									  type: utteranceSlot,
-									  samples: []
-									}
-								  ]
-							  }
-							  ],
-							  types: [
-									_{
-										name:utteranceSlot,
-										values:L
-									}
-								]
-							}
-						}
-				}
-			   ),
-		close(Stream).
 
