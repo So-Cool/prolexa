@@ -2,8 +2,9 @@
 
 ## Generating intent json for Alexa ##
 ```
-swipl -g "intents, halt." grammar.pl > prolexa_intent.json
+swipl -g "prolexa_intents, halt." prolexa
 ```
+The intents are found in `prolexa_intents.json`.
 
 ## Localhost workflow (Docker) ##
 To build:
@@ -18,7 +19,7 @@ docker run -it -p 4000:4000 prolexa
 
 To test the server:
 ```
-curl -v POST http://localhost:4000/alexa -d @testjson --header "Content-Type: application/json"
+curl -v POST http://localhost:4000/prolexa -d @testjson --header "Content-Type: application/json"
 ```
 
 ## Heroku workflow ##

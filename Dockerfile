@@ -6,7 +6,7 @@ USER myuser
 WORKDIR /home/myuser
 
 ADD basic_site.pl $HOME
-ADD alexa_mod.pl $HOME
+ADD prolexa.pl $HOME
 ADD grammar.pl $HOME
 ADD meta.pl $HOME
 ADD library.pl $HOME
