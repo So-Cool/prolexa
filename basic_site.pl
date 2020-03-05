@@ -11,7 +11,7 @@
 
 %:- initialization http_daemon.
 
-:- http_handler(root(alexa), alexa,[]).
+:- http_handler(root(prolexa), prolexa,[]).
 
 % The predicate server(+Port) starts the server. It simply creates a
 % number of Prolog threads and then returns to the toplevel, so you can

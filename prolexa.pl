@@ -1,4 +1,4 @@
-:-module(prolexa,[alexa/1]).
+:-module(prolexa,[prolexa/1]).
 
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_json)).
@@ -10,7 +10,7 @@
 
 :- dynamic sessionid_fact/2.
 
-alexa(Request):-
+prolexa(Request):-
 	http_read_json_dict(Request,DictIn),
 	RequestType = DictIn.request.type,
 	( RequestType = "LaunchRequest" -> my_json_answer("I am Minerva, how can I help?",_DictOut)
