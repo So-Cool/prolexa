@@ -5,7 +5,7 @@
 %%% meta-interpreter %%%
 
 all_facts(Answer):-
-	findall(R,alexa_mod:sessionid_fact(_ID,R),Rules),
+	findall(R,prolexa:sessionid_fact(_ID,R),Rules),
 	maplist(r2m,Rules,Messages),
 	( Messages=[] -> Answer = "I know nothing"
 	; otherwise -> atomic_list_concat(Messages,". ",Answer)
@@ -35,7 +35,7 @@ p2m(n(Fact),Message):-
 	atomic_list_concat(['It is not known that',FM]," ",Message).
 
 prove_question1(Query,SessionId,Answer):-
-	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
+	findall(R,prolexa:sessionid_fact(SessionId,R),Rulebase),
 	prove_rb(Query,Rulebase),
 	transform(Query,Clauses),
 	phrase(sentence(Clauses),AnswerAtomList),
@@ -43,7 +43,7 @@ prove_question1(Query,SessionId,Answer):-
 
 % this version always succeeds
 prove_question(Query,SessionId,Answer):-
-	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
+	findall(R,prolexa:sessionid_fact(SessionId,R),Rulebase),
 	( prove_rb(Query,Rulebase) ->
 		transform(Query,Clauses),
 		phrase(sentence(Clauses),AnswerAtomList),
@@ -52,7 +52,7 @@ prove_question(Query,SessionId,Answer):-
 	).	
 
 explain_question(Query,SessionId,Answer):-
-	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
+	findall(R,prolexa:sessionid_fact(SessionId,R),Rulebase),
 	( prove_rb(Query,Rulebase,Proof) ->
 		maplist(p2m,Proof,Msg),
 		phrase(sentence1([(Query:-true)]),L),
@@ -63,7 +63,7 @@ explain_question(Query,SessionId,Answer):-
 	).
 
 prove_rule([Rule],SessionId):-
-	findall(R,alexa_mod:sessionid_fact(SessionId,R),Rulebase),
+	findall(R,prolexa:sessionid_fact(SessionId,R),Rulebase),
 	try((numbervars(Rule,0,_),
 	     Rule=(H:-B),
 	     body2rules(B,Rulebase,RB2),
