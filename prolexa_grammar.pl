@@ -56,7 +56,6 @@ sword --> [that].
 % most of this follows Simply Logical, Chapter 7
 sentence1(C) --> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,M2).
 sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L).
-sentence1([d((H:-B,not(E)))]) --> determiner(N,X=>B,X=>H,[d(H:-B)]),noun(N,X=>B),verb_phrase(N,X=>H),exception(N,X=>E).
 
 verb_phrase(s,M) --> [is],property(s,M).
 verb_phrase(p,M) --> [are],property(p,M).
@@ -66,12 +65,9 @@ property(N,M) --> adjective(N,M).
 property(s,M) --> [a],noun(s,M).
 property(p,M) --> noun(p,M).
 
-exception(N,M) --> [except],noun(N,M).
-
 determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
 %determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
-determiner(p,X=>B,X=>H,[d(H:-B)])	 --> [most].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
 proper_noun(s,tweety) --> [tweety].
@@ -98,7 +94,7 @@ question1(Q) --> [does],proper_noun(_,X),verb_phrase(_,X=>Q).
 % These DCG rules have the form command(g(Goal,Answer)) --> <sentence>
 % The idea is that if :-phrase(command(g(Goal,Answer)),UtteranceList). succeeds,
 % it will instantiate Goal; if :-call(Goal). succeeds, it will instantiate Answer.
-% See case D. in prolexa.pl
+% See case C. in prolexa.pl
 % Example: 
 %	command(g(random_fact(Fact),Fact)) --> [tell,me,anything].
 % means that "tell me anything" will trigger the goal random_fact(Fact), 

@@ -1,4 +1,4 @@
-FROM swipl:7.6.0
+FROM swipl:8.0.3
 
 # Run the image as a non-root user
 RUN useradd -m -s /bin/sh myuser
@@ -7,8 +7,8 @@ WORKDIR /home/myuser
 
 ADD basic_site.pl $HOME
 ADD prolexa.pl $HOME
-ADD grammar.pl $HOME
-ADD qa_engine.pl $HOME
+ADD prolexa_grammar.pl $HOME
+ADD prolexa_engine.pl $HOME
 ADD library.pl $HOME
 ADD aux_swi.pl $HOME
 

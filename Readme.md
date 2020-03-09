@@ -2,7 +2,7 @@
 
 ## Generating intent json for Alexa ##
 ```
-swipl -g "mk_prolexa_intents, halt." prolexa
+swipl -g "mk_prolexa_intents, halt." prolexa.pl
 ```
 The intents are found in `prolexa_intents.json`.
 
@@ -67,6 +67,7 @@ in prolexa directory.
 3. Once you're done push them to Heroku
     ```
     heroku container:push web
+    heroku container:release web
     ```
 
 4. Test your skill and repeat steps *2.* and *3.* if necessary

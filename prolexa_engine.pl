@@ -39,7 +39,6 @@ explain_question(Query,SessionId,Answer):-
 		maplist(pstep2message,Proof,Msg),
 		phrase(sentence1([(Query:-true)]),L),
 		atomic_list_concat([therefore|L]," ",Last),
-		%reverse([Last|Msg],Messages),
 		append(Msg,[Last],Messages),
 		atomic_list_concat(Messages,"; ",Answer)
 	; Answer = 'Sorry, I don\'t think this is the case'
@@ -68,7 +67,7 @@ add_body_to_rulebase((A,B),Rs0,Rs):-!,
 add_body_to_rulebase(A,Rs0,[[(A:-true)]|Rs0]).
 
 
-%%% meta-interpreter that handles defaults and constructs proofs %%%
+%%% meta-interpreter that constructs proofs %%%
 
 % 3d argument is accumulator for proofs
 prove_rb(true,_Rulebase,P,P):-!.
@@ -79,10 +78,6 @@ prove_rb((A,B),Rulebase,P0,P):-!,
 prove_rb(A,Rulebase,P0,P):-
     find_clause((A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
-prove_rb(A,Rulebase,P0,[p(A,Rule),n(C)|P]):-
-	find_clause(d((A:-B,not(C))),Rule,Rulebase),
-	prove_rb(B,Rulebase,P0,P),
-	not prove_rb(C,Rulebase,P,_).
 
 % top-level version that ignores proof
 prove_rb(Q,RB):-

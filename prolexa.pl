@@ -15,6 +15,9 @@
 
 :- dynamic stored_rule/2.	% to record additions to Rulebase in a session
 
+:-prompt(_Old,'prolexa> ').
+
+
 %some intial stored rules
 stored_rule(1,[(mortal(X):-human(X))]).
 stored_rule(1,[(human(peter):-true)]).
@@ -32,7 +35,7 @@ prolexa_cli:-
 		prolexa_cli
 	).
 
-% Main predicate that uses DCG as defined in grammar.pl 
+% Main predicate that uses DCG as defined in prolexa_grammar.pl 
 % to distinguish between sentences, questions and commands
 handle_utterance(SessionId,Utterance,Answer):-
 	write_debug(utterance(Utterance)),
@@ -40,31 +43,30 @@ handle_utterance(SessionId,Utterance,Answer):-
 	split_string(Utterance," ","",StringList),	% tokenize by spaces
 	maplist(string_lower,StringList,StringListLow),	% all lowercase
 	maplist(atom_string,UtteranceList,StringListLow),	% strings to atoms
-% A. Utterance is a sentence that follows from knowledge base
+% A. Utterance is a sentence 
 	( phrase(sentence(Rule),UtteranceList),
-	  known_rule(Rule,SessionId) ->
-		write_debug(rule(Rule)),
-		atomic_list_concat(['I already knew that',Utterance],' ',Answer)
-% B. Utterance is a sentence that doesn't follow so assert as stored rule
-	; phrase(sentence(Rule),UtteranceList) ->
-		write_debug(rule(Rule)),
-		assertz(prolexa:stored_rule(SessionId,Rule)),
-		atomic_list_concat(['I will remember that',Utterance],' ',Answer)
-% C. Utterance is a question that can be answered
+	  write_debug(rule(Rule)),
+	  ( known_rule(Rule,SessionId) -> % A1. It follows from known rules
+			atomic_list_concat(['I already knew that',Utterance],' ',Answer)
+	  ; otherwise -> % A2. It doesn't follow, so add to stored rules
+			assertz(prolexa:stored_rule(SessionId,Rule)),
+			atomic_list_concat(['I will remember that',Utterance],' ',Answer)
+	  )
+% B. Utterance is a question that can be answered
 	; phrase(question(Query),UtteranceList),
 	  write_debug(query(Query)),
 	  prove_question(Query,SessionId,Answer) -> true
-% D. Utterance is a command that succeeds
+% C. Utterance is a command that succeeds
 	; phrase(command(g(Goal,Answer)),UtteranceList),
 	  write_debug(goal(Goal)),
 	  call(Goal) -> true
-% E. Catch-all
+% D. None of the above
 	; otherwise -> atomic_list_concat(['I heard you say, ',Utterance,', could you rephrase that please?'],' ',Answer)
 	),
 	write_debug(answer(Answer)).
 
 write_debug(Atom):-
-	writeln(user_error,Atom),flush_output(user_error).
+	write(user_error,'*** '),writeln(user_error,Atom),flush_output(user_error).
 
 
 %%%%% the stuff below is only relevant if you want to create a voice-driven Alexa skill %%%%%
@@ -95,6 +97,9 @@ my_json_answer(Message,DictOut):-
 	reply_json(DictOut).
 
 
+handle_intent("getANewFact",_,DictOut):-	% for testing
+	random_fact(Fact),
+	my_json_answer(Fact,DictOut).
 handle_intent("utterance",DictIn,DictOut):-
 	SessionId=DictIn.session.sessionId,
 	Utterance=DictIn.request.intent.slots.utteranceSlot.value,
