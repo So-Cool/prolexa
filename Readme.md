@@ -1,11 +1,22 @@
-This repository contains Prolog code for a simple question-answering assistant. The top module is `prolexa.pl`, which can either be run in the command line or with speech input and output through the 
+This repository contains Prolog code for a simple question-answering assistant. The top-level module is `prolexa.pl`, which can either be run in the command line or with speech input and output through the 
 [alexa developer console](https://developer.amazon.com/alexa/console/ask).
+
+The heavy lifting is done in 
+`prolexa_grammar.pl`, which defines DCG rules for 
+sentences (that are added to the knowledge base if they don't already follow),
+questions (that are answered if possible), and
+commands (e.g., explain why something follows); and
+`prolexa_engine.pl`, which implements reasoning by means of meta-interpreters. 
+
+Also included are `nl_shell.pl`, which is taken verbatim from Chapter 7 of *Simply Logical*, 
+and an extended version `nl_shell2.pl`, which formed the basis for the `prolexa` code. 
+
 The code has been tested with [SWI Prolog](https://www.swi-prolog.org) versions 7.6.0 and 8.0.3. 
 
 # Command-line interface #
 
 ```
-% <span style="color:red">swipl prolexa.pl</span>
+% swipl prolexa.pl
 Welcome to SWI-Prolog (threaded, 64 bits, version 8.0.3)
 SWI-Prolog comes with ABSOLUTELY NO WARRANTY. This is free software.
 Please run ?- license. for legal details.
