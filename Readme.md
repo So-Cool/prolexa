@@ -87,7 +87,7 @@ To see the status of your Heroku webapp use
 heroku logs
 ```
 
-in prolexa directory.
+in the prolexa directory.
 
 ---
 
