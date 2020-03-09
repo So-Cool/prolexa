@@ -1,3 +1,5 @@
+%%% adapted from nl_shell.pl (Simply Logical, Chapter 7)
+
 :-consult(library).
 
 :-op(600,xfy,'=>').	% infix functor for predicate semantics
