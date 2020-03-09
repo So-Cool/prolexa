@@ -1,13 +1,49 @@
-# Prolexa: Amazon Alexa and Prolog integration #
+This repository contains Prolog code for a simple question-answering assistant. The top module is `prolexa.pl`, which can either be run in the command line or with speech input and output through the 
+[alexa developer console](https://developer.amazon.com/alexa/console/ask).
+The code has been tested with [SWI Prolog](https://www.swi-prolog.org) versions 7.6.0 and 8.0.3. 
+
+# Command-line interface #
+
+```
+% <span style="color:red">swipl prolexa.pl</span>
+Welcome to SWI-Prolog (threaded, 64 bits, version 8.0.3)
+SWI-Prolog comes with ABSOLUTELY NO WARRANTY. This is free software.
+Please run ?- license. for legal details.
+
+For online help and background, visit http://www.swi-prolog.org
+For built-in help, use ?- help(Topic). or ?- apropos(Word).
+
+?- prolexa_cli.
+prolexa> "Tell me everything you know".
+*** utterance(Tell me everything you know)
+*** goal(all_rules(_7210))
+*** answer(every human is mortal. peter is human)
+every human is mortal. peter is human
+prolexa> "Peter is mortal".
+*** utterance(Peter is mortal)
+*** rule([(mortal(peter):-true)])
+*** answer(I already knew that Peter is mortal)
+I already knew that Peter is mortal
+prolexa> "Explain why Peter is mortal".
+*** utterance(Explain why Peter is mortal)
+*** goal(explain_question(mortal(peter),_8846,_8834))
+*** answer(peter is human; every human is mortal; therefore peter is mortal)
+peter is human; every human is mortal; therefore peter is mortal
+```
+
+
+# Amazon Alexa and Prolog integration #
 
 Follow the steps below if you want to use the Amazon Alexa speech to text and text to speech facilities. 
-This requires an HTTP interface that is exposed to the web, for which we use [Heroku](http://heroku.com).
+This requires an HTTP interface that is exposed to the web, for which we use 
+[Heroku](http://heroku.com).
 
 ## Generating intent json for Alexa ##
 ```
 swipl -g "mk_prolexa_intents, halt." prolexa.pl
 ```
-The intents are found in `prolexa_intents.json`. You can copy and paste the contents of this file while building your skill on the [alexa developer console](https://developer.amazon.com/alexa/console/ask).
+The intents are found in `prolexa_intents.json`. You can copy and paste the contents of this file while building your skill on the 
+[alexa developer console](https://developer.amazon.com/alexa/console/ask).
 
 
 ## Localhost workflow (Docker) ##
