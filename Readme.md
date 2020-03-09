@@ -2,7 +2,7 @@
 
 ## Generating intent json for Alexa ##
 ```
-swipl -g "prolexa_intents, halt." prolexa
+swipl -g "mk_prolexa_intents, halt." prolexa
 ```
 The intents are found in `prolexa_intents.json`.
 
