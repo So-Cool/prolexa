@@ -1,0 +1,7065 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "intents": [
+	{"name":"AMAZON.CancelIntent", "samples": []},
+	{"name":"AMAZON.HelpIntent", "samples": []},
+	{"name":"AMAZON.StopIntent", "samples": []},
+	{
+	  "name":"utterance",
+	  "samples": ["{utteranceSlot}" ],
+	  "slots": [
+	    {
+	      "name":"utteranceSlot",
+	      "samples": [],
+	      "type":"utteranceSlot"
+	    }
+	  ]
+	}
+      ],
+      "invocationName":"minerva",
+      "types": [
+	{
+	  "name":"utteranceSlot",
+	  "values": [
+	    {"name": {"synonyms": [], "value":"every human is human"}},
+	    {"name": {"synonyms": [], "value":"every human is mortal"}},
+	    {
+	      "name": {"synonyms": [], "value":"every human is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every human is a mortal"}
+	    },
+	    {"name": {"synonyms": [], "value":"every human is a bird"}},
+	    {
+	      "name": {"synonyms": [], "value":"every human is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every human is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"every human flies"}},
+	    {"name": {"synonyms": [], "value":"every mortal is human"}},
+	    {
+	      "name": {"synonyms": [], "value":"every mortal is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every mortal is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every mortal is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every mortal is a bird"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every mortal is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every mortal is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"every mortal flies"}},
+	    {"name": {"synonyms": [], "value":"every bird is human"}},
+	    {"name": {"synonyms": [], "value":"every bird is mortal"}},
+	    {"name": {"synonyms": [], "value":"every bird is a human"}},
+	    {
+	      "name": {"synonyms": [], "value":"every bird is a mortal"}
+	    },
+	    {"name": {"synonyms": [], "value":"every bird is a bird"}},
+	    {
+	      "name": {"synonyms": [], "value":"every bird is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every bird is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"every bird flies"}},
+	    {
+	      "name": {"synonyms": [], "value":"every penguin is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every penguin is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every penguin is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every penguin is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every penguin is a bird"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every penguin is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every penguin is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"every penguin flies"}},
+	    {
+	      "name": {"synonyms": [], "value":"every sparrow is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every sparrow is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every sparrow is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every sparrow is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every sparrow is a bird"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every sparrow is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"every sparrow is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"every sparrow flies"}},
+	    {"name": {"synonyms": [], "value":"all humans are human"}},
+	    {"name": {"synonyms": [], "value":"all humans are mortal"}},
+	    {"name": {"synonyms": [], "value":"all humans are humans"}},
+	    {
+	      "name": {"synonyms": [], "value":"all humans are mortals"}
+	    },
+	    {"name": {"synonyms": [], "value":"all humans are birds"}},
+	    {
+	      "name": {"synonyms": [], "value":"all humans are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all humans are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"all humans fly"}},
+	    {"name": {"synonyms": [], "value":"all mortals are human"}},
+	    {
+	      "name": {"synonyms": [], "value":"all mortals are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all mortals are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all mortals are mortals"}
+	    },
+	    {"name": {"synonyms": [], "value":"all mortals are birds"}},
+	    {
+	      "name": {"synonyms": [], "value":"all mortals are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all mortals are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"all mortals fly"}},
+	    {"name": {"synonyms": [], "value":"all birds are human"}},
+	    {"name": {"synonyms": [], "value":"all birds are mortal"}},
+	    {"name": {"synonyms": [], "value":"all birds are humans"}},
+	    {"name": {"synonyms": [], "value":"all birds are mortals"}},
+	    {"name": {"synonyms": [], "value":"all birds are birds"}},
+	    {
+	      "name": {"synonyms": [], "value":"all birds are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all birds are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"all birds fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"all penguins are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all penguins are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all penguins are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all penguins are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all penguins are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all penguins are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all penguins are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"all penguins fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"all sparrows are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all sparrows are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all sparrows are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all sparrows are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all sparrows are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all sparrows are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"all sparrows are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"all sparrows fly"}},
+	    {"name": {"synonyms": [], "value":"most humans are human"}},
+	    {
+	      "name": {"synonyms": [], "value":"most humans are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most humans are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most humans are mortals"}
+	    },
+	    {"name": {"synonyms": [], "value":"most humans are birds"}},
+	    {
+	      "name": {"synonyms": [], "value":"most humans are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most humans are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"most humans fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"most mortals are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most mortals are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most mortals are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most mortals are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most mortals are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most mortals are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most mortals are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"most mortals fly"}},
+	    {"name": {"synonyms": [], "value":"most birds are human"}},
+	    {"name": {"synonyms": [], "value":"most birds are mortal"}},
+	    {"name": {"synonyms": [], "value":"most birds are humans"}},
+	    {
+	      "name": {"synonyms": [], "value":"most birds are mortals"}
+	    },
+	    {"name": {"synonyms": [], "value":"most birds are birds"}},
+	    {
+	      "name": {"synonyms": [], "value":"most birds are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most birds are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"most birds fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"most penguins are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most penguins are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most penguins are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most penguins are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most penguins are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most penguins are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most penguins are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"most penguins fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"most sparrows are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most sparrows are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most sparrows are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most sparrows are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most sparrows are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most sparrows are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most sparrows are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"most sparrows fly"}},
+	    {"name": {"synonyms": [], "value":"tweety is human"}},
+	    {"name": {"synonyms": [], "value":"tweety is mortal"}},
+	    {"name": {"synonyms": [], "value":"tweety is a human"}},
+	    {"name": {"synonyms": [], "value":"tweety is a mortal"}},
+	    {"name": {"synonyms": [], "value":"tweety is a bird"}},
+	    {"name": {"synonyms": [], "value":"tweety is a penguin"}},
+	    {"name": {"synonyms": [], "value":"tweety is a sparrow"}},
+	    {"name": {"synonyms": [], "value":"tweety flies"}},
+	    {"name": {"synonyms": [], "value":"peter is human"}},
+	    {"name": {"synonyms": [], "value":"peter is mortal"}},
+	    {"name": {"synonyms": [], "value":"peter is a human"}},
+	    {"name": {"synonyms": [], "value":"peter is a mortal"}},
+	    {"name": {"synonyms": [], "value":"peter is a bird"}},
+	    {"name": {"synonyms": [], "value":"peter is a penguin"}},
+	    {"name": {"synonyms": [], "value":"peter is a sparrow"}},
+	    {"name": {"synonyms": [], "value":"peter flies"}},
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most humans fly except humans"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most humans fly except birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most humans fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most mortals fly except birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most mortals fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most birds fly except humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most birds fly except mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"most birds fly except birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most birds fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most penguins fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"most sparrows fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every human is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every human is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every human is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every human is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every human is a bird"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every human is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every human is a sparrow"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every human flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every mortal is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every mortal is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every mortal is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every mortal is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every mortal is a bird"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that every mortal is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that every mortal is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every mortal flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every bird is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every bird is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every bird is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every bird is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every bird is a bird"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every bird is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every bird is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"that every bird flies"}},
+	    {
+	      "name": {"synonyms": [], "value":"that every penguin is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every penguin is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every penguin is a human"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that every penguin is a mortal"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every penguin is a bird"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that every penguin is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that every penguin is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every penguin flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every sparrow is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every sparrow is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every sparrow is a human"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that every sparrow is a mortal"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every sparrow is a bird"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that every sparrow is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that every sparrow is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that every sparrow flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all humans are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all humans are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all humans are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all humans are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all humans are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all humans are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all humans are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"that all humans fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"that all mortals are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all mortals are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all mortals are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all mortals are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all mortals are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all mortals are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all mortals are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"that all mortals fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"that all birds are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all birds are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all birds are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all birds are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all birds are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all birds are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all birds are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"that all birds fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"that all penguins are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all penguins are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all penguins are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all penguins are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all penguins are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that all penguins are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that all penguins are sparrows"
+	      }
+	    },
+	    {"name": {"synonyms": [], "value":"that all penguins fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"that all sparrows are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all sparrows are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all sparrows are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all sparrows are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that all sparrows are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that all sparrows are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that all sparrows are sparrows"
+	      }
+	    },
+	    {"name": {"synonyms": [], "value":"that all sparrows fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"that most humans are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most humans are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most humans are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most humans are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most humans are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most humans are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most humans are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"that most humans fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"that most mortals are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most mortals are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most mortals are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most mortals are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most mortals are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are sparrows"
+	      }
+	    },
+	    {"name": {"synonyms": [], "value":"that most mortals fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"that most birds are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most birds are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most birds are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most birds are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most birds are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most birds are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most birds are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"that most birds fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"that most penguins are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most penguins are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most penguins are humans"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortals"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most penguins are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most penguins fly"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most sparrows are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most sparrows are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most sparrows are humans"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortals"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most sparrows are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that most sparrows fly"}
+	    },
+	    {"name": {"synonyms": [], "value":"that tweety is human"}},
+	    {"name": {"synonyms": [], "value":"that tweety is mortal"}},
+	    {
+	      "name": {"synonyms": [], "value":"that tweety is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that tweety is a mortal"}
+	    },
+	    {"name": {"synonyms": [], "value":"that tweety is a bird"}},
+	    {
+	      "name": {"synonyms": [], "value":"that tweety is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that tweety is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"that tweety flies"}},
+	    {"name": {"synonyms": [], "value":"that peter is human"}},
+	    {"name": {"synonyms": [], "value":"that peter is mortal"}},
+	    {"name": {"synonyms": [], "value":"that peter is a human"}},
+	    {
+	      "name": {"synonyms": [], "value":"that peter is a mortal"}
+	    },
+	    {"name": {"synonyms": [], "value":"that peter is a bird"}},
+	    {
+	      "name": {"synonyms": [], "value":"that peter is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"that peter is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"that peter flies"}},
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most humans fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most mortals fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most birds fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most penguins fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"that most sparrows fly except sparrows"
+	      }
+	    },
+	    {"name": {"synonyms": [], "value":"who is human"}},
+	    {"name": {"synonyms": [], "value":"who is mortal"}},
+	    {"name": {"synonyms": [], "value":"who is a human"}},
+	    {"name": {"synonyms": [], "value":"who is a mortal"}},
+	    {"name": {"synonyms": [], "value":"who is a bird"}},
+	    {"name": {"synonyms": [], "value":"who is a penguin"}},
+	    {"name": {"synonyms": [], "value":"who is a sparrow"}},
+	    {"name": {"synonyms": [], "value":"who flies"}},
+	    {"name": {"synonyms": [], "value":"is tweety human"}},
+	    {"name": {"synonyms": [], "value":"is tweety mortal"}},
+	    {"name": {"synonyms": [], "value":"is tweety a human"}},
+	    {"name": {"synonyms": [], "value":"is tweety a mortal"}},
+	    {"name": {"synonyms": [], "value":"is tweety a bird"}},
+	    {"name": {"synonyms": [], "value":"is tweety a penguin"}},
+	    {"name": {"synonyms": [], "value":"is tweety a sparrow"}},
+	    {"name": {"synonyms": [], "value":"is peter human"}},
+	    {"name": {"synonyms": [], "value":"is peter mortal"}},
+	    {"name": {"synonyms": [], "value":"is peter a human"}},
+	    {"name": {"synonyms": [], "value":"is peter a mortal"}},
+	    {"name": {"synonyms": [], "value":"is peter a bird"}},
+	    {"name": {"synonyms": [], "value":"is peter a penguin"}},
+	    {"name": {"synonyms": [], "value":"is peter a sparrow"}},
+	    {"name": {"synonyms": [], "value":"does tweety is human"}},
+	    {"name": {"synonyms": [], "value":"does tweety is mortal"}},
+	    {
+	      "name": {"synonyms": [], "value":"does tweety is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"does tweety is a mortal"}
+	    },
+	    {"name": {"synonyms": [], "value":"does tweety is a bird"}},
+	    {
+	      "name": {"synonyms": [], "value":"does tweety is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"does tweety is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"does tweety are human"}},
+	    {
+	      "name": {"synonyms": [], "value":"does tweety are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"does tweety are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"does tweety are mortals"}
+	    },
+	    {"name": {"synonyms": [], "value":"does tweety are birds"}},
+	    {
+	      "name": {"synonyms": [], "value":"does tweety are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"does tweety are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"does tweety flies"}},
+	    {"name": {"synonyms": [], "value":"does tweety fly"}},
+	    {"name": {"synonyms": [], "value":"does peter is human"}},
+	    {"name": {"synonyms": [], "value":"does peter is mortal"}},
+	    {"name": {"synonyms": [], "value":"does peter is a human"}},
+	    {
+	      "name": {"synonyms": [], "value":"does peter is a mortal"}
+	    },
+	    {"name": {"synonyms": [], "value":"does peter is a bird"}},
+	    {
+	      "name": {"synonyms": [], "value":"does peter is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"does peter is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"does peter are human"}},
+	    {"name": {"synonyms": [], "value":"does peter are mortal"}},
+	    {"name": {"synonyms": [], "value":"does peter are humans"}},
+	    {
+	      "name": {"synonyms": [], "value":"does peter are mortals"}
+	    },
+	    {"name": {"synonyms": [], "value":"does peter are birds"}},
+	    {
+	      "name": {"synonyms": [], "value":"does peter are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"does peter are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"does peter flies"}},
+	    {"name": {"synonyms": [], "value":"does peter fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"forget every human is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every human is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every human is a human"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every human is a mortal"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every human is a bird"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every human is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every human is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every human flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every mortal is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every mortal is mortal"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every mortal is a human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every mortal is a mortal"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every mortal is a bird"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every mortal is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every mortal is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every mortal flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every bird is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every bird is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every bird is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every bird is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every bird is a bird"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every bird is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every bird is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every bird flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every penguin is human"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every penguin is mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every penguin is a human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every penguin is a mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every penguin is a bird"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every penguin is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every penguin is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every penguin flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every sparrow is human"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every sparrow is mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every sparrow is a human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every sparrow is a mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every sparrow is a bird"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every sparrow is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget every sparrow is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget every sparrow flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all humans are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all humans are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all humans are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all humans are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all humans are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all humans are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all humans are sparrows"
+	      }
+	    },
+	    {"name": {"synonyms": [], "value":"forget all humans fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"forget all mortals are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all mortals are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all mortals are humans"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all mortals are mortals"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all mortals are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all mortals are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all mortals are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all mortals fly"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all birds are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all birds are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all birds are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all birds are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all birds are birds"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all birds are penguins"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all birds are sparrows"}
+	    },
+	    {"name": {"synonyms": [], "value":"forget all birds fly"}},
+	    {
+	      "name": {"synonyms": [], "value":"forget all penguins are human"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all penguins are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all penguins are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all penguins are mortals"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all penguins are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all penguins are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all penguins are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all penguins fly"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all sparrows are human"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all sparrows are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all sparrows are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all sparrows are mortals"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all sparrows are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all sparrows are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget all sparrows are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget all sparrows fly"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most humans are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most humans are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most humans are humans"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortals"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most humans are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most humans fly"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most mortals are human"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortals"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most mortals are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most mortals fly"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most birds are human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most birds are mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most birds are humans"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most birds are mortals"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most birds are birds"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are sparrows"
+	      }
+	    },
+	    {"name": {"synonyms": [], "value":"forget most birds fly"}},
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most penguins fly"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget most sparrows fly"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget tweety is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget tweety is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget tweety is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget tweety is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget tweety is a bird"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget tweety is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget tweety is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"forget tweety flies"}},
+	    {"name": {"synonyms": [], "value":"forget peter is human"}},
+	    {
+	      "name": {"synonyms": [], "value":"forget peter is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget peter is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget peter is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget peter is a bird"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget peter is a penguin"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget peter is a sparrow"}
+	    },
+	    {"name": {"synonyms": [], "value":"forget peter flies"}},
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most humans fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most mortals fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most birds fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most penguins fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget most sparrows fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every human is human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every human is mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every human is a human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every human is a mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every human is a bird"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every human is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every human is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that every human flies"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every mortal is human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every mortal is mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every mortal is a human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every mortal is a mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every mortal is a bird"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every mortal is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every mortal is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every mortal flies"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every bird is human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every bird is mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every bird is a human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every bird is a mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every bird is a bird"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every bird is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every bird is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that every bird flies"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every penguin is human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every penguin is mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every penguin is a human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every penguin is a mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every penguin is a bird"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every penguin is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every penguin is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every penguin flies"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every sparrow is human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every sparrow is mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every sparrow is a human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every sparrow is a mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every sparrow is a bird"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every sparrow is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every sparrow is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that every sparrow flies"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all humans are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all humans are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all humans are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all humans are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all humans are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all humans are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all humans are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that all humans fly"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all mortals are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all mortals are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all mortals are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all mortals are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all mortals are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all mortals are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all mortals are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that all mortals fly"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all birds are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all birds are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all birds are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all birds are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all birds are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all birds are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all birds are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that all birds fly"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all penguins are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all penguins are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all penguins are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all penguins are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all penguins are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all penguins are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all penguins are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that all penguins fly"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all sparrows are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all sparrows are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all sparrows are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all sparrows are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all sparrows are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all sparrows are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that all sparrows are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that all sparrows fly"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that most humans fly"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that most mortals fly"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that most birds fly"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that most penguins fly"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are human"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortal"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are sparrows"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that most sparrows fly"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that tweety is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that tweety is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that tweety is a human"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that tweety is a mortal"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that tweety is a bird"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that tweety is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that tweety is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that tweety flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that peter is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that peter is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that peter is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that peter is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that peter is a bird"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that peter is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that peter is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"forget that peter flies"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most humans fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most mortals fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most birds fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most penguins fly except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are human except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are human except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are human except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are human except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are human except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortal except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortal except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortal except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortal except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortal except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are humans except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are humans except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are humans except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are humans except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are humans except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortals except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortals except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortals except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortals except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are mortals except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are birds except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are birds except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are birds except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are birds except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are birds except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are penguins except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are penguins except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are penguins except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are penguins except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are penguins except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are sparrows except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are sparrows except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are sparrows except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are sparrows except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows are sparrows except sparrows"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows fly except humans"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows fly except mortals"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows fly except birds"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows fly except penguins"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"forget that most sparrows fly except sparrows"
+	      }
+	    },
+	    {"name": {"synonyms": [], "value":"forget all"}},
+	    {"name": {"synonyms": [], "value":"forget everything"}},
+	    {"name": {"synonyms": [], "value":"forget all you know"}},
+	    {
+	      "name": {"synonyms": [], "value":"forget everything you know"}
+	    },
+	    {"name": {"synonyms": [], "value":"spill the beans"}},
+	    {"name": {"synonyms": [], "value":"tell me all"}},
+	    {"name": {"synonyms": [], "value":"tell me everything"}},
+	    {"name": {"synonyms": [], "value":"tell me all you know"}},
+	    {
+	      "name": {"synonyms": [], "value":"tell me everything you know"}
+	    },
+	    {"name": {"synonyms": [], "value":"tell me about tweety"}},
+	    {"name": {"synonyms": [], "value":"tell me about peter"}},
+	    {
+	      "name": {"synonyms": [], "value":"tell me all about tweety"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"tell me all about peter"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"tell me everything about tweety"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"tell me everything about peter"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why tweety is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why tweety is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why tweety is a human"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"explain why tweety is a mortal"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why tweety is a bird"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"explain why tweety is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"explain why tweety is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why tweety flies"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why peter is human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why peter is mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why peter is a human"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why peter is a mortal"}
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why peter is a bird"}
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"explain why peter is a penguin"
+	      }
+	    },
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"explain why peter is a sparrow"
+	      }
+	    },
+	    {
+	      "name": {"synonyms": [], "value":"explain why peter flies"}
+	    },
+	    {"name": {"synonyms": [], "value":"anything"}},
+	    {"name": {"synonyms": [], "value":"a random fact"}},
+	    {
+	      "name": {"synonyms": [], "value":"something i don't know"}
+	    },
+	    {"name": {"synonyms": [], "value":"tell me anything"}},
+	    {"name": {"synonyms": [], "value":"tell me a random fact"}},
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"tell me something i don't know"
+	      }
+	    },
+	    {"name": {"synonyms": [], "value":"thank you"}},
+	    {"name": {"synonyms": [], "value":"thanks"}},
+	    {"name": {"synonyms": [], "value":"great thanks"}},
+	    {
+	      "name": {
+		"synonyms": [],
+		"value":"what can you do for me minerva"
+	      }
+	    }
+	  ]
+	}
+      ]
+    }
+  }
+}

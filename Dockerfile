@@ -8,7 +8,7 @@ WORKDIR /home/myuser
 ADD basic_site.pl $HOME
 ADD prolexa.pl $HOME
 ADD grammar.pl $HOME
-ADD meta.pl $HOME
+ADD qa_engine.pl $HOME
 ADD library.pl $HOME
 ADD aux_swi.pl $HOME
 

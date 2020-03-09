@@ -2,7 +2,7 @@
 	[
 		prolexa_cli/0,			% run prolexa on the command line
 		prolexa/1,				% HTTP server for prolexa (for Heroku)
-		prolexa_intents/0		% dump all possible Alexa intents in prolexa_intents.json
+		mk_prolexa_intents/0	% dump all possible Alexa intents in prolexa_intents.json
 	]).
 
 :- use_module(library(http/http_dispatch)).
@@ -10,10 +10,14 @@
 :- use_module(library(http/http_open)).
 :- use_module(library(http/json)).
 
-:- consult(meta).	% meta-interpreter
-:- consult(grammar).	% NLP grammar
+:- consult(prolexa_engine).		% meta-interpreter
+:- consult(prolexa_grammar).	% NLP grammar
 
-:- dynamic sessionid_fact/2.	% to record additions to KB in a session
+:- dynamic stored_rule/2.	% to record additions to Rulebase in a session
+
+%some intial stored rules
+stored_rule(1,[(mortal(X):-human(X))]).
+stored_rule(1,[(human(peter):-true)]).
 
 
 %%% Prolexa Command Line Interface %%%
@@ -38,13 +42,13 @@ handle_utterance(SessionId,Utterance,Answer):-
 	maplist(atom_string,UtteranceList,StringListLow),	% strings to atoms
 % A. Utterance is a sentence that follows from knowledge base
 	( phrase(sentence(Rule),UtteranceList),
-	  prove_rule(Rule,SessionId) ->
+	  known_rule(Rule,SessionId) ->
 		write_debug(rule(Rule)),
 		atomic_list_concat(['I already knew that',Utterance],' ',Answer)
-% B. Utterance is a sentence that doesn't follow so add to KB
+% B. Utterance is a sentence that doesn't follow so assert as stored rule
 	; phrase(sentence(Rule),UtteranceList) ->
 		write_debug(rule(Rule)),
-		assertz(prolexa:sessionid_fact(SessionId,Rule)),
+		assertz(prolexa:stored_rule(SessionId,Rule)),
 		atomic_list_concat(['I will remember that',Utterance],' ',Answer)
 % C. Utterance is a question that can be answered
 	; phrase(question(Query),UtteranceList),
@@ -63,7 +67,7 @@ write_debug(Atom):-
 	writeln(user_error,Atom),flush_output(user_error).
 
 
-%%%%% stuff below is only relevant if you want to create a voice-driven Alexa skill %%%%%
+%%%%% the stuff below is only relevant if you want to create a voice-driven Alexa skill %%%%%
 
 
 %%% HTTP server %%%
@@ -104,7 +108,7 @@ handle_intent(_,_,DictOut):-
 % Run this if you want to test the skill on the 
 % Alexa developer console
 
-prolexa_intents:-
+mk_prolexa_intents:-
 	findall(
 			_{
 				%id:null,

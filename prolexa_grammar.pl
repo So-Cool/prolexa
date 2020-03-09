@@ -1,4 +1,4 @@
-%%% Definite Clause Grammer for utterances %%%
+%%% Definite Clause Grammer for prolexa utterances %%%
 
 utterance(C) --> sentence(C).
 utterance(C) --> question(C).
@@ -75,7 +75,6 @@ determiner(p,X=>B,X=>H,[d(H:-B)])	 --> [most].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
 proper_noun(s,tweety) --> [tweety].
-proper_noun(s,dek) --> [dek].
 proper_noun(s,peter) --> [peter].
 
 
@@ -104,55 +103,29 @@ question1(Q) --> [does],proper_noun(_,X),verb_phrase(_,X=>Q).
 %	command(g(random_fact(Fact),Fact)) --> [tell,me,anything].
 % means that "tell me anything" will trigger the goal random_fact(Fact), 
 % which will generate a random fact as output for prolexa.
-% The special form
-%	command(g(true,<response>)) --> <sentence>. 
 
-
-command(g(random_fact(Fact),Fact)) --> getanewfact.
-command(g(retractall(prolexa:sessionid_fact(_,C)),"I erased it from my memory")) --> forget,sentence(C). 
-command(g(retractall(prolexa:sessionid_fact(_,_)),"I am a blank slate")) --> forgetall. 
-command(g(all_facts(Answer),Answer)) --> kbdump. 
+command(g(retractall(prolexa:stored_rule(_,C)),"I erased it from my memory")) --> forget,sentence(C). 
+command(g(retractall(prolexa:stored_rule(_,_)),"I am a blank slate")) --> forgetall. 
+command(g(all_rules(Answer),Answer)) --> kbdump. 
 command(g(all_answers(PN,Answer),Answer)) --> tellmeabout,proper_noun(s,PN).
 command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
-
-command(g(true,"I can do a little bit of logical reasoning. You can talk with me about humans and birds.")) --> [what,can,you,do,for,me,minerva]. 
-command(g(true,"Your middle name is Adriaan")) --> [what,is,my,middle,name]. 
-command(g(true,"Today you can find out about postgraduate study at the University of Bristol. This presentation is about the Centre for Doctoral Training in Interactive Artificial Intelligence")) --> today. 
-command(g(true,"The presenter is the Centre Director, Professor Peter Flach")) --> todaysspeaker. 
-command(g(pf(A),A)) --> peterflach. 
-command(g(iai(A),A)) --> what. 
+command(g(random_fact(Fact),Fact)) --> getanewfact.
+%command(g(pf(A),A)) --> peterflach. 
+%command(g(iai(A),A)) --> what. 
 command(g(rr(A),A)) --> thanks.
 
-today --> [what,today,is,about].
-today --> [what,is,today,about].
-today --> [what,is,happening,today].
+% The special form
+%	command(g(true,<response>)) --> <sentence>. 
+% maps specific input sentences to specific responses.
 
-todaysspeaker --> [who,gives,'today\'s',seminar].
-todaysspeaker --> [who,gives,it].
-todaysspeaker --> [who,is,the,speaker].
-
-peterflach --> [who,is],hepf.
-peterflach --> [tell,me,more,about],hepf.
-
-what --> [what,is],iai.
-what --> [tell,me,more,about],iai.
-
-hepf --> [he].
-hepf --> [peter,flach].
-
-iai --> [that].
-iai --> [interactive,'A.I.'].
-iai --> [interactive,artificial,intelligence].
-
-pf("According to Wikipedia, Pieter Adriaan Flach is a Dutch computer scientist and a Professor of Artificial Intelligence in the Department of Computer Science at the University of Bristol.").
-
-iai("The Centre for Doctoral Training in Interactive Artificial Intelligence will train the next generation of innovators in human-in-the-loop AI systems, enabling them to responsibly solve societally important problems. You can ask Peter for more information.").
+command(g(true,"I can do a little bit of logical reasoning. You can talk with me about humans and birds.")) --> [what,can,you,do,for,me,minerva]. 
+%command(g(true,"Your middle name is Adriaan")) --> [what,is,my,middle,name]. 
+%command(g(true,"Today you can find out about postgraduate study at the University of Bristol. This presentation is about the Centre for Doctoral Training in Interactive Artificial Intelligence")) --> today. 
+%command(g(true,"The presenter is the Centre Director, Professor Peter Flach")) --> todaysspeaker. 
 
 thanks --> [thank,you].
 thanks --> [thanks].
 thanks --> [great,thanks].
-
-rr(A):-random_member(A,["no worries","the pleasure is entirely mine","any time, peter","happy to be of help"]).
 
 getanewfact --> getanewfact1.
 getanewfact --> [tell,me],getanewfact1.
@@ -177,7 +150,36 @@ all --> [everything].
 tellmeabout --> [tell,me,about].
 tellmeabout --> [tell,me],all,[about].
 
+rr(A):-random_member(A,["no worries","the pleasure is entirely mine","any time, peter","happy to be of help"]).
 
 random_fact(X):-
 	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
 
+
+%%% various stuff for specfic events
+
+% today --> [what,today,is,about].
+% today --> [what,is,today,about].
+% today --> [what,is,happening,today].
+% 
+% todaysspeaker --> [who,gives,'today\'s',seminar].
+% todaysspeaker --> [who,gives,it].
+% todaysspeaker --> [who,is,the,speaker].
+% 
+% peterflach --> [who,is],hepf.
+% peterflach --> [tell,me,more,about],hepf.
+% 
+% what --> [what,is],iai.
+% what --> [tell,me,more,about],iai.
+% 
+% hepf --> [he].
+% hepf --> [peter,flach].
+% 
+% iai --> [that].
+% iai --> [interactive,'A.I.'].
+% iai --> [interactive,artificial,intelligence].
+% 
+% pf("According to Wikipedia, Pieter Adriaan Flach is a Dutch computer scientist and a Professor of Artificial Intelligence in the Department of Computer Science at the University of Bristol.").
+% 
+% iai("The Centre for Doctoral Training in Interactive Artificial Intelligence will train the next generation of innovators in human-in-the-loop AI systems, enabling them to responsibly solve societally important problems. You can ask Peter for more information.").
+% 
