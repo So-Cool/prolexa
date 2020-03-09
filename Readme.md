@@ -1,13 +1,13 @@
 # Prolexa: Amazon Alexa and Prolog integration #
 
 Follow the steps below if you want to use the Amazon Alexa speech to text and text to speech facilities. 
-This requires an HTTP interface that is exposed to the web, for which we use [http://heroku.com](Heroku).
+This requires an HTTP interface that is exposed to the web, for which we use [Heroku](http://heroku.com).
 
 ## Generating intent json for Alexa ##
 ```
 swipl -g "mk_prolexa_intents, halt." prolexa.pl
 ```
-The intents are found in `prolexa_intents.json`. You can copy and paste the contents of this file while building your skill on the [https://developer.amazon.com/alexa/console/ask](alexa developer console).
+The intents are found in `prolexa_intents.json`. You can copy and paste the contents of this file while building your skill on the [alexa developer console](https://developer.amazon.com/alexa/console/ask).
 
 
 ## Localhost workflow (Docker) ##
