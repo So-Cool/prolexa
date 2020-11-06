@@ -1,19 +1,24 @@
-This repository contains Prolog code for a simple question-answering assistant. The top-level module is `prolexa.pl`, which can either be run in the command line or with speech input and output through the 
+# Prolexa #
+This repository contains Prolog code for a simple question-answering assistant.
+The top-level module is `prolog/prolexa.pl`, which can either be run in the
+command line or with speech input and output through the
 [alexa developer console](https://developer.amazon.com/alexa/console/ask).
 
-The heavy lifting is done in 
-`prolexa_grammar.pl`, which defines DCG rules for 
-sentences (that are added to the knowledge base if they don't already follow),
-questions (that are answered if possible), and
-commands (e.g., explain why something follows); and
-`prolexa_engine.pl`, which implements reasoning by means of meta-interpreters. 
+The heavy lifting is done in `prolog/prolexa_grammar.pl`, which defines DCG
+rules for sentences (that are added to the knowledge base if they don't already
+follow), questions (that are answered if possible), and commands (e.g., explain
+why something follows); and `prolog/prolexa_engine.pl`, which implements
+reasoning by means of meta-interpreters.
 
-Also included are `nl_shell.pl`, which is taken verbatim from Chapter 7 of *Simply Logical*, 
-and an extended version `nl_shell2.pl`, which formed the basis for the `prolexa` code. 
+Also included are `prolog/nl_shell.pl`, which is taken verbatim from Chapter 7
+of *Simply Logical*, and an extended version `prolog/nl_shell2.pl`, which
+formed the basis for the *prolexa* code.
 
-The code has been tested with [SWI Prolog](https://www.swi-prolog.org) versions 7.6.0 and 8.0.3. 
+The code has been tested with [SWI Prolog](https://www.swi-prolog.org) versions
+7.6.0 and 8.0.3.
 
-# Command-line interface #
+## Command-line interface ##
+(The code is executed from the `prolog` directory.)
 
 ```
 % swipl prolexa.pl
@@ -42,22 +47,22 @@ prolexa> "Explain why Peter is mortal".
 peter is human; every human is mortal; therefore peter is mortal
 ```
 
-
-# Amazon Alexa and Prolog integration #
-
-Follow the steps below if you want to use the Amazon Alexa speech to text and text to speech facilities. 
-This requires an HTTP interface that is exposed to the web, for which we use 
+## Amazon Alexa and Prolog integration ##
+Follow the steps below if you want to use the Amazon Alexa speech to text and
+text to speech facilities.
+This requires an HTTP interface that is exposed to the web, for which we use
 [Heroku](http://heroku.com).
 
-## Generating intent json for Alexa ##
+### Generating intent json for Alexa ###
 ```
 swipl -g "mk_prolexa_intents, halt." prolexa.pl
 ```
-The intents are found in `prolexa_intents.json`. You can copy and paste the contents of this file while building your skill on the 
+The intents are found in `prolexa_intents.json`. You can copy and paste the
+contents of this file while building your skill on the
 [alexa developer console](https://developer.amazon.com/alexa/console/ask).
 
 
-## Localhost workflow (Docker) ##
+### Localhost workflow (Docker) ###
 To build:
 ```
 docker build . -t prolexa
@@ -73,12 +78,12 @@ To test the server:
 curl -v POST http://localhost:4000/prolexa -d @testjson --header "Content-Type: application/json"
 ```
 
-## Heroku workflow ##
-### Initial setup ###
+### Heroku workflow ###
+#### Initial setup ####
 Prerequisites:
 
-- Docker app running in the background
-- Installed Heroku CLI (`brew install heroku/brew/heroku`)
+- Docker app running in the background.
+- Installed Heroku CLI (`brew install heroku/brew/heroku` on MacOS).
 
 ---
 
@@ -87,7 +92,7 @@ To see the status of your Heroku webapp use
 heroku logs
 ```
 
-in the prolexa directory.
+in the `prolexa` directory.
 
 ---
 
@@ -107,7 +112,7 @@ in the prolexa directory.
     heroku git:remote -a prolexa
     ```
 
-### Development workflow ###
+#### Development workflow ####
 1. Before you start open your local copy of Prolexa and login to Heroku
     ```
     cd prolexa
