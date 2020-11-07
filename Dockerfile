@@ -5,12 +5,12 @@ RUN useradd -m -s /bin/sh myuser
 USER myuser
 WORKDIR /home/myuser
 
-ADD prolog/basic_site.pl $HOME
-ADD prolog/prolexa.pl $HOME
-ADD prolog/prolexa_grammar.pl $HOME
-ADD prolog/prolexa_engine.pl $HOME
-ADD prolog/library.pl $HOME
-ADD prolog/aux_swi.pl $HOME
+ADD prolexa/prolog/basic_site.pl $HOME
+ADD prolexa/prolog/prolexa.pl $HOME
+ADD prolexa/prolog/prolexa_grammar.pl $HOME
+ADD prolexa/prolog/prolexa_engine.pl $HOME
+ADD prolexa/prolog/library.pl $HOME
+ADD prolexa/prolog/aux_swi.pl $HOME
 
 ENV PORT 4000
 EXPOSE 4000

@@ -1,24 +1,24 @@
 # Prolexa #
 This repository contains Prolog code for a simple question-answering assistant.
-The top-level module is `prolog/prolexa.pl`, which can either be run in the
-command line or with speech input and output through the
+The top-level module is `prolexa/prolog/prolexa.pl`, which can either be run in
+the command line or with speech input and output through the
 [alexa developer console](https://developer.amazon.com/alexa/console/ask).
 
-The heavy lifting is done in `prolog/prolexa_grammar.pl`, which defines DCG
-rules for sentences (that are added to the knowledge base if they don't already
-follow), questions (that are answered if possible), and commands (e.g., explain
-why something follows); and `prolog/prolexa_engine.pl`, which implements
-reasoning by means of meta-interpreters.
+The heavy lifting is done in `prolexa/prolog/prolexa_grammar.pl`, which defines
+DCG rules for sentences (that are added to the knowledge base if they don't
+already follow), questions (that are answered if possible), and commands (e.g.,
+explain why something follows); and `prolexa/prolog/prolexa_engine.pl`, which
+implements reasoning by means of meta-interpreters.
 
-Also included are `prolog/nl_shell.pl`, which is taken verbatim from Chapter 7
-of *Simply Logical*, and an extended version `prolog/nl_shell2.pl`, which
-formed the basis for the *prolexa* code.
+Also included are `prolexa/prolog/nl_shell.pl`, which is taken verbatim from
+Chapter 7 of *Simply Logical*, and an extended version
+`prolexa/prolog/nl_shell2.pl`, which formed the basis for the *prolexa* code.
 
 The code has been tested with [SWI Prolog](https://www.swi-prolog.org) versions
 7.6.0 and 8.0.3.
 
 ## Command-line interface ##
-(The code is executed from the `prolog` directory.)
+(The code is executed from the `prolexa/prolog` directory.)
 
 ```
 % swipl prolexa.pl
