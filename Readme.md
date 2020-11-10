@@ -135,7 +135,8 @@ in the `prolexa` directory.
 
 # Prolexa Plus #
 Prolexa Plus is an extension to Prolexa which uses NLTK and Flair for part-of-speech tagging of nouns, verbs 
-and other words that are not currently in Prolexa's lexicon. It was implemented by Gavin Leech and Dan Whettam 
+and other words that are not currently in Prolexa's lexicon. It was implemented by 
+[Gavin Leech](https://github.com/g-leech) and [Dan Whettam](https://github.com/DWhettam)
 from the CDT19 cohort.
 
 ```
