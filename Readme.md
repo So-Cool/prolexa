@@ -150,20 +150,44 @@ For more information on how to set up `pyswip` see:
 * <https://github.com/yuce/pyswip>.
 
 ## Installation ##
+### `pip install` ###
+This installation approach is recommended.
+The installation script may take a moment when processing the Prolexa package
+since language models need to be downloaded (which is achieved by automatically
+executing the `prolexa/setup_models.py` script) -- the
+`Running setup.py install for prolexa ... /` step.
+
+To install execute
+```
+pip install -e .
+```
+while in the root directory of this repository.
+The `-e` flag installs an editable version of the package, which allows you to
+edit the source to instantly updated the installed version of the package
+(read more
+[here](https://pip.pypa.io/en/stable/reference/pip_install/#install-editable)).
+
+This installation comes with two command line tools:
+
+* `prolexa-plus` -- **launches the Prolexa Plus REPL**, and
+* `prolexa-setup-models` -- downloads `nltk` and `flair` language corpora and
+  models.
+
+### Executing Source ###
 1. Install Python dependencies
    ```
    pip install -r requirements.txt
    ```
 2. Install language models and data
    ```
-   python prolexa/setup_nltk.py
+   python prolexa/setup_models.py
    ```
 3. Run *Prolexa Plus*
    ```
    PYTHONPATH=./ python prolexa/prolexa_plus.py
    ```
 
-## Docker ##
+### Docker ###
 Instead of a local install, it is possible to run *Prolexa Plus* with the
 designated Docker image.
 
@@ -175,3 +199,10 @@ designated Docker image.
    ```
    docker run -it prolexa-plus
    ```
+
+## Tests ##
+**Python tests are currently broken.**
+To test the code execute
+```
+python prolexa/tests/test.py
+```

@@ -21,7 +21,10 @@ class ProlexaPlus(Cmd):
         first_answer = meta.standardised_query(pl, input_)[0]['Output']
         print(first_answer)
 
-if __name__ == '__main__':
+def prolexa_plus_repl():
     meta.reset_grammar()
     meta.initialise_prolexa(pl)
     ProlexaPlus().cmdloop()
+
+if __name__ == '__main__':
+    prolexa_plus_repl()

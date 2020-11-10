@@ -21,8 +21,8 @@ ADD requirements.txt $HOME
 RUN pip3.6 install -r requirements.txt
 # RUN pip3.6 install --upgrade flair
 
-ADD prolexa/setup_nltk.py $HOME
-RUN python3.6 setup_nltk.py
+ADD prolexa/setup_models.py $HOME
+RUN python3.6 setup_models.py
 
 ADD prolexa /root/prolexa
 ENV PYTHONPATH=/root

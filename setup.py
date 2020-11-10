@@ -2,22 +2,27 @@
 
 import re
 from setuptools import find_packages, setup
-from setuptools.command.develop import develop
 from setuptools.command.install import install
+from setuptools.command.develop import develop
 
 import prolexa
 
-class PostDevelopCommand(develop):
-    """Post-installation for development mode."""
-    def run(self):
-        develop.run(self)
-        # PUT YOUR POST-INSTALL SCRIPT HERE or CALL A FUNCTION
+def setup_models():
+    import prolexa.setup_models as setup_models_
+    setup_models_.get_wordnet_nltk()
+    setup_models_.get_pos_flair()
 
 class PostInstallCommand(install):
     """Post-installation for installation mode."""
     def run(self):
         install.run(self)
-        # PUT YOUR POST-INSTALL SCRIPT HERE or CALL A FUNCTION
+        setup_models()
+
+class PostDevelopCommand(develop):
+    """Post-installation for development mode."""
+    def run(self):
+        develop.run(self)
+        setup_models()
 
 def dependencies_from_file(file_path):
     required = []
@@ -78,14 +83,16 @@ def setup_package():
                     packages=PACKAGES,
                     # include_package_data=INCLUDE_PACKAGE_DATA,
                     package_data={DISTNAME: ['prolog/*.pl']},
-                    cmdclass={'develop': PostDevelopCommand,
-                              'install': PostInstallCommand}
+                    cmdclass={'install': PostInstallCommand,
+                              'develop': PostDevelopCommand},
+                    entry_points = {
+                        'console_scripts': [
+                            'prolexa-setup-models=prolexa.command_line:setup_models',
+                            'prolexa-plus=prolexa.command_line:prolexa_plus']
+                    }
                     )
 
     setup(**metadata)
 
 if __name__ == "__main__":
     setup_package()
-
-    # import nltk
-    # nltk.download('wordnet')
