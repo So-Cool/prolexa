@@ -132,3 +132,46 @@ in the `prolexa` directory.
     git commit -am "My commit message"
     git push origin master
     ```
+
+# Prolexa Plus #
+Prolexa Plus requires Python 3.6+ and SWI Prolog version 7.6.0+.
+Using a Python virtual environment is advised.
+Since the Prolog<->Python bridge is quite fragile, you should consider using:
+
+* *Windows Subsystem for Linux* if you are on Windows,
+* *Ubuntu Linux*,
+* *MacOS*, or
+* the provided *Docker image* (see below)
+
+to minimise potential issues.
+For more information on how to set up `pyswip` see:
+
+* <https://github.com/yuce/pyswip/blob/master/INSTALL.md> and
+* <https://github.com/yuce/pyswip>.
+
+## Installation ##
+1. Install Python dependencies
+   ```
+   pip install -r requirements.txt
+   ```
+2. Install language models and data
+   ```
+   python prolexa/setup_nltk.py
+   ```
+3. Run *Prolexa Plus*
+   ```
+   PYTHONPATH=./ python prolexa/prolexa_plus.py
+   ```
+
+## Docker ##
+Instead of a local install, it is possible to run *Prolexa Plus* with the
+designated Docker image.
+
+1. Build the *Prolexa Plus* Docker image
+   ```
+   docker build -t prolexa-plus -f Dockerfile-prolexa-plus ./
+   ```
+2. Run *Prolexa Plus* via Docker
+   ```
+   docker run -it prolexa-plus
+   ```

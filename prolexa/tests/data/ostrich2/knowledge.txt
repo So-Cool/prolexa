@@ -1,0 +1,6 @@
+If someone is an ostrich then they can fly. 
+If someone is an ostrich then they are a bird. 
+If someone is a bird and not abnormal then they cannot fly. 
+If someone can fly then they are abnormal. 
+Arthur is a bird. 
+Bill is an ostrich.

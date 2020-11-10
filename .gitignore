@@ -3,3 +3,7 @@
 
 # Python
 *__pycache__
+
+# Prolexa Plus
+prolexa/prolexa.pl
+prolexa/knowledge_store.pl

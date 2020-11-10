@@ -1,0 +1,4 @@
+contractions>=0.0.24
+flair>=0.5
+nltk>=3.5
+pyswip>=0.2.9

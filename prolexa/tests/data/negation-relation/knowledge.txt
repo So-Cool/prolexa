@@ -1,0 +1,5 @@
+The squirrel is young. 
+The tiger is rough. 
+The tiger eats the bear. 
+If something eats the bear then it is red. 
+If something is red and rough then the squirrel likes the tiger.

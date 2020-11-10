@@ -1,0 +1,9 @@
+If someone is not a UK resident and they do not have a UK civil service pension then they do not pay UK pension tax. 
+If someone has a UK civil service pension then they pay pension tax in the UK. 
+If someone is a UK resident then they pay pension tax in the UK. 
+If someone's home country is UK then they are a UK resident. 
+If someone's home country is France then they are a French resident. 
+John's home country is UK. 
+Pierre's home country is France. 
+Alan's home country is France. 
+Alan has a UK civil service pension.

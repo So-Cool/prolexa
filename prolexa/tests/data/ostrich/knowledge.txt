@@ -1,0 +1,13 @@
+Arthur is a bird. 
+Arthur is not wounded. 
+Bill is an ostrich. 
+Colin is a bird. 
+Colin is wounded. 
+Dave is not an ostrich. 
+Dave is wounded. 
+If someone is an ostrich then they are a bird. 
+If someone is an ostrich then they are abnormal. 
+If someone is an ostrich then they cannot fly. 
+If someone is a bird and wounded then they are abnormal. 
+If someone is wounded then they cannot fly. 
+If someone is a bird and not abnormal then they can fly.

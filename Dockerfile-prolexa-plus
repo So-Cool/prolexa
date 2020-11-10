@@ -1,0 +1,32 @@
+FROM swipl
+
+RUN apt-get update
+
+RUN apt-get install -y make build-essential libssl-dev zlib1g-dev
+RUN apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
+RUN apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev
+
+RUN wget https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz
+RUN tar xvf Python-3.6.4.tgz
+RUN cd Python-3.6.4 \
+    && ./configure \
+    && make -j8 \
+    && make install
+
+RUN cd $HOME
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python3.6 get-pip.py
+
+ADD requirements.txt $HOME
+RUN pip3.6 install -r requirements.txt
+# RUN pip3.6 install --upgrade flair
+
+ADD prolexa/setup_nltk.py $HOME
+RUN python3.6 setup_nltk.py
+
+ADD prolexa /root/prolexa
+ENV PYTHONPATH=/root
+
+WORKDIR /root
+
+CMD python3.6 prolexa/prolexa_plus.py

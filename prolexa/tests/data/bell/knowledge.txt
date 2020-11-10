@@ -1,0 +1,8 @@
+The circuit has a switch. 
+The circuit has a bell. 
+The switch is on. 
+If the circuit has the switch and the switch is on then the circuit is complete. 
+If the circuit does not have the switch then the circuit is complete. 
+If the circuit is complete and the circuit has the light bulb then the light bulb is glowing. 
+If the circuit is complete and the circuit has the bell then the bell is ringing. 
+If the circuit is complete and the circuit has the radio then the radio is playing.

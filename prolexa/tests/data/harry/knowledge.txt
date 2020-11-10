@@ -1,0 +1,4 @@
+Harry can do magic. 
+Muggles cannot do magic. 
+If a person can do magic then they can vanish. 
+Mr Dursley is a Muggle.
