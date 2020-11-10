@@ -134,6 +134,41 @@ in the `prolexa` directory.
     ```
 
 # Prolexa Plus #
+Prolexa Plus is an extension to Prolexa which uses NLTK and Flair for part-of-speech tagging of nouns, verbs 
+and other words that are not currently in Prolexa's lexicon. It was implemented by Gavin Leech and Dan Whettam 
+from the CDT19 cohort.
+
+```
+% python prolexa/prolexa_plus.py
+2020-11-10 18:33:12,559 loading file /Users/cspaf/.flair/models/en-pos-ontonotes-v0.5.pt
+Hello! I'm ProlexaPlus! Tell me anything, ask me anything.
+> tell me about Kacper
+*** utterance(tell me about Kacper)
+*** goal(all_answers(kacper,_60700))
+*** answer(I know nothing about kacper)
+I know nothing about kacper
+> Kacper is a postdoc
+*** utterance(Kacper is a postdoc)
+*** rule([(postdoc(kacper):-true)])
+*** answer(I will remember that Kacper is a postdoc)
+I will remember that Kacper is a postdoc
+> every postdoc is busy
+*** utterance(every postdoc is busy)
+*** rule([(busy(_53392):-postdoc(_53392))])
+*** answer(I will remember that every postdoc is busy)
+I will remember that every postdoc is busy
+> Kacper is busy
+*** utterance(Kacper is busy)
+*** rule([(busy(kacper):-true)])
+*** answer(I already knew that Kacper is busy)
+I already knew that Kacper is busy
+> explain why Kacper is busy
+*** utterance(explain why Kacper is busy)
+*** goal(explain_question(busy(kacper),_3046,_2824))
+*** answer(kacper is a postdoc; every postdoc is busy; therefore kacper is busy)
+kacper is a postdoc; every postdoc is busy; therefore kacper is busy
+```
+
 Prolexa Plus requires Python 3.6+ and SWI Prolog version 7.6.0+.
 Using a Python virtual environment is advised.
 Since the Prolog<->Python bridge is quite fragile, you should consider using:
@@ -163,13 +198,13 @@ pip install -e .
 ```
 while in the root directory of this repository.
 The `-e` flag installs an editable version of the package, which allows you to
-edit the source to instantly updated the installed version of the package
+edit the source to instantly update the installed version of the package
 (read more
 [here](https://pip.pypa.io/en/stable/reference/pip_install/#install-editable)).
 
 This installation comes with two command line tools:
 
-* `prolexa-plus` -- **launches the Prolexa Plus REPL**, and
+* `prolexa-plus` -- **launches the Prolexa Plus CLI**, and
 * `prolexa-setup-models` -- downloads `nltk` and `flair` language corpora and
   models.
 
