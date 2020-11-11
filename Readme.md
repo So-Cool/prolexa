@@ -15,7 +15,7 @@ Chapter 7 of *Simply Logical*, and an extended version
 `prolexa/prolog/nl_shell2.pl`, which formed the basis for the *prolexa* code.
 
 The code has been tested with [SWI Prolog](https://www.swi-prolog.org) versions
-7.6.0 and 8.0.3.
+7.6.0, 8.0.3 and 8.2.2.
 
 ## Command-line interface ##
 (The code is executed from the `prolexa/prolog` directory.)
