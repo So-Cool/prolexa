@@ -47,6 +47,8 @@ prolexa> "Explain why Peter is mortal".
 peter is human; every human is mortal; therefore peter is mortal
 ```
 
+---
+
 ## Amazon Alexa and Prolog integration ##
 Follow the steps below if you want to use the Amazon Alexa speech to text and
 text to speech facilities.
@@ -132,6 +134,8 @@ in the `prolexa` directory.
     git commit -am "My commit message"
     git push origin master
     ```
+
+---
 
 # Prolexa Plus #
 Prolexa Plus is an extension to Prolexa which uses NLTK and Flair for part-of-speech tagging of nouns, verbs 
