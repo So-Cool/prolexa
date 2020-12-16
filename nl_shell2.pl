@@ -13,9 +13,19 @@
 sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
 sentence(d((H:-B,not(E))))			--> determiner(N,X=>B,X=>H,d(H:-B)),noun(N,X=>B),verb_phrase(N,X=>H),exception(N,X=>E).
 sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
+% Otto: added sentence predicate to handle negation
+sentence(c((not Lit, true)))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit). 
+
+
+
 verb_phrase(s,M)		--> [is],property(s,M).
 verb_phrase(p,M)		--> [are],property(p,M).
 verb_phrase(N,M)		--> iverb(N,M).
+% Otto negated verb phrase
+negated_verb_phrase(s, M) --> [is],[not],property(s, M).
+
+
+
 property(s,M)			--> [a],noun(s,M).
 property(p,M)			--> noun(p,M).
 property(N,M)			--> adjective(N,M).
@@ -232,16 +242,29 @@ prove_rb(Q,RB,RP):-
 
 prove_rb(c(H:-B),Rulebase,P0,P):-!,
 	numbervars(c(H:-B),0,_),
+	% Turn the body of the clause into a rule
+	% of the form c((body:-true)) and append 
+	% to the front of Rulebase and instantiate
+	% RB2 to be the new rulebase...
 	body2rules(B,Rulebase,RB2),
 	prove_rb(H,RB2,P0,P).
+
 prove_rb(true,_Rulebase,P,P):-!.
+
 prove_rb((A,B),Rulebase,P0,P):-!,
 	find_clause(c(A:-C),Rule,Rulebase),
 	conj_append(C,B,D),
 	prove_rb(D,Rulebase,[p((A,B),Rule)|P0],P).
+
 prove_rb(A,Rulebase,P0,P):-
 	find_clause(c(A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
+
+% Otto: changed meta-interpreter to handle negation
+prove_rb(c(not A, B), Rulebase, P0, P):-
+	not prove_rb(A, Rulebase, P0, P),
+	prove_rb(B, Rulebase, P0, P).
+
 prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
 	find_clause(d((A:-B,not(C))),Rule,Rulebase),
 	prove_rb(B,Rulebase,P0,P),
