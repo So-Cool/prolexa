@@ -10,22 +10,29 @@
 
 %%% Grammar %%%
 
+% Original grammar rules
 sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
 sentence(d((H:-B,not(E))))			--> determiner(N,X=>B,X=>H,d(H:-B)),noun(N,X=>B),verb_phrase(N,X=>H),exception(N,X=>E).
 sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
-% Otto: added sentence predicate to handle negation
-sentence(c((not Lit, true)))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit). 
 
+% Otto: two alternative representation of not bird(otto)
+sentence(c((false:-Lit)))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit).
+sentence(c((not Lit:-true))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit)).
+
+% Otto: takes form not Body then head
+sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), [therefore], proper_noun(N, X), verb_phrase(N, X=>H).
 
 
 verb_phrase(s,M)		--> [is],property(s,M).
 verb_phrase(p,M)		--> [are],property(p,M).
 verb_phrase(N,M)		--> iverb(N,M).
+
 % Otto negated verb phrase
 negated_verb_phrase(s, M) --> [is],[not],property(s, M).
 
+% TO DO: add code to distinguish between 'otto is round' and 'otto is a round'
 
-
+property(s,M)			--> noun(s, M).
 property(s,M)			--> [a],noun(s,M).
 property(p,M)			--> noun(p,M).
 property(N,M)			--> adjective(N,M).
@@ -41,14 +48,21 @@ noun(s,M)			--> [Noun],   {pred2gr(_P,1,n/Noun,M)}.
 noun(p,M)			--> [Noun_p], {pred2gr(_P,1,n/Noun,M),noun_s2p(Noun,Noun_p)}.
 iverb(s,M)			--> [Verb_s], {pred2gr(_P,1,v/Verb,M),verb_p2s(Verb,Verb_s)}.
 iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
+% nverb(s, M)			--> [Verb],   {}
 
 % unary predicates for adjectives, nouns and verbs
+pred(pig,   1,[a/pig,n/pig]).
+pred(horse,   1,[a/horse,n/horse]).
+
 pred(human,   1,[a/human,n/human]).
 pred(mortal,  1,[a/mortal,n/mortal]).
 pred(man,     1,[a/male,n/man]).
 pred(woman,   1,[a/female,n/woman]).
+pred(cold, 	  1,[a/cold]).
+pred(round,   1,[a/round]).
 pred(married, 1,[a/married]).
 pred(bachelor,1,[n/bachelor]).
+pred(round,	  1,[n/round]).
 pred(mammal,  1,[n/mammal]).
 pred(bird,    1,[n/bird]).
 pred(bat,     1,[n/bat]).
@@ -115,8 +129,10 @@ handle_input(Input,Rulebase):-
 	% second-order query
 	; Input=[tell,me,about,In],phrase(proper_noun(s,PN),[In])
 							-> all_answers(PN,Rulebase),show_answer(all(In)),nl_shell(Rulebase)
+
 	; Input=[explain,all,about,In],phrase(proper_noun(s,PN),[In])
 							-> all_explanations(PN,Rulebase),show_answer(all(In)),nl_shell(Rulebase)
+
 	% check whether statement is either implied or inconsistent
 	; phrase(sentence(Rule),Input),check(Rule,Rulebase,Check) 
 							-> show_answer(Check),nl_shell(Rulebase)
@@ -152,7 +168,7 @@ show_answer(Answer):-
 	write(' ! '),
 	( Answer=hello         -> writes(['Hello, talk to me.'])
 	; Answer=all           -> writes(['That is all I know.'])
-	; Answer=all(X)        -> writes(['That is all I know about ',X,'.'])
+	; Answer=all(X)        -> writes(['That is all I know about ', X,'.'])
 	; Answer=thanks        -> writes(['Thanks for telling me.'])
 	; Answer=forget        -> writes(['I have erased it from my memory.'])
 	; Answer=implied       -> writes(['Thanks, but I already knew that.'])
@@ -260,10 +276,23 @@ prove_rb(A,Rulebase,P0,P):-
 	find_clause(c(A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
 
-% Otto: changed meta-interpreter to handle negation
-prove_rb(c(not A, B), Rulebase, P0, P):-
-	not prove_rb(A, Rulebase, P0, P),
+prove_rb(c(A, B), Rulebase, P0, P):-
+	prove_rb(A, Rulebase, P0, P),
 	prove_rb(B, Rulebase, P0, P).
+
+
+%Otto: changed meta-interpreter to handle negation
+
+%prove_rb(c(not A, B), Rulebase, P0, P):-
+%	not prove_rb(A, Rulebase, P0, P),
+%	prove_rb(B, Rulebase, P0, P).
+
+
+%prove_rb(A, Rulebase, P0, P):-
+%	find_clause(c(B:-A), Rule, Rulebase),
+%	prove_rb(B, Rulebase, P0, P).
+
+% prove_rb(false,_Rulebase,P,P):-!.
 
 prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
 	find_clause(d((A:-B,not(C))),Rule,Rulebase),
@@ -285,8 +314,16 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 c((mortal(X):-human(X))),
 c((human(X):-woman(X))),
 c((human(X):-man(X))),
+c((pig(X) :- horse(X))),
+c((false:-horse(otto))),
+% if you input a pred that
+% hasn't been defined this will fail
 c((woman(helena):-true)),
 c((man(socrates):-true)),
 d((fly(X):-bird(X),not penguin(X))),
 c((bird(tweety):-true))
 ],assert(kb(ex,Cs)).
+
+
+
+% Input=[tell,me,about,otto], phrase(proper_noun(s,PN),[In]), all_answers(PN,[c((false:-bird(otto)))]), show_answer(all(In)),nl_shell([c((false:-bird(otto)))])).
