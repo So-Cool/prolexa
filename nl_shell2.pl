@@ -15,13 +15,12 @@ sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
 sentence(d((H:-B,not(E))))			--> determiner(N,X=>B,X=>H,d(H:-B)),noun(N,X=>B),verb_phrase(N,X=>H),exception(N,X=>E).
 sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
 
-% Otto: two alternative representation of not bird(otto)
+% Otto: representation of not bird(otto) but alternative would be 
+% c(true:-not bird(otto))
 sentence(c((false:-Lit)))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit).
-sentence(c((not Lit:-true))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit)).
 
-% Otto: takes form not Body then head
-sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), [therefore], proper_noun(N, X), verb_phrase(N, X=>H).
-
+% Otto: handles if not Body then Head
+% sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), [therefore], proper_noun(N, X), verb_phrase(N, X=>H).
 
 verb_phrase(s,M)		--> [is],property(s,M).
 verb_phrase(p,M)		--> [are],property(p,M).
@@ -31,8 +30,7 @@ verb_phrase(N,M)		--> iverb(N,M).
 negated_verb_phrase(s, M) --> [is],[not],property(s, M).
 
 % TO DO: add code to distinguish between 'otto is round' and 'otto is a round'
-
-property(s,M)			--> noun(s, M).
+% property(s,M)			--> noun(s, M).
 property(s,M)			--> [a],noun(s,M).
 property(p,M)			--> noun(p,M).
 property(N,M)			--> adjective(N,M).
@@ -48,9 +46,13 @@ noun(s,M)			--> [Noun],   {pred2gr(_P,1,n/Noun,M)}.
 noun(p,M)			--> [Noun_p], {pred2gr(_P,1,n/Noun,M),noun_s2p(Noun,Noun_p)}.
 iverb(s,M)			--> [Verb_s], {pred2gr(_P,1,v/Verb,M),verb_p2s(Verb,Verb_s)}.
 iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
-% nverb(s, M)			--> [Verb],   {}
 
 % unary predicates for adjectives, nouns and verbs
+pred(woman,   1,[a/female,n/woman]).
+
+pred(round,	  1,[n/round]).
+pred(bird,    1,[n/bird]).
+
 pred(pig,   1,[a/pig,n/pig]).
 pred(horse,   1,[a/horse,n/horse]).
 
@@ -62,9 +64,7 @@ pred(cold, 	  1,[a/cold]).
 pred(round,   1,[a/round]).
 pred(married, 1,[a/married]).
 pred(bachelor,1,[n/bachelor]).
-pred(round,	  1,[n/round]).
 pred(mammal,  1,[n/mammal]).
-pred(bird,    1,[n/bird]).
 pred(bat,     1,[n/bat]).
 pred(penguin, 1,[n/penguin]).
 pred(sparrow, 1,[n/sparrow]).
@@ -139,7 +139,6 @@ handle_input(Input,Rulebase):-
 	% add statement to Rulebase
 	; phrase(sentence(Rule),Input) 
 							-> show_answer(thanks),nl_shell([Rule|Rulebase])
-	% remove statement from Rulebase
 	; Input=[forget,that|In],phrase(sentence(Rule),In) 
 							-> remove_one(Rule,Rulebase,RB),show_answer(forget),nl_shell(RB)
 	% catchall if all of the above fail
@@ -233,6 +232,7 @@ show_kb([Rule|Rules]):-
 
 answer_query(Query,Rulebase,answers(L)):-
 	setof0(sentence(Query),Query^P^prove_rb(Query,Rulebase,P),L).
+
 answer_query(Query,Rulebase,proof(Proof)):-
 	( prove_rb(Query,Rulebase,Proof) -> true
 	; otherwise -> Proof=no
@@ -246,7 +246,11 @@ check(Rule,Rulebase,implied):-
 	   )).
 
 all_answers(PN,Rulebase):-
+	forall((pred(P,1,_), Q=..[P,PN],prove_rb(not(Q),Rulebase,_)),show_answer(sentence(c(false:-Q)))),
 	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,_)),show_answer(sentence(Q))).
+
+%	all_answers(PN,Rulebase):-
+%	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,_)),show_answer(sentence(Q))).
 
 all_explanations(PN,Rulebase):-
 	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,Proof)),show_answer(explain(Q,Proof))).
@@ -255,6 +259,10 @@ all_explanations(PN,Rulebase):-
 prove_rb(Q,RB,RP):-
 	prove_rb(Q,RB,[],P),
 	reverse(P,RP).
+
+prove_rb(not A, Rulebase, _P):-!,
+	find_clause(c((false:-A)), _Rule, Rulebase),
+	not prove_rb(A, Rulebase,_).
 
 prove_rb(c(H:-B),Rulebase,P0,P):-!,
 	numbervars(c(H:-B),0,_),
@@ -280,20 +288,6 @@ prove_rb(c(A, B), Rulebase, P0, P):-
 	prove_rb(A, Rulebase, P0, P),
 	prove_rb(B, Rulebase, P0, P).
 
-
-%Otto: changed meta-interpreter to handle negation
-
-%prove_rb(c(not A, B), Rulebase, P0, P):-
-%	not prove_rb(A, Rulebase, P0, P),
-%	prove_rb(B, Rulebase, P0, P).
-
-
-%prove_rb(A, Rulebase, P0, P):-
-%	find_clause(c(B:-A), Rule, Rulebase),
-%	prove_rb(B, Rulebase, P0, P).
-
-% prove_rb(false,_Rulebase,P,P):-!.
-
 prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
 	find_clause(d((A:-B,not(C))),Rule,Rulebase),
 	prove_rb(B,Rulebase,P0,P),
@@ -314,10 +308,9 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 c((mortal(X):-human(X))),
 c((human(X):-woman(X))),
 c((human(X):-man(X))),
-c((pig(X) :- horse(X))),
-c((false:-horse(otto))),
-% if you input a pred that
-% hasn't been defined this will fail
+% c((cold(X):-not round(X))),
+% need to be able to prove this...
+% c((false:-round(otto))),
 c((woman(helena):-true)),
 c((man(socrates):-true)),
 d((fly(X):-bird(X),not penguin(X))),
@@ -326,4 +319,11 @@ c((bird(tweety):-true))
 
 
 
-% Input=[tell,me,about,otto], phrase(proper_noun(s,PN),[In]), all_answers(PN,[c((false:-bird(otto)))]), show_answer(all(In)),nl_shell([c((false:-bird(otto)))])).
+
+% Input=[tell,me,about,otto], phrase(proper_noun(s,otto),[otto]), all_answers(otto, [c((cold(X):-not round(X))), c((false:-round(otto)))]), show_answer(all(otto)), nl_shell([c((cold(X):-not round(X))), c((false:-round(otto)))]).
+
+% Input=[tell,me,about,tweety], phrase(proper_noun(s,tweety),[tweety]), all_answers(tweety,[c((bird(tweety):-true))]), show_answer(all(tweety)), nl_shell([c((bird(tweety):-true))]).
+
+% Input=[tell,me,about,otto], phrase(proper_noun(s,otto),[otto]), all_answers(otto,[c((false:-round(otto)))]), show_answer(all(otto)), nl_shell([c((false:-round(otto)))]).
+
+% all_answers(otto, [c((false:-round(otto))), c((woman(helena):-true)),c((man(socrates):-true))]).
