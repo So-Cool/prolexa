@@ -20,7 +20,7 @@ sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
 sentence(c((false:-Lit)))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit).
 
 % Otto: handles if not Body then Head
-sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), [therefore], proper_noun(N, X), verb_phrase(N, X=>H).
+sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), verb_phrase(N, X=>H).
 
 verb_phrase(s,M)		--> [is],property(s,M).
 verb_phrase(p,M)		--> [are],property(p,M).
@@ -35,6 +35,7 @@ property(s,M)			--> [a],noun(s,M).
 property(p,M)			--> noun(p,M).
 property(N,M)			--> adjective(N,M).
 exception(N,M)		--> [except],noun(N,M).
+therefore(N,M)		--> [therefore], proper_noun(N,M).
 determiner(s,X=>B,X=>H,c(H:-B))	--> [every].
 determiner(p,X=>B,X=>H,c(H:-B))	--> [all].
 determiner(p,X=>B,X=>H,d(H:-B))	--> [most].
