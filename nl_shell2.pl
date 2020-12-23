@@ -298,6 +298,10 @@ prove_rb(A,Rulebase,P0,P):-
 	find_clause(c(A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
 
+prove_rb(A,Rulebase,P0,P):-
+	find_clause(c(A:-B),Rule,Rulebase),
+	prove_rb(not(B),Rulebase,[p(A,Rule)|P0],P).
+
 prove_rb(c(A, B), Rulebase, P0, P):-
 	prove_rb(A, Rulebase, P0, P),
 	prove_rb(B, Rulebase, P0, P).
@@ -332,10 +336,9 @@ c((human(X):-man(X))),
 % c((cold(X):-not round(X))),
 % need to be able to prove this...
 % c((false:-round(otto))),
+c((bachelor(X):-not pig(X))),
 c((woman(helena):-true)),
 c((man(socrates):-true)),
-c((fly(X):-not penguin(X))),
-c((false:-penguin(tweety))),
 d((fly(X):-bird(X),not penguin(X))),
 c((bird(tweety):-true))
 ],assert(kb(ex,Cs)).
@@ -355,7 +358,7 @@ c((bird(tweety):-true))
 
 % Input=[tell,me,about,In=tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((mortal(X):-human(X))),c((human(X):-woman(X))),c((human(X):-man(X))),c((woman(helena):-true)),c((man(socrates):-true)),c((fly(X):-not penguin(X))),c((false:-penguin(tweety)))]), show_answer(all(In)), nl_shell([c((mortal(X):-human(X))), c((human(X):-woman(X))),	c((human(X):-man(X))), c((woman(helena):-true)), c((man(socrates):-true)), c((fly(X):-not penguin(X))),	c((false:-penguin(tweety)))]).
 
-% Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((mortal(X):-human(X))), c((human(X):-woman(X))),	c((human(X):-man(X))), c((woman(helena):-true)), c((man(socrates):-true)), c((fly(X):-not penguin(X))),	c((false:-penguin(tweety))),d((fly(X):-bird(X),not penguin(X))),c((bird(tweety):-true))]), show_answer(all(In)), nl_shell([c((mortal(X):-human(X))), c((human(X):-woman(X))),	c((human(X):-man(X))), c((woman(helena):-true)), c((man(socrates):-true)), c((fly(X):-not penguin(X))),	c((false:-penguin(tweety))),d((fly(X):-bird(X),not penguin(X))),c((bird(tweety):-true))]).
+% Input=[tell,me,about,tweety], phrase(proper_noun(s,tweety),[tweety]), all_answers(tweety,[c((mortal(X):-human(X))), c((human(X):-woman(X))),	c((human(X):-man(X))), c((woman(helena):-true)), c((man(socrates):-true)), c((fly(X):-not penguin(X))),	c((false:-penguin(tweety))),d((fly(X):-bird(X),not penguin(X))),c((bird(tweety):-true))]), show_answer(all(In)), nl_shell([c((mortal(X):-human(X))), c((human(X):-woman(X))),	c((human(X):-man(X))), c((woman(helena):-true)), c((man(socrates):-true)), c((fly(X):-not penguin(X))),	c((false:-penguin(tweety))),d((fly(X):-bird(X),not penguin(X))),c((bird(tweety):-true))]).
 
 % [c((mortal(X):-human(X))), c((human(X):-woman(X))),	c((human(X):-man(X))), c((woman(helena):-true)), c((man(socrates):-true)), c((fly(X):-not penguin(X))),	c((false:-penguin(tweety))),d((fly(X):-bird(X),not penguin(X))),c((bird(tweety):-true))]
 
