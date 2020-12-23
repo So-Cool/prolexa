@@ -49,11 +49,15 @@ iverb(s,M)			--> [Verb_s], {pred2gr(_P,1,v/Verb,M),verb_p2s(Verb,Verb_s)}.
 iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 
 % unary predicates for adjectives, nouns and verbs
-pred(woman,   1,[a/female,n/woman]).
 
-pred(round,	  1,[n/round]).
+
+pred(penguin, 1,[n/penguin]).
+pred(fly,     1,[v/fly]).
 pred(bird,    1,[n/bird]).
 
+/*
+pred(woman,   1,[a/female,n/woman]).
+pred(round,	  1,[n/round]).
 pred(pig,   1,[a/pig,n/pig]).
 pred(horse,   1,[a/horse,n/horse]).
 
@@ -67,9 +71,8 @@ pred(married, 1,[a/married]).
 pred(bachelor,1,[n/bachelor]).
 pred(mammal,  1,[n/mammal]).
 pred(bat,     1,[n/bat]).
-pred(penguin, 1,[n/penguin]).
 pred(sparrow, 1,[n/sparrow]).
-pred(fly,     1,[v/fly]).
+*/
 
 pred2gr(P,1,C/W,X=>Lit):-
 	pred(P,1,L),
@@ -248,24 +251,24 @@ check(Rule,Rulebase,implied):-
 
 all_answers(PN,Rulebase):-
 	forall((pred(P,1,_), Q=..[P,PN],prove_rb(not(Q),Rulebase,_)),show_answer(sentence(c(false:-Q)))),
-	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,_)),show_answer(sentence(Q))).
-
-%	all_answers(PN,Rulebase):-
-%	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,_)),show_answer(sentence(Q))).
+	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,_)), show_answer(sentence(Q))).
 
 all_explanations(PN,Rulebase):-
 	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,Proof)),show_answer(explain(Q,Proof))).
 
+is_negated(Q, RP):-
+	(member(c(false:-_X), RP) -> show_answer(sentence(not(Q)))
+	; otherwise -> show_answer(sentence(Q))
+	).
+
 % meta-interpreter
 prove_rb(Q,RB,RP):-
+	write('Entering proof'),
 	prove_rb(Q,RB,[],P),
 	reverse(P,RP).
 
-prove_rb(not A, Rulebase, _P):-!,
-	find_clause(c((false:-A)), _Rule, Rulebase),
-	not prove_rb(A, Rulebase,_).
-
 prove_rb(c(H:-B),Rulebase,P0,P):-!,
+	write('Handling c(H:-B'),
 	numbervars(c(H:-B),0,_),
 	% Turn the body of the clause into a rule
 	% of the form c((body:-true)) and append 
@@ -276,23 +279,49 @@ prove_rb(c(H:-B),Rulebase,P0,P):-!,
 
 prove_rb(true,_Rulebase,P,P):-!.
 
+prove_rb(c(false,_B),_Rulebase, P, P):-!.
+
+/*
+prove_rb(not(A), Rulebase, P, P):-!,
+	write('Handling negation'),
+	find_clause(c((false:-A)), _Rule, Rulebase),
+	not prove_rb(A, Rulebase, P, _).
+*/
+
 prove_rb((A,B),Rulebase,P0,P):-!,
+	write('Handling (A,B)'),
 	find_clause(c(A:-C),Rule,Rulebase),
 	conj_append(C,B,D),
 	prove_rb(D,Rulebase,[p((A,B),Rule)|P0],P).
 
 prove_rb(A,Rulebase,P0,P):-
+	write('Handling A'),
 	find_clause(c(A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
 
+prove_rb(not(A), Rulebase, P0, P):-
+	write('Negated Handling A'),
+	find_clause(c(false:-A), Rule, Rulebase),
+	prove_rb(c(false,A), Rulebase, [p(not(A),Rule)|P0], P).
+
 prove_rb(c(A, B), Rulebase, P0, P):-
+	write('Handling c(A,B)'),
 	prove_rb(A, Rulebase, P0, P),
 	prove_rb(B, Rulebase, P0, P).
 
 prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+	write('Handling A:-B,not(C)'),
 	find_clause(d((A:-B,not(C))),Rule,Rulebase),
 	prove_rb(B,Rulebase,P0,P),
 	not prove_rb(C,Rulebase,P,_).
+
+
+/*
+prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+	write('Handling A:-not(B)'),
+	find_clause(d((A:-not(B))),Rule,Rulebase),
+	not prove_rb(B,Rulebase,P0,P).
+*/
 
 body2rules((A,B),Rs0,Rs):-!,
 	body2rules(A,Rs0,Rs1),
@@ -328,3 +357,20 @@ c((bird(tweety):-true))
 % Input=[tell,me,about,otto], phrase(proper_noun(s,otto),[otto]), all_answers(otto,[c((false:-round(otto)))]), show_answer(all(otto)), nl_shell([c((false:-round(otto)))]).
 
 % all_answers(otto, [c((false:-round(otto))), c((woman(helena):-true)),c((man(socrates):-true))]).
+
+% Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[d((fly(X):-bird(X),not penguin(X))), c((bird(tweety):-true))]), show_answer(all(In)), nl_shell([d((fly(X):-bird(X),not penguin(X))), c((bird(tweety):-true))]).
+
+
+% Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((fly(X):-not penguin(X)))]), show_answer(all(In)), nl_shell([d((fly(X):-not penguin(X)))]).
+
+% Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[d((fly(X):-not penguin(X)))]), show_answer(all(In)), nl_shell([d((fly(X):-not penguin(tweety)))]).
+
+% All proof cases
+% Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((bird(tweety):-true))]), show_answer(all(In)), nl_shell([c((bird(tweety):-true))]).
+% Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((bird(X):-penguin(X))), c((penguin(tweety):-true))]), show_answer(all(In)), nl_shell([c((bird(X):-penguin(X))), c((penguin(tweety):-true))]).
+
+% Simple negation
+% Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((false:-bird(tweety)))]), show_answer(all(In)), nl_shell([c((false:-bird(tweety)))]).
+
+% Negation of body
+% Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((fly(X):-not penguin(X))), c((false:-penguin(tweety)))]), show_answer(all(In)), nl_shell([c((fly(X):-not penguin(X))), c((false:-penguin(tweety)))]).
