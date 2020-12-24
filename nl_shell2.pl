@@ -12,7 +12,9 @@
 
 % Original grammar rules
 
-sentence(Rule)			--> determiner(N,M1,M2,Rule),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
+sentence(Rule)			--> determiner(i,M1,M2,Rule),negated_verb_phrase(N,M1),[it],negated_verb_phrase(N,M2).
+sentence(Rule)			--> determiner(s,M1,M2,Rule),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
+
 sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
 
 
@@ -23,6 +25,9 @@ sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
 % c(true:-not bird(otto))
 sentence(c((false:-Lit)))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit).
 
+
+sentence(c(not H:-not B)) --> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), negated_verb_phrase(N, X=>H).
+
 % Otto: handles if not Body then Head
 % sentence(c(H:-not B))	--> determiner(N,X=>B,X=>H,c(H:-not B)), negated_verb_phrase(N,B), therefore(N,X), verb_phrase(N,H).
 % sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), verb_phrase(N, X=>H).
@@ -32,20 +37,22 @@ verb_phrase(p,M)		--> [are],property(p,M).
 verb_phrase(N,M)		--> iverb(N,M).
 
 % Otto negated verb phrase
-negated_verb_phrase(s, M) --> [is],[not],property(s, M).
+negated_verb_phrase(N, M) --> [is],[not],property(N, M).
 
 % TO DO: add code to distinguish between 'otto is round' and 'otto is a round'
 % property(s,M)			--> noun(s, M).
+property(i,M)			--> [a],noun(s,M).
 property(s,M)			--> [a],noun(s,M).
 property(p,M)			--> noun(p,M).
 property(N,M)			--> adjective(N,M).
 exception(N,M)		--> [except],noun(N,M).
 therefore(N,M)		--> [therefore], proper_noun(N,M).
 
-determiner(s,X=>B,X=>H,c(H:-not(B))) --> [if], [something].
-determiner(s,X=>B,X=>H,d(H:-B))	     --> [every].
-determiner(p,X=>B,X=>H,c(H:-B))	     --> [all].
-determiner(p,X=>B,X=>H,d(H:-B))	     --> [most].
+determiner(i,X=>B,X=>H,c(not(H):-not(B)))	--> [if],[something].
+determiner(s,X=>B,X=>H,c(H:-not(B)))	--> [if],[something].
+determiner(s,X=>B,X=>H,d(H:-B))	    --> [every].
+determiner(p,X=>B,X=>H,c(H:-B))	    --> [all].
+determiner(p,X=>B,X=>H,d(H:-B))	    --> [most].
 
 % lexicon, driven by predicates
 proper_noun(s,PN)	--> [PN].	% accept any proper noun in the right grammatical position
@@ -345,11 +352,10 @@ c((quiet(X):-cold(X))),
 c((mortal(X):-human(X))),
 c((human(X):-woman(X))),
 c((human(X):-man(X))),
-c((cold(X):-not round(X))),
-% c((cold(X):-not round(X))),
+c((not cold(X):-not round(X))),
+c((quiet(X):-not round(X))),
 % need to be able to prove this...
 % c((false:-round(otto))),
-c((bachelor(X):-not pig(X))),
 c((woman(helena):-true)),
 c((man(socrates):-true))
 ],assert(kb(ex,Cs)).
@@ -365,4 +371,6 @@ c((man(socrates):-true))
 
 % Negation of body
 % Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((fly(X):-not penguin(X))), c((false:-penguin(tweety)))]), show_answer(all(In)), nl_shell([c((fly(X):-not penguin(X))), c((false:-penguin(tweety)))]).
-	
+
+% Negation of head & body
+% Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((not cold(X):-not round(X))), c((false:-round(tweety)))]), show_answer(all(In)), nl_shell([c((not cold(X):-not round(X))), c((false:-round(tweety)))]).
