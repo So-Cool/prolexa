@@ -11,6 +11,7 @@
 %%% Grammar %%%
 
 % Original grammar rules
+
 sentence(Rule)			--> determiner(N,M1,M2,Rule),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
 sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
 
@@ -41,10 +42,10 @@ property(N,M)			--> adjective(N,M).
 exception(N,M)		--> [except],noun(N,M).
 therefore(N,M)		--> [therefore], proper_noun(N,M).
 
-determiner(s,X=>B,X=>H,c(H:-not B))	--> [if], [something].
-determiner(s,X=>B,X=>H,d(H:-B))	    --> [every].
-determiner(p,X=>B,X=>H,c(H:-B))	    --> [all].
-determiner(p,X=>B,X=>H,d(H:-B))	    --> [most].
+determiner(s,X=>B,X=>H,c(H:-not(B))) --> [if], [something].
+determiner(s,X=>B,X=>H,d(H:-B))	     --> [every].
+determiner(p,X=>B,X=>H,c(H:-B))	     --> [all].
+determiner(p,X=>B,X=>H,d(H:-B))	     --> [most].
 
 % lexicon, driven by predicates
 proper_noun(s,PN)	--> [PN].	% accept any proper noun in the right grammatical position
@@ -60,14 +61,16 @@ pred(penguin, 1,[n/penguin]).
 pred(fly,     1,[v/fly]).
 pred(bird,    1,[n/bird]).
 pred(woman,   1,[a/female,n/woman]).
-pred(round,	  1,[n/round]).
+pred(quiet,	  1,[a/quiet,n/quiet]).
+pred(round,	  1,[a/round,n/round]).
+pred(blue,	  1,[a/blue,n/blue]).
 pred(pig,   1,[a/pig,n/pig]).
 pred(horse,   1,[a/horse,n/horse]).
 pred(human,   1,[a/human,n/human]).
 pred(mortal,  1,[a/mortal,n/mortal]).
 pred(man,     1,[a/male,n/man]).
 pred(woman,   1,[a/female,n/woman]).
-pred(cold, 	  1,[a/cold]).
+pred(cold, 	  1,[a/cold, n/cold]).
 pred(round,   1,[a/round]).
 pred(married, 1,[a/married]).
 pred(bachelor,1,[n/bachelor]).
@@ -338,9 +341,11 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 	find_clause(Clause,Rule,Rules).
 
 :-Cs=[
+c((quiet(X):-cold(X))),
 c((mortal(X):-human(X))),
 c((human(X):-woman(X))),
 c((human(X):-man(X))),
+c((cold(X):-not round(X))),
 % c((cold(X):-not round(X))),
 % need to be able to prove this...
 % c((false:-round(otto))),
@@ -360,14 +365,4 @@ c((man(socrates):-true))
 
 % Negation of body
 % Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((fly(X):-not penguin(X))), c((false:-penguin(tweety)))]), show_answer(all(In)), nl_shell([c((fly(X):-not penguin(X))), c((false:-penguin(tweety)))]).
-
-
-% Input=[tell,me,about,In=tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((mortal(X):-human(X))),c((human(X):-woman(X))),c((human(X):-man(X))),c((woman(helena):-true)),c((man(socrates):-true)),c((fly(X):-not penguin(X))),c((false:-penguin(tweety)))]), show_answer(all(In)), nl_shell([c((mortal(X):-human(X))), c((human(X):-woman(X))),	c((human(X):-man(X))), c((woman(helena):-true)), c((man(socrates):-true)), c((fly(X):-not penguin(X))),	c((false:-penguin(tweety)))]).
-
-% Input=[tell,me,about,tweety], phrase(proper_noun(s,tweety),[tweety]), all_answers(tweety,[c((mortal(X):-human(X))), c((human(X):-woman(X))),	c((human(X):-man(X))), c((woman(helena):-true)), c((man(socrates):-true)), c((fly(X):-not penguin(X))),	c((false:-penguin(tweety))),d((fly(X):-bird(X),not penguin(X))),c((bird(tweety):-true))]), show_answer(all(In)), nl_shell([c((mortal(X):-human(X))), c((human(X):-woman(X))),	c((human(X):-man(X))), c((woman(helena):-true)), c((man(socrates):-true)), c((fly(X):-not penguin(X))),	c((false:-penguin(tweety))),d((fly(X):-bird(X),not penguin(X))),c((bird(tweety):-true))]).
-
-% [c((mortal(X):-human(X))), c((human(X):-woman(X))),	c((human(X):-man(X))), c((woman(helena):-true)), c((man(socrates):-true)), c((fly(X):-not penguin(X))),	c((false:-penguin(tweety))),d((fly(X):-bird(X),not penguin(X))),c((bird(tweety):-true))]
-
-
-
 	
