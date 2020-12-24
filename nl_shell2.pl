@@ -11,7 +11,10 @@
 %%% Grammar %%%
 
 % Original grammar rules
+sentence(Rule)			--> determiner(N,M1,M2,Rule),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
 sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
+
+
 sentence(d((H:-B,not(E))))			--> determiner(N,X=>B,X=>H,d(H:-B)),noun(N,X=>B),verb_phrase(N,X=>H),exception(N,X=>E).
 sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
 
@@ -20,7 +23,8 @@ sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
 sentence(c((false:-Lit)))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit).
 
 % Otto: handles if not Body then Head
-sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), verb_phrase(N, X=>H).
+% sentence(c(H:-not B))	--> determiner(N,X=>B,X=>H,c(H:-not B)), negated_verb_phrase(N,B), therefore(N,X), verb_phrase(N,H).
+% sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), verb_phrase(N, X=>H).
 
 verb_phrase(s,M)		--> [is],property(s,M).
 verb_phrase(p,M)		--> [are],property(p,M).
@@ -36,9 +40,11 @@ property(p,M)			--> noun(p,M).
 property(N,M)			--> adjective(N,M).
 exception(N,M)		--> [except],noun(N,M).
 therefore(N,M)		--> [therefore], proper_noun(N,M).
-determiner(s,X=>B,X=>H,c(H:-B))	--> [every].
-determiner(p,X=>B,X=>H,c(H:-B))	--> [all].
-determiner(p,X=>B,X=>H,d(H:-B))	--> [most].
+
+determiner(s,X=>B,X=>H,c(H:-not B))	--> [if], [something].
+determiner(s,X=>B,X=>H,d(H:-B))	    --> [every].
+determiner(p,X=>B,X=>H,c(H:-B))	    --> [all].
+determiner(p,X=>B,X=>H,d(H:-B))	    --> [most].
 
 % lexicon, driven by predicates
 proper_noun(s,PN)	--> [PN].	% accept any proper noun in the right grammatical position
@@ -251,7 +257,6 @@ all_answers(PN,Rulebase):-
 	forall((pred(P,1,_), Q=..[P,PN],prove_rb(not(Q),Rulebase,_)),show_answer(sentence(c(false:-Q)))),
 	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,_)), show_answer(sentence(Q))).
 	
-
 all_explanations(PN,Rulebase):-
 	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,Proof)),show_answer(explain(Q,Proof))).
 
@@ -290,17 +295,20 @@ prove_rb((A,B),Rulebase,P0,P):-!,
 	conj_append(C,B,D),
 	prove_rb(D,Rulebase,[p((A,B),Rule)|P0],P).
 
-prove_rb(not(A), Rulebase, P0, P):-
-	find_clause(c(false:-A), Rule, Rulebase),
-	prove_rb(c(false,A), Rulebase, [p(not(A),Rule)|P0], P).
-
 prove_rb(A,Rulebase,P0,P):-
 	find_clause(c(A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
 
+prove_rb(not(A), Rulebase, P0, P):-
+	find_clause(c(false:-A), Rule, Rulebase),
+	prove_rb(c(false,A), Rulebase, [p(not(A),Rule)|P0], P).
+
+/*
 prove_rb(A,Rulebase,P0,P):-
-	find_clause(c(A:-B),Rule,Rulebase),
+	write('Handling not(B)'),
+	find_clause(c(A:-not(B)),Rule,Rulebase),
 	prove_rb(not(B),Rulebase,[p(A,Rule)|P0],P).
+*/
 
 prove_rb(c(A, B), Rulebase, P0, P):-
 	prove_rb(A, Rulebase, P0, P),
@@ -338,9 +346,7 @@ c((human(X):-man(X))),
 % c((false:-round(otto))),
 c((bachelor(X):-not pig(X))),
 c((woman(helena):-true)),
-c((man(socrates):-true)),
-d((fly(X):-bird(X),not penguin(X))),
-c((bird(tweety):-true))
+c((man(socrates):-true))
 ],assert(kb(ex,Cs)).
 
 
