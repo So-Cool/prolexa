@@ -14,7 +14,6 @@
 
 sentence(Rule)			--> determiner(i,M1,M2,Rule),negated_verb_phrase(N,M1),[it],negated_verb_phrase(N,M2).
 sentence(Rule)			--> determiner(s,M1,M2,Rule),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
-
 sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
 
 
@@ -26,7 +25,7 @@ sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
 sentence(c((false:-Lit)))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit).
 
 
-sentence(c(not H:-not B)) --> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), negated_verb_phrase(N, X=>H).
+% sentence(c(not H:-not B)) --> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), negated_verb_phrase(N, X=>H).
 
 % Otto: handles if not Body then Head
 % sentence(c(H:-not B))	--> determiner(N,X=>B,X=>H,c(H:-not B)), negated_verb_phrase(N,B), therefore(N,X), verb_phrase(N,H).
@@ -268,6 +267,7 @@ all_answers(PN,Rulebase):-
 	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,_)), show_answer(sentence(Q))).
 	
 all_explanations(PN,Rulebase):-
+	forall((pred(P,1,_), Q=..[P,PN],prove_rb(not(Q),Rulebase,Proof)),show_answer(explain(c(false:-Q),Proof))),
 	forall((pred(P,1,_),Q=..[P,PN],prove_rb(Q,Rulebase,Proof)),show_answer(explain(Q,Proof))).
 
 is_negated(Q, RP):-
@@ -348,14 +348,10 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 	find_clause(Clause,Rule,Rules).
 
 :-Cs=[
-c((quiet(X):-cold(X))),
 c((mortal(X):-human(X))),
 c((human(X):-woman(X))),
 c((human(X):-man(X))),
-c((not cold(X):-not round(X))),
-c((quiet(X):-not round(X))),
-% need to be able to prove this...
-% c((false:-round(otto))),
+c((not cold(X):-not quiet(X))),
 c((woman(helena):-true)),
 c((man(socrates):-true))
 ],assert(kb(ex,Cs)).
@@ -372,5 +368,8 @@ c((man(socrates):-true))
 % Negation of body
 % Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((fly(X):-not penguin(X))), c((false:-penguin(tweety)))]), show_answer(all(In)), nl_shell([c((fly(X):-not penguin(X))), c((false:-penguin(tweety)))]).
 
-% Negation of head & body
+% Tell me... Negation of head & body
 % Input=[tell,me,about,tweety], phrase(proper_noun(s,In),[In]), all_answers(In,[c((not cold(X):-not round(X))), c((false:-round(tweety)))]), show_answer(all(In)), nl_shell([c((not cold(X):-not round(X))), c((false:-round(tweety)))]).
+
+% Explain... Negation of head & body
+% Input=[explain,all,about,otto],phrase(proper_noun(s,otto),[otto]),all_explanations(otto,[c((not cold(A):-not quiet(A))), c((false:-quiet(otto)))]),show_answer(all(otto)),nl_shell([c((not cold(A):-not quiet(A))), c((false:-quiet(otto)))]).
