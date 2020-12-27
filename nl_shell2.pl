@@ -12,24 +12,34 @@
 
 % Original grammar rules
 
+% Rules
+
+sentence(Rule)			--> determiner(f,M1,M2,M3,Rule),verb_phrase(N,M1), [and], negated_verb_phrase(N,M2), [then, it],negated_verb_phrase(N,M3).
 sentence(Rule)			--> determiner(i,M1,M2,Rule),negated_verb_phrase(N,M1),[it],negated_verb_phrase(N,M2).
 sentence(Rule)			--> determiner(s,M1,M2,Rule),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
 sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
 
 
+% Sentences
 sentence(d((H:-B,not(E))))			--> determiner(N,X=>B,X=>H,d(H:-B)),noun(N,X=>B),verb_phrase(N,X=>H),exception(N,X=>E).
 sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
 
-% Otto: representation of not bird(otto) but alternative would be 
-% c(true:-not bird(otto))
+% Otto: representation of not bird(otto) but alternative would be false:-bird(otto)
+% Otto: this is causing problems because of the queries are being generated - consider to how to deal with this later
+sentence(not(Lit))		--> proper_noun(N,X),negated_verb_phrase(N,X=>Lit).
 sentence(c((false:-Lit)))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit).
-
-
-% sentence(c(not H:-not B)) --> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), negated_verb_phrase(N, X=>H).
 
 % Otto: handles if not Body then Head
 % sentence(c(H:-not B))	--> determiner(N,X=>B,X=>H,c(H:-not B)), negated_verb_phrase(N,B), therefore(N,X), verb_phrase(N,H).
-% sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), verb_phrase(N, X=>H).
+sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), verb_phrase(N, X=>H).
+
+% Otto: handles if not Body then not Head
+sentence(c(not H:-not B)) --> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), negated_verb_phrase(N, X=>H).
+
+
+
+
+% sentence(c(not H:-B0, not B1)) --> proper_noun(N,X),verb_phrase(N,X=>B0),[and],negated_verb_phrase(N,X=>B1),therefore(N,X),negated_verb_phrase(N,X=>H).
 
 verb_phrase(s,M)		--> [is],property(s,M).
 verb_phrase(p,M)		--> [are],property(p,M).
@@ -47,11 +57,13 @@ property(N,M)			--> adjective(N,M).
 exception(N,M)		--> [except],noun(N,M).
 therefore(N,M)		--> [therefore], proper_noun(N,M).
 
-determiner(i,X=>B,X=>H,c(not(H):-not(B)))	--> [if],[something].
-determiner(s,X=>B,X=>H,c(H:-not(B)))	--> [if],[something].
+determiner(f,X=>B1,X=>B2,X=>H,c(not(H):-B1,not(B2)))  --> [if],[something].
+determiner(i,X=>B,X=>H,c(not(H):-not(B)))			  --> [if],[something].
+determiner(s,X=>B,X=>H,c(H:-not(B)))				  --> [if],[something].
 determiner(s,X=>B,X=>H,d(H:-B))	    --> [every].
 determiner(p,X=>B,X=>H,c(H:-B))	    --> [all].
 determiner(p,X=>B,X=>H,d(H:-B))	    --> [most].
+
 
 % lexicon, driven by predicates
 proper_noun(s,PN)	--> [PN].	% accept any proper noun in the right grammatical position
@@ -63,25 +75,21 @@ iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 
 % unary predicates for adjectives, nouns and verbs
 
+
 pred(penguin, 1,[n/penguin]).
 pred(fly,     1,[v/fly]).
 pred(bird,    1,[n/bird]).
-pred(woman,   1,[a/female,n/woman]).
-pred(quiet,	  1,[a/quiet,n/quiet]).
-pred(round,	  1,[a/round,n/round]).
-pred(blue,	  1,[a/blue,n/blue]).
-pred(pig,   1,[a/pig,n/pig]).
-pred(horse,   1,[a/horse,n/horse]).
+
 pred(human,   1,[a/human,n/human]).
 pred(mortal,  1,[a/mortal,n/mortal]).
 pred(man,     1,[a/male,n/man]).
 pred(woman,   1,[a/female,n/woman]).
-pred(cold, 	  1,[a/cold, n/cold]).
-pred(round,   1,[a/round]).
 pred(married, 1,[a/married]).
 pred(bachelor,1,[n/bachelor]).
 pred(mammal,  1,[n/mammal]).
+pred(bird,    1,[n/bird]).
 pred(bat,     1,[n/bat]).
+pred(penguin, 1,[n/penguin]).
 pred(sparrow, 1,[n/sparrow]).
 
 
@@ -348,12 +356,7 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 	find_clause(Clause,Rule,Rules).
 
 :-Cs=[
-c((mortal(X):-human(X))),
-c((human(X):-woman(X))),
-c((human(X):-man(X))),
-c((not cold(X):-not quiet(X))),
-c((woman(helena):-true)),
-c((man(socrates):-true))
+c(not human(X):-penguin(X), not bird(X))
 ],assert(kb(ex,Cs)).
 
 
@@ -373,3 +376,8 @@ c((man(socrates):-true))
 
 % Explain... Negation of head & body
 % Input=[explain,all,about,otto],phrase(proper_noun(s,otto),[otto]),all_explanations(otto,[c((not cold(A):-not quiet(A))), c((false:-quiet(otto)))]),show_answer(all(otto)),nl_shell([c((not cold(A):-not quiet(A))), c((false:-quiet(otto)))]).
+
+% Input=[prove,that|[otto,is,not,a,cold]],phrase(sentence((Query)),In),answer_query(Query,[c((not cold(X):-not quiet(X))),c((false:-quiet(otto)))],proof(Proof)),show_answer(proof(Proof)),nl_shell([c((not cold(X):-not quiet(X))),c((false:-quiet(otto)))]).
+% Input=[prove,that|[otto,is,a,pig]],phrase(sentence((Query)),In),answer_query(Query,[c((pig(otto):-true))],proof(Proof)),show_answer(proof(Proof)),nl_shell([c((pig(otto):-true))]).
+
+% show_rules([c((not penguin(X):-bird(X),not fly(X)))]),nl_shell([c((not pig(X):-bird(X),not penguin(X)))]).
