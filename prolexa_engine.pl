@@ -66,7 +66,6 @@ add_body_to_rulebase((A,B),Rs0,Rs):-!,
 	add_body_to_rulebase(B,Rs1,Rs).
 add_body_to_rulebase(A,Rs0,[[(A:-true)]|Rs0]).
 
-
 %%% meta-interpreter that constructs proofs %%%
 
 % 3d argument is accumulator for proofs
@@ -83,7 +82,6 @@ prove_rb(A,Rulebase,P0,P):-
 prove_rb(Q,RB):-
 	prove_rb(Q,RB,[],_P).
 
-
 %%% Utilities from nl_shell.pl %%%
 
 find_clause(Clause,Rule,[Rule|_Rules]):-
@@ -95,7 +93,6 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 transform((A,B),[(A:-true)|Rest]):-!,
     transform(B,Rest).
 transform(A,[(A:-true)]).
-
 
 %%% Two more commands: all_rules/1 and all_answers/2
 
