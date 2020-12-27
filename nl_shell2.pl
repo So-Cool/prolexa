@@ -35,6 +35,7 @@ sentence(c(H:-not B))	--> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefo
 % Otto: handles if not Body then not Head
 sentence(c(not H:-not B)) --> proper_noun(N,X), negated_verb_phrase(N,X=>B), therefore(N,X), negated_verb_phrase(N, X=>H).
 
+
 verb_phrase(s,M)		--> [is],property(s,M).
 verb_phrase(p,M)		--> [are],property(p,M).
 verb_phrase(N,M)		--> iverb(N,M).
@@ -72,6 +73,24 @@ iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 pred(penguin, 1,[n/penguin]).
 pred(fly,     1,[v/fly]).
 pred(bird,    1,[n/bird]).
+pred(woman,   1,[a/female,n/woman]).
+pred(quiet,	  1,[a/quiet,n/quiet]).
+pred(round,	  1,[a/round,n/round]).
+pred(blue,	  1,[a/blue,n/blue]).
+pred(pig,   1,[a/pig,n/pig]).
+pred(horse,   1,[a/horse,n/horse]).
+pred(human,   1,[a/human,n/human]).
+pred(mortal,  1,[a/mortal,n/mortal]).
+pred(cold, 	  1,[a/cold, n/cold]).
+pred(man,     1,[a/male,n/man]).
+pred(woman,   1,[a/female,n/woman]).
+pred(cold, 	  1,[a/cold, n/cold]).
+pred(round,   1,[a/round]).
+pred(married, 1,[a/married]).
+pred(bachelor,1,[n/bachelor]).
+pred(mammal,  1,[n/mammal]).
+pred(bat,     1,[n/bat]).
+pred(sparrow, 1,[n/sparrow]).
 
 
 pred2gr(P,1,C/W,X=>Lit):-
@@ -337,7 +356,17 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 	find_clause(Clause,Rule,Rules).
 
 :-Cs=[
-c((not penguin(X):-penguin(X), not penguin(X)))
+c((mortal(X):-human(X))),
+c((human(X):-woman(X))),
+c((human(X):-man(X))),
+c((pig(X):-not horse(X))),
+c((not mortal(X):-not man(X))),
+d((fly(X):-bird(X),not penguin(X))),
+c(not penguin(X):-penguin(X), not penguin(X)),
+c((false:-horse(otto))),
+c((false:-man(otto))),
+c((woman(helena):-true)),
+c((man(socrates):-true))
 ],assert(kb(ex,Cs)).
 
 
