@@ -73,10 +73,6 @@ prove_rb(true,_Rulebase,P,P):-!.
 
 prove_rb((false,_B),_Rulebase, P, P):-!.
 
-prove_rb(not(A), Rulebase, P0, P):-
-	find_clause((false:-A), Rule, Rulebase),
-	prove_rb((false,A), Rulebase, [p(not(A),Rule)|P0], P).
-
 prove_rb((A,B),Rulebase,P0,P):-!,
 	find_clause((A:-C),Rule,Rulebase),
 	conj_append(C,B,D),
@@ -86,7 +82,18 @@ prove_rb(A,Rulebase,P0,P):-
     find_clause((A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
 
+prove_rb(not(A), Rulebase, P0, P):-
+	find_clause((false:-A), Rule, Rulebase),
+	prove_rb((false,A), Rulebase, [p(not(A),Rule)|P0], P).
 
+prove_rb(c(A, B), Rulebase, P0, P):-
+	prove_rb(A, Rulebase, P0, P),
+	prove_rb(B, Rulebase, P0, P).
+
+prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+	find_clause(((A:-B,not(C))),Rule,Rulebase),
+	prove_rb(B,Rulebase,P0,P),
+	not prove_rb(C,Rulebase,P,_).
 
 % top-level version that ignores proof
 prove_rb(Q,RB):-
