@@ -13,8 +13,6 @@
 % Original grammar rules
 
 % Rules
-
-sentence(Rule)			--> determiner(f,M1,M2,M3,Rule),verb_phrase(N,M1), [and], negated_verb_phrase(N,M2), [then, it],negated_verb_phrase(N,M3).
 sentence(Rule)			--> determiner(i,M1,M2,Rule),negated_verb_phrase(N,M1),[it],negated_verb_phrase(N,M2).
 sentence(Rule)			--> determiner(s,M1,M2,Rule),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
 sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
@@ -53,13 +51,11 @@ property(N,M)			--> adjective(N,M).
 exception(N,M)		--> [except],noun(N,M).
 therefore(N,M)		--> [therefore], proper_noun(N,M).
 
-determiner(f,X=>B1,X=>B2,X=>H,c(not(H):-B1,not(B2)))  --> [if],[something].
-determiner(i,X=>B,X=>H,c(not(H):-not(B)))			  --> [if],[something].
-determiner(s,X=>B,X=>H,c(H:-not(B)))				  --> [if],[something].
+determiner(i,X=>B,X=>H,c(not(H):-not(B)))	--> [if],[something].
+determiner(s,X=>B,X=>H,c(H:-not(B)))	--> [if],[something].
 determiner(s,X=>B,X=>H,d(H:-B))	    --> [every].
 determiner(p,X=>B,X=>H,c(H:-B))	    --> [all].
 determiner(p,X=>B,X=>H,d(H:-B))	    --> [most].
-
 
 % lexicon, driven by predicates
 proper_noun(s,PN)	--> [PN].	% accept any proper noun in the right grammatical position
@@ -75,17 +71,23 @@ iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 pred(penguin, 1,[n/penguin]).
 pred(fly,     1,[v/fly]).
 pred(bird,    1,[n/bird]).
-
+pred(woman,   1,[a/female,n/woman]).
+pred(quiet,	  1,[a/quiet,n/quiet]).
+pred(round,	  1,[a/round,n/round]).
+pred(blue,	  1,[a/blue,n/blue]).
+pred(pig,   1,[a/pig,n/pig]).
+pred(horse,   1,[a/horse,n/horse]).
 pred(human,   1,[a/human,n/human]).
 pred(mortal,  1,[a/mortal,n/mortal]).
+pred(cold, 	  1,[a/cold, n/cold]).
 pred(man,     1,[a/male,n/man]).
 pred(woman,   1,[a/female,n/woman]).
+pred(cold, 	  1,[a/cold, n/cold]).
+pred(round,   1,[a/round]).
 pred(married, 1,[a/married]).
 pred(bachelor,1,[n/bachelor]).
 pred(mammal,  1,[n/mammal]).
-pred(bird,    1,[n/bird]).
 pred(bat,     1,[n/bat]).
-pred(penguin, 1,[n/penguin]).
 pred(sparrow, 1,[n/sparrow]).
 
 
@@ -328,7 +330,6 @@ prove_rb(c(A, B), Rulebase, P0, P):-
 	prove_rb(A, Rulebase, P0, P),
 	prove_rb(B, Rulebase, P0, P).
 
-
 prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
 	find_clause(d((A:-B,not(C))),Rule,Rulebase),
 	prove_rb(B,Rulebase,P0,P),
@@ -353,9 +354,16 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 	find_clause(Clause,Rule,Rules).
 
 :-Cs=[
-c(not human(X):-penguin(X), not bird(X)),
-c(false:-bird(otto)),
-c(penguin(otto):-true)
+c((mortal(X):-human(X))),
+c((human(X):-woman(X))),
+c((human(X):-man(X))),
+c((pig(X):-not horse(X))),
+c((not mortal(X):-not man(X))),
+d((fly(X):-bird(X),not penguin(X))),
+c((false:-horse(otto))),
+c((false:-man(otto))),
+c((woman(helena):-true)),
+c((man(socrates):-true))
 ],assert(kb(ex,Cs)).
 
 
@@ -375,16 +383,3 @@ c(penguin(otto):-true)
 
 % Explain... Negation of head & body
 % Input=[explain,all,about,otto],phrase(proper_noun(s,otto),[otto]),all_explanations(otto,[c((not cold(A):-not quiet(A))), c((false:-quiet(otto)))]),show_answer(all(otto)),nl_shell([c((not cold(A):-not quiet(A))), c((false:-quiet(otto)))]).
-
-% Prove this and that
-% Input=[prove,that|[otto,is,not,a,cold]],phrase(sentence((Query)),In),answer_query(Query,[c((not cold(X):-not quiet(X))),c((false:-quiet(otto)))],proof(Proof)),show_answer(proof(Proof)),nl_shell([c((not cold(X):-not quiet(X))),c((false:-quiet(otto)))]).
-% Input=[prove,that|[otto,is,a,pig]],phrase(sentence((Query)),In),answer_query(Query,[c((pig(otto):-true))],proof(Proof)),show_answer(proof(Proof)),nl_shell([c((pig(otto):-true))]).
-
-% not Head :- Body and not Body1
-% show_rules([c((not penguin(X):-bird(X),not fly(X)))]),nl_shell([c((not pig(X):-bird(X),not penguin(X)))]).
-
-% Input=[prove,that|[otto,is,not,a,human]],phrase(sentence((Query)),[otto,is,not,a,human]),answer_query(Query,[c(not human(X):-penguin(X), not bird(X)), c(false:-bird(otto)),c(penguin(otto):-true)],proof(Proof)),show_answer(proof(Proof)),nl_shell([c(not human(X):-penguin(X), not bird(X)), c(false:-bird(otto)),c(penguin(otto):-true)]).
-
-
-% answer_query(not human(otto),[c(not human(X):-penguin(X), not bird(X)), c(false:-bird(otto)),c(penguin(otto):-true)],proof(Proof)),show_answer(proof(Proof)),nl_shell([c(not human(X):-penguin(X), not bird(X)), c(false:-bird(otto)),c(penguin(otto):-true)]).
-% prove_rb(not human(otto),[c(not human(X):-penguin(X), not bird(X)), c(false:-bird(otto)),c(penguin(otto):-true)], Y).
