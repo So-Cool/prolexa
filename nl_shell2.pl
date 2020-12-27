@@ -333,6 +333,13 @@ prove_rb(c(A, B), Rulebase, P0, P):-
 	prove_rb(B, Rulebase, P0, P).
 
 prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+	find_clause(c(A:-B,not(C)),Rule,Rulebase),
+	prove_rb(B,Rulebase,P0,P),
+	prove_rb(not(C),Rulebase,P,_).
+	% last line could be replaced with the below...
+	% not prove_rb(C,Rulebase,P,_).
+
+prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
 	find_clause(d((A:-B,not(C))),Rule,Rulebase),
 	prove_rb(B,Rulebase,P0,P),
 	not prove_rb(C,Rulebase,P,_).
@@ -362,7 +369,9 @@ c((human(X):-man(X))),
 c((pig(X):-not horse(X))),
 c((not mortal(X):-not man(X))),
 d((fly(X):-bird(X),not penguin(X))),
-c(not penguin(X):-penguin(X), not penguin(X)),
+c(not penguin(X):-human(X), not bird(X)),
+c((false:-bird(otto))),
+c((human(otto):-true)),
 c((false:-horse(otto))),
 c((false:-man(otto))),
 c((woman(helena):-true)),
