@@ -57,6 +57,16 @@ sword --> [that].
 sentence1(C) --> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,M2).
 sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L).
 
+
+% Otto: representation of not bird(otto) but alternative would be false:-bird(otto)
+% Otto: this is causing problems because of the queries are being generated - consider to how to deal with this later
+
+sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
+sentence1(not(L))		--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
+
+% Otto negated verb phrase
+negated_verb_phrase(N, M) --> [is],[not],property(N, M).
+
 verb_phrase(s,M) --> [is],property(s,M).
 verb_phrase(p,M) --> [are],property(p,M).
 verb_phrase(N,M) --> iverb(N,M).
@@ -72,6 +82,7 @@ determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
 
 proper_noun(s,tweety) --> [tweety].
 proper_noun(s,peter) --> [peter].
+proper_noun(s,otto)	--> [otto].
 
 
 %%% questions %%%
