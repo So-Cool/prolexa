@@ -13,6 +13,7 @@
 % Original grammar rules
 
 % Rules
+sentence(Rule)			--> determiner(f,M1,M2,M3,Rule),verb_phrase(N,M1), [and], negated_verb_phrase(N,M2), [then, it],negated_verb_phrase(N,M3).
 sentence(Rule)			--> determiner(i,M1,M2,Rule),negated_verb_phrase(N,M1),[it],negated_verb_phrase(N,M2).
 sentence(Rule)			--> determiner(s,M1,M2,Rule),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
 sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
@@ -51,6 +52,7 @@ property(N,M)			--> adjective(N,M).
 exception(N,M)		--> [except],noun(N,M).
 therefore(N,M)		--> [therefore], proper_noun(N,M).
 
+determiner(f,X=>B1,X=>B2,X=>H,c(not(H):-B1,not(B2)))  --> [if],[something].
 determiner(i,X=>B,X=>H,c(not(H):-not(B)))	--> [if],[something].
 determiner(s,X=>B,X=>H,c(H:-not(B)))	--> [if],[something].
 determiner(s,X=>B,X=>H,d(H:-B))	    --> [every].
@@ -331,6 +333,13 @@ prove_rb(c(A, B), Rulebase, P0, P):-
 	prove_rb(B, Rulebase, P0, P).
 
 prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+	find_clause(c(A:-B,not(C)),Rule,Rulebase),
+	prove_rb(B,Rulebase,P0,P),
+	prove_rb(not(C),Rulebase,P,_).
+	% last line could be replaced with the below...
+	% not prove_rb(C,Rulebase,P,_).
+
+prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
 	find_clause(d((A:-B,not(C))),Rule,Rulebase),
 	prove_rb(B,Rulebase,P0,P),
 	not prove_rb(C,Rulebase,P,_).
@@ -360,6 +369,9 @@ c((human(X):-man(X))),
 c((pig(X):-not horse(X))),
 c((not mortal(X):-not man(X))),
 d((fly(X):-bird(X),not penguin(X))),
+c(not penguin(X):-human(X), not bird(X)),
+c((false:-bird(otto))),
+c((human(otto):-true)),
 c((false:-horse(otto))),
 c((false:-man(otto))),
 c((woman(helena):-true)),
