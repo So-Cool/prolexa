@@ -17,6 +17,7 @@ iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 
 % unary predicates for adjectives, nouns and verbs
 pred(human,   1,[a/human,n/human]).
+
 pred(mortal,  1,[a/mortal,n/mortal]).
 %pred(man,     1,[a/male,n/man]).
 %pred(woman,   1,[a/female,n/woman]).
@@ -54,8 +55,24 @@ sword --> [].
 sword --> [that]. 
 
 % most of this follows Simply Logical, Chapter 7
-sentence1(C) --> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,M2).
+sentence1(C) 			--> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,M2).
+sentence1(C)			--> determiner(l,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],verb_phrase(N,M3).
+sentence1(C)			--> determiner(f,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],negated_verb_phrase(N,M3).
+sentence1(C)			--> determiner(i,M1,M2,C),negated_verb_phrase(N,M1),[it],negated_verb_phrase(N,M2).
+sentence1(C)  			--> determiner(s,M1,M2,C),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
 sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L).
+
+
+% Otto: representation of not bird(otto) but alternative would be false:-bird(otto)
+% Otto: this is causing problems because of the queries are being generated - consider to how to deal with this later
+
+sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
+
+sentence_negation([not(L):-true])		--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
+
+
+% Otto negated verb phrase
+negated_verb_phrase(N, M) --> [is],[not],property(N, M).
 
 verb_phrase(s,M) --> [is],property(s,M).
 verb_phrase(p,M) --> [are],property(p,M).
@@ -65,13 +82,19 @@ property(N,M) --> adjective(N,M).
 property(s,M) --> [a],noun(s,M).
 property(p,M) --> noun(p,M).
 
+determiner(l,X=>B1,X=>B2,X=>H,[(H:-B1,not(B2))])  --> [if],[something].
+determiner(f,X=>B1,X=>B2,X=>H,[(not(H):-B1,not(B2))])  --> [if],[something].
+determiner(i,X=>B,X=>H,[(not(H):-not(B))])	--> [if],[something].
+determiner(s,X=>B,X=>H,[(H:-not(B))])	--> [if],[something].
 determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
 %determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
+
 proper_noun(s,tweety) --> [tweety].
 proper_noun(s,peter) --> [peter].
+proper_noun(s,otto)	--> [otto].
 
 
 %%% questions %%%
@@ -104,7 +127,11 @@ command(g(retractall(prolexa:stored_rule(_,C)),"I erased it from my memory")) --
 command(g(retractall(prolexa:stored_rule(_,_)),"I am a blank slate")) --> forgetall. 
 command(g(all_rules(Answer),Answer)) --> kbdump. 
 command(g(all_answers(PN,Answer),Answer)) --> tellmeabout,proper_noun(s,PN).
+
+command(g(explain_question_negated(not(Q),_,Answer),Answer)) --> [explain,why],sentence_negation([not(Q):-true]).
+
 command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
+
 command(g(random_fact(Fact),Fact)) --> getanewfact.
 %command(g(pf(A),A)) --> peterflach. 
 %command(g(iai(A),A)) --> what. 

@@ -18,6 +18,10 @@ prove_question(Query,SessionId,Answer):-
 		transform(Query,Clauses),
 		phrase(sentence(Clauses),AnswerAtomList),
 		atomics_to_string(AnswerAtomList," ",Answer)
+	; prove_rb(not(Query),Rulebase) ->
+		transform(not(Query),Clauses),
+		phrase(sentence_negation(Clauses),AnswerAtomList),
+		atomics_to_string(AnswerAtomList," ",Answer)
 	; Answer = 'Sorry, I don\'t think this is the case'
 	).	
 
@@ -28,16 +32,31 @@ prove_question(Query,Answer):-
 		transform(Query,Clauses),
 		phrase(sentence(Clauses),AnswerAtomList),
 		atomics_to_string(AnswerAtomList," ",Answer)
+	; prove_rb(not(Query),Rulebase) ->
+		transform(not(Query),Clauses),
+		phrase(sentence_negation(Clauses),AnswerAtomList),
+		atomics_to_string(AnswerAtomList," ",Answer)
 	; Answer = ""
 	).	
 
-
 %%% Extended version of prove_question/3 that constructs a proof tree %%%
+
 explain_question(Query,SessionId,Answer):-
 	findall(R,prolexa:stored_rule(SessionId,R),Rulebase),
 	( prove_rb(Query,Rulebase,[],Proof) ->
 		maplist(pstep2message,Proof,Msg),
 		phrase(sentence1([(Query:-true)]),L),
+		atomic_list_concat([therefore|L]," ",Last),
+		append(Msg,[Last],Messages),
+		atomic_list_concat(Messages,"; ",Answer)
+	; Answer = 'Sorry, I don\'t think this is the case'
+	).
+
+explain_question_negated(Query,SessionId,Answer):-
+	findall(R,prolexa:stored_rule(SessionId,R),Rulebase),
+	( prove_rb(Query,Rulebase,[],Proof) ->
+		maplist(pstep2message,Proof,Msg),
+		phrase(sentence_negation([Query:-true]),L),
 		atomic_list_concat([therefore|L]," ",Last),
 		append(Msg,[Last],Messages),
 		atomic_list_concat(Messages,"; ",Answer)
@@ -70,13 +89,37 @@ add_body_to_rulebase(A,Rs0,[[(A:-true)]|Rs0]).
 
 % 3d argument is accumulator for proofs
 prove_rb(true,_Rulebase,P,P):-!.
+
+prove_rb((false,_B),_Rulebase, P, P):-!.
+
 prove_rb((A,B),Rulebase,P0,P):-!,
 	find_clause((A:-C),Rule,Rulebase),
 	conj_append(C,B,D),
     prove_rb(D,Rulebase,[p((A,B),Rule)|P0],P).
+
 prove_rb(A,Rulebase,P0,P):-
     find_clause((A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
+
+prove_rb(not(A), Rulebase, P0, P):-
+	find_clause((false:-A), Rule, Rulebase),
+	prove_rb((false,A), Rulebase, [p(not(A),Rule)|P0], P).
+
+prove_rb(c(A, B), Rulebase, P0, P):-
+	prove_rb(A, Rulebase, P0, P),
+	prove_rb(B, Rulebase, P0, P).
+
+prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+	find_clause((A:-B,not(C)),Rule,Rulebase),
+	prove_rb(B,Rulebase,P0,P),
+	prove_rb(not(C),Rulebase,P,_).
+	% last line could be replaced with the below...
+	% not prove_rb(C,Rulebase,P,_).
+
+prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+	find_clause(((A:-B,not(C))),Rule,Rulebase),
+	prove_rb(B,Rulebase,P0,P),
+	not prove_rb(C,Rulebase,P,_).
 
 % top-level version that ignores proof
 prove_rb(Q,RB):-
@@ -92,7 +135,10 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 % transform instantiated, possibly conjunctive, query to list of clauses
 transform((A,B),[(A:-true)|Rest]):-!,
     transform(B,Rest).
+transform((not(A),B),[(false:-A)|Rest]):-!,
+	transform(B,Rest).
 transform(A,[(A:-true)]).
+transform(not(A),[(false:-A)]).
 
 %%% Two more commands: all_rules/1 and all_answers/2
 

@@ -18,7 +18,6 @@ sentence(Rule)			--> determiner(i,M1,M2,Rule),negated_verb_phrase(N,M1),[it],neg
 sentence(Rule)			--> determiner(s,M1,M2,Rule),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
 sentence(Rule)			--> determiner(N,M1,M2,Rule),noun(N,M1),verb_phrase(N,M2).
 
-
 % Sentences
 sentence(d((H:-B,not(E))))			--> determiner(N,X=>B,X=>H,d(H:-B)),noun(N,X=>B),verb_phrase(N,X=>H),exception(N,X=>E).
 sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
