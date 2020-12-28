@@ -41,17 +41,23 @@ prove_question(Query,Answer):-
 
 
 %%% Extended version of prove_question/3 that constructs a proof tree %%%
+
 explain_question(Query,SessionId,Answer):-
 	findall(R,prolexa:stored_rule(SessionId,R),Rulebase),
 	( prove_rb(Query,Rulebase,[],Proof) ->
 		maplist(pstep2message,Proof,Msg),
-		phrase(sentence_negation([not(Query):-true]),L),
+		phrase(sentence1([(Query:-true)]),L),
 		atomic_list_concat([therefore|L]," ",Last),
 		append(Msg,[Last],Messages),
 		atomic_list_concat(Messages,"; ",Answer)
-	; prove_rb(not(Query),Rulebase,[],Proof) ->
+	; Answer = 'Sorry, I don\'t think this is the case'
+	).
+
+explain_question_negated(Query,SessionId,Answer):-
+	findall(R,prolexa:stored_rule(SessionId,R),Rulebase),
+	( prove_rb(Query,Rulebase,[],Proof) ->
 		maplist(pstep2message,Proof,Msg),
-		phrase(sentence_negation([(not(Query):-true)]),L),
+		phrase(sentence_negation([Query:-true]),L),
 		atomic_list_concat([therefore|L]," ",Last),
 		append(Msg,[Last],Messages),
 		atomic_list_concat(Messages,"; ",Answer)

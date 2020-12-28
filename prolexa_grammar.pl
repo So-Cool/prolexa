@@ -17,6 +17,7 @@ iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 
 % unary predicates for adjectives, nouns and verbs
 pred(human,   1,[a/human,n/human]).
+
 pred(mortal,  1,[a/mortal,n/mortal]).
 %pred(man,     1,[a/male,n/man]).
 %pred(woman,   1,[a/female,n/woman]).
@@ -69,7 +70,6 @@ sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
 sentence_negation([not(L):-true])		--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
 
 
-
 % Otto negated verb phrase
 negated_verb_phrase(N, M) --> [is],[not],property(N, M).
 
@@ -88,6 +88,7 @@ determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
 %determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
+
 
 proper_noun(s,tweety) --> [tweety].
 proper_noun(s,peter) --> [peter].
@@ -124,8 +125,11 @@ command(g(retractall(prolexa:stored_rule(_,C)),"I erased it from my memory")) --
 command(g(retractall(prolexa:stored_rule(_,_)),"I am a blank slate")) --> forgetall. 
 command(g(all_rules(Answer),Answer)) --> kbdump. 
 command(g(all_answers(PN,Answer),Answer)) --> tellmeabout,proper_noun(s,PN).
-command(g(explain_question(not(Q),_,Answer),Answer)) --> [explain,why],sentence_negation([not(Q):-true]).
-% command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
+
+command(g(explain_question_negated(not(Q),_,Answer),Answer)) --> [explain,why],sentence_negation([not(Q):-true]).
+
+command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
+
 command(g(random_fact(Fact),Fact)) --> getanewfact.
 %command(g(pf(A),A)) --> peterflach. 
 %command(g(iai(A),A)) --> what. 
