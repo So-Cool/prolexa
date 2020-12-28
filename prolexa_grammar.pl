@@ -54,9 +54,10 @@ sword --> [].
 sword --> [that]. 
 
 % most of this follows Simply Logical, Chapter 7
+sentence1(C) 			--> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,M2).
+sentence1(C)			--> determiner(f,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],negated_verb_phrase(N,M3).
 sentence1(C)			--> determiner(i,M1,M2,C),negated_verb_phrase(N,M1),[it],negated_verb_phrase(N,M2).
 sentence1(C)  			--> determiner(s,M1,M2,C),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
-sentence1(C) 			--> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,M2).
 sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L).
 
 
@@ -64,7 +65,8 @@ sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L).
 % Otto: this is causing problems because of the queries are being generated - consider to how to deal with this later
 
 sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
-sentence1(not(L))		--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
+
+sentence_negation([not(L):-true])		--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
 
 
 
@@ -79,6 +81,7 @@ property(N,M) --> adjective(N,M).
 property(s,M) --> [a],noun(s,M).
 property(p,M) --> noun(p,M).
 
+determiner(f,X=>B1,X=>B2,X=>H,[(not(H):-B1,not(B2))])  --> [if],[something].
 determiner(i,X=>B,X=>H,[(not(H):-not(B))])	--> [if],[something].
 determiner(s,X=>B,X=>H,[(H:-not(B))])	--> [if],[something].
 determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
@@ -121,7 +124,8 @@ command(g(retractall(prolexa:stored_rule(_,C)),"I erased it from my memory")) --
 command(g(retractall(prolexa:stored_rule(_,_)),"I am a blank slate")) --> forgetall. 
 command(g(all_rules(Answer),Answer)) --> kbdump. 
 command(g(all_answers(PN,Answer),Answer)) --> tellmeabout,proper_noun(s,PN).
-command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
+command(g(explain_question(not(Q),_,Answer),Answer)) --> [explain,why],sentence_negation([not(Q):-true]).
+% command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
 command(g(random_fact(Fact),Fact)) --> getanewfact.
 %command(g(pf(A),A)) --> peterflach. 
 %command(g(iai(A),A)) --> what. 

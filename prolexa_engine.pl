@@ -18,6 +18,10 @@ prove_question(Query,SessionId,Answer):-
 		transform(Query,Clauses),
 		phrase(sentence(Clauses),AnswerAtomList),
 		atomics_to_string(AnswerAtomList," ",Answer)
+	; prove_rb(not(Query),Rulebase) ->
+		transform(not(Query),Clauses),
+		phrase(sentence_negation(Clauses),AnswerAtomList),
+		atomics_to_string(AnswerAtomList," ",Answer)
 	; Answer = 'Sorry, I don\'t think this is the case'
 	).	
 
@@ -28,6 +32,10 @@ prove_question(Query,Answer):-
 		transform(Query,Clauses),
 		phrase(sentence(Clauses),AnswerAtomList),
 		atomics_to_string(AnswerAtomList," ",Answer)
+	; prove_rb(not(Query),Rulebase) ->
+		transform(not(Query),Clauses),
+		phrase(sentence_negation(Clauses),AnswerAtomList),
+		atomics_to_string(AnswerAtomList," ",Answer)
 	; Answer = ""
 	).	
 
@@ -37,7 +45,13 @@ explain_question(Query,SessionId,Answer):-
 	findall(R,prolexa:stored_rule(SessionId,R),Rulebase),
 	( prove_rb(Query,Rulebase,[],Proof) ->
 		maplist(pstep2message,Proof,Msg),
-		phrase(sentence1([(Query:-true)]),L),
+		phrase(sentence_negation([not(Query):-true]),L),
+		atomic_list_concat([therefore|L]," ",Last),
+		append(Msg,[Last],Messages),
+		atomic_list_concat(Messages,"; ",Answer)
+	; prove_rb(not(Query),Rulebase,[],Proof) ->
+		maplist(pstep2message,Proof,Msg),
+		phrase(sentence_negation([(not(Query):-true)]),L),
 		atomic_list_concat([therefore|L]," ",Last),
 		append(Msg,[Last],Messages),
 		atomic_list_concat(Messages,"; ",Answer)
@@ -109,7 +123,10 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 % transform instantiated, possibly conjunctive, query to list of clauses
 transform((A,B),[(A:-true)|Rest]):-!,
     transform(B,Rest).
+transform((not(A),B),[(false:-A)|Rest]):-!,
+	transform(B,Rest).
 transform(A,[(A:-true)]).
+transform(not(A),[(false:-A)]).
 
 %%% Two more commands: all_rules/1 and all_answers/2
 
@@ -130,8 +147,6 @@ rule2message(Rule,Message):-
 all_answers(PN,Answer):-
 	findall(Q,(pred(P,1,_),Q=..[P,PN]),Queries), % collect known predicates from grammar
 	maplist(prove_question,Queries,Msg),
-	% findall(not(Q), (pred(P,1,_),Q=..[P,PN]), Queries),
-	% maplist(prove_question,Queries,Msg),
 	delete(Msg,"",Messages),
 	( Messages=[] -> atomic_list_concat(['I know nothing about',PN],' ',Answer)
 	; otherwise -> atomic_list_concat(Messages,". ",Answer)
