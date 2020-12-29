@@ -38,6 +38,8 @@ pred2gr(P,1,C/W,X=>Lit):-
 noun_s2p(Noun_s,Noun_p):-
 	( Noun_s=woman -> Noun_p=women
 	; Noun_s=man -> Noun_p=men
+	; Noun_s=bird -> Noun_p=birds
+	; Noun_s=human -> Noun_p=humans
 	; atom_concat(Noun_s,s,Noun_p)
 	).
 
@@ -55,24 +57,23 @@ sword --> [].
 sword --> [that]. 
 
 % most of this follows Simply Logical, Chapter 7
+sentence1(C) 			--> determiner(p_negation,M1,M2,C),noun(N,M1),negated_verb_phrase(N,M2).
 sentence1(C) 			--> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,M2).
 sentence1(C)			--> determiner(l,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],verb_phrase(N,M3).
 sentence1(C)			--> determiner(f,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],negated_verb_phrase(N,M3).
 sentence1(C)			--> determiner(i,M1,M2,C),negated_verb_phrase(N,M1),[it],negated_verb_phrase(N,M2).
 sentence1(C)  			--> determiner(s,M1,M2,C),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
 sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L).
-
-
-% Otto: representation of not bird(otto) but alternative would be false:-bird(otto)
-% Otto: this is causing problems because of the queries are being generated - consider to how to deal with this later
-
 sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
 
+% Handling interpretation of negation
 sentence_negation([not(L):-true])		--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
 
 
 % Otto negated verb phrase
-negated_verb_phrase(N, M) --> [is],[not],property(N, M).
+negated_verb_phrase(s, M) --> [is],[not],property(s, M).
+negated_verb_phrase(p, M) --> [are],[not],property(p, M).
+negated_verb_phrase(N, M) --> [cannot], iverb(N,M).
 
 verb_phrase(s,M) --> [is],property(s,M).
 verb_phrase(p,M) --> [are],property(p,M).
@@ -86,8 +87,12 @@ determiner(l,X=>B1,X=>B2,X=>H,[(H:-B1,not(B2))])  --> [if],[something].
 determiner(f,X=>B1,X=>B2,X=>H,[(not(H):-B1,not(B2))])  --> [if],[something].
 determiner(i,X=>B,X=>H,[(not(H):-not(B))])	--> [if],[something].
 determiner(s,X=>B,X=>H,[(H:-not(B))])	--> [if],[something].
+
+
+% TO DO: Need expressions for 
 determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
+determiner(p_negation,X=>B,X=>H,[(not(H):-B)]) --> [all].
 %determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
