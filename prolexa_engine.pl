@@ -110,16 +110,18 @@ prove_rb(c(A, B), Rulebase, P0, P):-
 	prove_rb(B, Rulebase, P0, P).
 
 prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+	find_clause(((A:-B,not(C))),Rule,Rulebase),
+	prove_rb(B,Rulebase,P0,P),
+	not prove_rb(C,Rulebase,P,_).
+
+prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
 	find_clause((A:-B,not(C)),Rule,Rulebase),
 	prove_rb(B,Rulebase,P0,P),
 	prove_rb(not(C),Rulebase,P,_).
 	% last line could be replaced with the below...
 	% not prove_rb(C,Rulebase,P,_).
 
-prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
-	find_clause(((A:-B,not(C))),Rule,Rulebase),
-	prove_rb(B,Rulebase,P0,P),
-	not prove_rb(C,Rulebase,P,_).
+
 
 % top-level version that ignores proof
 prove_rb(Q,RB):-

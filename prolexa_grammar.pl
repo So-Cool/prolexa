@@ -17,8 +17,9 @@ iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 
 % unary predicates for adjectives, nouns and verbs
 pred(human,   1,[a/human,n/human]).
-
+pred(muggle,  1,[a/muggle,n/muggle]).
 pred(mortal,  1,[a/mortal,n/mortal]).
+pred(magic,	  1,[a/magic,n/magic]).
 %pred(man,     1,[a/male,n/man]).
 %pred(woman,   1,[a/female,n/woman]).
 %pred(married, 1,[a/married]).
@@ -29,6 +30,7 @@ pred(bird,    1,[n/bird]).
 pred(penguin, 1,[n/penguin]).
 pred(sparrow, 1,[n/sparrow]).
 pred(fly,     1,[v/fly]).
+pred(vanish,  1,[v/vanish]).
 
 pred2gr(P,1,C/W,X=>Lit):-
 	pred(P,1,L),
@@ -45,7 +47,8 @@ noun_s2p(Noun_s,Noun_p):-
 
 verb_p2s(Verb_p,Verb_s):-
 	( Verb_p=fly -> Verb_s=flies
-	; 	atom_concat(Verb_p,s,Verb_s)
+	; Verb_p=vanish -> Verb_s=vanishes
+	; atom_concat(Verb_p,s,Verb_s)
 	).
 
 
@@ -57,7 +60,10 @@ sword --> [].
 sword --> [that]. 
 
 % most of this follows Simply Logical, Chapter 7
-sentence1(C) 			--> determiner(p_negation,M1,M2,C),noun(N,M1),negated_verb_phrase(N,M2).
+
+sentence1(C)			--> person_determiner(N,M1,M2,C),magic_verb_phrase(N,M1),[then],[they],[can],verb_phrase(p,M2).
+
+sentence1(C) 			--> neg_determiner(N,M1,M2,C),noun(N,M1),negated_verb_phrase(N,M2).
 sentence1(C) 			--> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,M2).
 sentence1(C)			--> determiner(l,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],verb_phrase(N,M3).
 sentence1(C)			--> determiner(f,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],negated_verb_phrase(N,M3).
@@ -69,12 +75,13 @@ sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
 % Handling interpretation of negation
 sentence_negation([not(L):-true])		--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
 
-
 % Otto negated verb phrase
 negated_verb_phrase(s, M) --> [is],[not],property(s, M).
-negated_verb_phrase(p, M) --> [are],[not],property(p, M).
+negated_verb_phrase(p, M) --> [cannot],property(p, M).
 negated_verb_phrase(N, M) --> [cannot], iverb(N,M).
 
+
+magic_verb_phrase(s,M) --> [can],[do],property(s,M).
 verb_phrase(s,M) --> [is],property(s,M).
 verb_phrase(p,M) --> [are],property(p,M).
 verb_phrase(N,M) --> iverb(N,M).
@@ -92,14 +99,21 @@ determiner(s,X=>B,X=>H,[(H:-not(B))])	--> [if],[something].
 % TO DO: Need expressions for 
 determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
-determiner(p_negation,X=>B,X=>H,[(not(H):-B)]) --> [all].
+
+person_determiner(s,X=>B,X=>H,[(H:-B)]) --> [if],[a],[person].
 %determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
+neg_determiner(s,X=>B,X=>H,[(not(H):-B)]) --> [every].
+neg_determiner(p,X=>B,X=>H,[(not(H):-B)]) --> [all].
 
 proper_noun(s,tweety) --> [tweety].
 proper_noun(s,peter) --> [peter].
 proper_noun(s,otto)	--> [otto].
+
+% Harry Potter
+proper_noun(s,harry) --> [harry].
+proper_noun(s,dursley) --> [dursley].
 
 
 %%% questions %%%

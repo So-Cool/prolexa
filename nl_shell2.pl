@@ -24,7 +24,9 @@ sentence(c(Lit:-true))	--> proper_noun(N,X),verb_phrase(N,X=>Lit).
 
 % Otto: representation of not bird(otto) but alternative would be false:-bird(otto)
 % Otto: this is causing problems because of the queries are being generated - consider to how to deal with this later
-sentence(not(Lit))		--> proper_noun(N,X),negated_verb_phrase(N,X=>Lit).
+% sentence(not(Lit))		--> proper_noun(N,X),negated_verb_phrase(N,X=>Lit).
+
+
 sentence(c((false:-Lit)))	--> proper_noun(N,X),negated_verb_phrase(N, X=>Lit).
 
 % Otto: handles if not Body then Head
@@ -367,7 +369,9 @@ c((human(X):-woman(X))),
 c((human(X):-man(X))),
 c((pig(X):-not horse(X))),
 c((not mortal(X):-not man(X))),
-d((fly(X):-bird(X),not penguin(X))),
+d((fly(X):-bird(X),not penguin(X)))
+
+/*
 c(not penguin(X):-human(X), not bird(X)),
 c((false:-bird(otto))),
 c((human(otto):-true)),
@@ -375,6 +379,7 @@ c((false:-horse(otto))),
 c((false:-man(otto))),
 c((woman(helena):-true)),
 c((man(socrates):-true))
+*/
 ],assert(kb(ex,Cs)).
 
 
