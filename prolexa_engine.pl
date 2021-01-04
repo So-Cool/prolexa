@@ -122,7 +122,6 @@ prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
 	% not prove_rb(C,Rulebase,P,_).
 
 
-
 % top-level version that ignores proof
 prove_rb(Q,RB):-
 	prove_rb(Q,RB,[],_P).

@@ -20,6 +20,14 @@ pred(human,   1,[a/human,n/human]).
 pred(muggle,  1,[a/muggle,n/muggle]).
 pred(mortal,  1,[a/mortal,n/mortal]).
 pred(magic,	  1,[a/magic,n/magic]).
+pred(conductive, 1,[a/conductive,n/conductive]).
+pred(insulator, 1,[a/insulator,n/insulator]).
+pred(metal,	1,[a/metal,n/metal]).
+pred(iron,	1,[a/iron,n/iron]).
+pred(nail,	1,[a/nail,n/nail]).
+pred(wounded, 1,[a/wounded]).
+pred(abnormal, 1,[a/abnormal]).
+
 %pred(man,     1,[a/male,n/man]).
 %pred(woman,   1,[a/female,n/woman]).
 %pred(married, 1,[a/married]).
@@ -27,6 +35,7 @@ pred(magic,	  1,[a/magic,n/magic]).
 %pred(mammal,  1,[n/mammal]).
 pred(bird,    1,[n/bird]).
 %pred(bat,     1,[n/bat]).
+pred(ostrich, 1,[n/ostrich]).
 pred(penguin, 1,[n/penguin]).
 pred(sparrow, 1,[n/sparrow]).
 pred(fly,     1,[v/fly]).
@@ -61,16 +70,24 @@ sword --> [that].
 
 % most of this follows Simply Logical, Chapter 7
 
-sentence1(C)			--> person_determiner(N,M1,M2,C),magic_verb_phrase(N,M1),[then],[they],[can],verb_phrase(p,M2).
-
 sentence1(C) 			--> neg_determiner(N,M1,M2,C),noun(N,M1),negated_verb_phrase(N,M2).
 sentence1(C) 			--> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,M2).
+
+sentence1(C) 			--> determiner(z,M1,M2,C),verb_phrase(N,M1),[then],[it],negated_verb_phrase(p,M2).
+sentence1(C) 			--> determiner(a,M1,M2,C),verb_phrase(N,M1),[then],[it],verb_phrase(N,M2).
+sentence1(C)			--> determiner(d,M1,M2,M3,C),verb_phrase(N,M1),[and],[it],verb_phrase(N,M2),[then],[it],verb_phrase(N,M3).
 sentence1(C)			--> determiner(l,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],verb_phrase(N,M3).
 sentence1(C)			--> determiner(f,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],negated_verb_phrase(N,M3).
 sentence1(C)			--> determiner(i,M1,M2,C),negated_verb_phrase(N,M1),[it],negated_verb_phrase(N,M2).
 sentence1(C)  			--> determiner(s,M1,M2,C),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
 sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L).
 sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
+
+% Harry Potter
+sentence1(C)			--> person_determiner(N,M1,M2,C),magic_verb_phrase(N,M1),[then],[they],[can],verb_phrase(p,M2).
+
+% Bird Rulebase
+sentence1(C)			--> bird_determiner(N,M1,M2,C),verb_phrase(N,M1),[then],[it],verb_phrase(p,M2).
 
 % Handling interpretation of negation
 sentence_negation([not(L):-true])		--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
@@ -90,19 +107,30 @@ property(N,M) --> adjective(N,M).
 property(s,M) --> [a],noun(s,M).
 property(p,M) --> noun(p,M).
 
+determiner(d,X=>B1,X=>B2,X=>H,[(H:-B1,B2)])	--> [if],[something].
 determiner(l,X=>B1,X=>B2,X=>H,[(H:-B1,not(B2))])  --> [if],[something].
 determiner(f,X=>B1,X=>B2,X=>H,[(not(H):-B1,not(B2))])  --> [if],[something].
+determiner(a,X=>B,X=>H,[(H:-B)]) --> [if],[something].
 determiner(i,X=>B,X=>H,[(not(H):-not(B))])	--> [if],[something].
 determiner(s,X=>B,X=>H,[(H:-not(B))])	--> [if],[something].
+determiner(z,X=>B,X=>H,[(not(H):-B)])	--> [if],[something].
+
+
 
 
 % TO DO: Need expressions for 
 determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
-
-person_determiner(s,X=>B,X=>H,[(H:-B)]) --> [if],[a],[person].
 %determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
+
+% Harry Potter
+person_determiner(s,X=>B,X=>H,[(H:-B)]) --> [if],[a],[person].
+
+% Birds Rulebase
+bird_determiner(s,X=>B,X=>H,[(H:-B)]) --> [if],[something].
+bird_determiner(s,X=>B,X=>H,[(H:-B)]) --> [if],[something].
+
 
 neg_determiner(s,X=>B,X=>H,[(not(H):-B)]) --> [every].
 neg_determiner(p,X=>B,X=>H,[(not(H):-B)]) --> [all].
@@ -110,6 +138,12 @@ neg_determiner(p,X=>B,X=>H,[(not(H):-B)]) --> [all].
 proper_noun(s,tweety) --> [tweety].
 proper_noun(s,peter) --> [peter].
 proper_noun(s,otto)	--> [otto].
+
+
+% Birds Rulebase
+proper_noun(s,arthur)	--> [arthur].
+proper_noun(s,bill)	--> [bill].
+proper_noun(s,colin)	--> [colin].
 
 % Harry Potter
 proper_noun(s,harry) --> [harry].
@@ -126,6 +160,7 @@ qword --> [].
 
 question1(Q) --> [who],verb_phrase(s,_X=>Q).
 question1(Q) --> [is], proper_noun(N,X),property(N,X=>Q).
+question1(Q) --> [is], noun(N,X),property(N,X=>Q).
 question1(Q) --> [does],proper_noun(_,X),verb_phrase(_,X=>Q).
 %question1((Q1,Q2)) --> [are,some],noun(p,sk=>Q1),
 %					  property(p,sk=>Q2).
