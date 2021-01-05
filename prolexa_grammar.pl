@@ -27,6 +27,11 @@ pred(iron,	1,[a/iron,n/iron]).
 pred(nail,	1,[a/nail,n/nail]).
 pred(wounded, 1,[a/wounded]).
 pred(abnormal, 1,[a/abnormal]).
+pred(blue, 1,[a/blue]).
+pred(round, 1,[a/round]).
+pred(cold, 1, [a/cold]).
+pred(quiet,1,[a/quiet]).
+
 
 %pred(man,     1,[a/male,n/man]).
 %pred(woman,   1,[a/female,n/woman]).
@@ -98,7 +103,7 @@ negated_verb_phrase(p, M) --> [cannot],property(p, M).
 negated_verb_phrase(N, M) --> [cannot], iverb(N,M).
 
 
-magic_verb_phrase(s,M) --> [can],[do],property(s,M).
+% verb_phrase(s,M) --> [can],[do],property(s,M).
 verb_phrase(s,M) --> [is],property(s,M).
 verb_phrase(p,M) --> [are],property(p,M).
 verb_phrase(N,M) --> iverb(N,M).
