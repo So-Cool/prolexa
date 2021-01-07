@@ -12,6 +12,8 @@ utterance(C) --> command(C).
 adjective(_,M)		--> [Adj],    {pred2gr(_P,1,a/Adj, M)}.
 noun(s,M)			--> [Noun],   {pred2gr(_P,1,n/Noun,M)}.
 noun(p,M)			--> [Noun_p], {pred2gr(_P,1,n/Noun,M),noun_s2p(Noun,Noun_p)}.
+
+% noun(s,M,V)			--> [Noun], {pred2gr(_P,1,n/Noun,M,_V)}.
 iverb(s,M)			--> [Verb_s], {pred2gr(_P,1,v/Verb,M),verb_p2s(Verb,Verb_s)}.
 iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 
@@ -40,14 +42,21 @@ pred(quiet,1,[a/quiet]).
 %pred(mammal,  1,[n/mammal]).
 pred(bird,    1,[n/bird]).
 %pred(bat,     1,[n/bat]).
-pred(ostrich, 1,[n/ostrich]).
+
 pred(penguin, 1,[n/penguin]).
 pred(sparrow, 1,[n/sparrow]).
 pred(fly,     1,[v/fly]).
 pred(vanish,  1,[v/vanish]).
+pred(ostrich, 1,[n/ostrich],vowel).
 
 pred2gr(P,1,C/W,X=>Lit):-
 	pred(P,1,L),
+	member(C/W,L),
+	Lit=..[P,X].
+
+% Handles pred with 4 arguments: 1 for vowel indicator
+pred2gr(P,1,C/W,X=>Lit,_V):-
+	pred(P,1,L,_),
 	member(C/W,L),
 	Lit=..[P,X].
 
@@ -75,52 +84,90 @@ sword --> [that].
 
 % most of this follows Simply Logical, Chapter 7
 
-sentence1(C) 			--> neg_determiner(N,M1,M2,C),noun(N,M1),negated_verb_phrase(N,M2).
-sentence1(C) 			--> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,M2).
+sentence1([(L:-true)])   --> proper_noun(N,X),verb_phrase(N,_,_,X=>L).
+sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,_,_,X=>L).
+sentence1([(H:-B)])      --> conjunction(c,Be),pronoun(P,Be),verb_phrase(N,Be,_,X=>B),adverb(T),pronoun(P,T),verb_phrase(N,T,P,X=>H).
+sentence1([(not(H):-B)]) --> conjunction(c,Be),pronoun(P,Be),verb_phrase(N,Be,_,X=>B),adverb(T),pronoun(P,T),negated_verb_phrase(N,T,P,X=>H).
+sentence1([(H:-B1,B2)])	 --> conjunction(c,Be),pronoun(_P,_C),verb_phrase(N,Be,_,X=>B1),conjunction(a,Be),verb_phrase(N,Be,_,X=>B2),adverb(T),pronoun(P,T),verb_phrase(N,T,P,X=>H).
 
-sentence1(C) 			--> determiner(z,M1,M2,C),verb_phrase(N,M1),[then],[it],negated_verb_phrase(p,M2).
-sentence1(C) 			--> determiner(a,M1,M2,C),verb_phrase(N,M1),[then],[it],verb_phrase(N,M2).
-sentence1(C)			--> determiner(d,M1,M2,M3,C),verb_phrase(N,M1),[and],[it],verb_phrase(N,M2),[then],[it],verb_phrase(N,M3).
-sentence1(C)			--> determiner(l,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],verb_phrase(N,M3).
-sentence1(C)			--> determiner(f,M1,M2,M3,C),verb_phrase(N,M1),[and],negated_verb_phrase(N,M2),[then],[it],negated_verb_phrase(N,M3).
-sentence1(C)			--> determiner(i,M1,M2,C),negated_verb_phrase(N,M1),[it],negated_verb_phrase(N,M2).
-sentence1(C)  			--> determiner(s,M1,M2,C),negated_verb_phrase(N,M1),[it],verb_phrase(N,M2).
+
+% Example input: if someone is a bird and is not a penguin then they can fly
+%			   : if something is a bird and is not a penguin then it flies
+% 			   : explain why otto flies
+sentence1([(H:-B1,not(B2))]) --> conjunction(c,Be),pronoun(_P,_C),verb_phrase(N,Be,_,X=>B1),conjunction(a,Be),negated_verb_phrase(N,Be,_,X=>B2),adverb(T),pronoun(P,T),verb_phrase(N,T,P,X=>H).
+
+% Example input: if someone is a bird and is not a penguin then they cannot fly
+sentence1([(not(H):-B1,not(B2))]) --> conjunction(c,Be),pronoun(_P,_C),verb_phrase(N,Be,_,X=>B1),conjunction(a,Be),negated_verb_phrase(N,Be,_,X=>B2),adverb(T),pronoun(P,T),negated_verb_phrase(N,T,P,X=>H).
+
+% Example input: if someone is not a bird then they are not a penguin'.
+% Example input: if something is not a bird then it is not a penguin'
+sentence1([(not(H):-not(B))])      --> conjunction(c,Be),pronoun(P,Be),negated_verb_phrase(N,Be,_,X=>B),adverb(T),pronoun(P,T),negated_verb_phrase(N,T,P,X=>H).
+
+
+% Example input: if someone cannot fly then they are not a bird
+% Example input: if someone is not a penguin then they are a sparrow
+sentence1([(H:-not(B))])      --> conjunction(c,Be),pronoun(P,Be),negated_verb_phrase(N,Be,_,X=>B),adverb(T),pronoun(P,T),verb_phrase(N,T,P,X=>H).
+
+
+/*
+Introducing indefinite articles
+sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L,_V).
+*/
+
+% sentence1([(not(H):-B)]) 	--> noun(N,B),negated_verb_phrase(N,after,person,X=>H).
+
+% M2 is negated
+
+% determiner(z,X=>B,X=>H,[(not(H):-B)])	--> [if],[something].
+
 sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L).
-sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
 
-% Harry Potter
-sentence1(C)			--> person_determiner(N,M1,M2,C),magic_verb_phrase(N,M1),[then],[they],[can],verb_phrase(p,M2).
-
-% Bird Rulebase
-sentence1(C)			--> bird_determiner(N,M1,M2,C),verb_phrase(N,M1),[then],[it],verb_phrase(p,M2).
 
 % Handling interpretation of negation
-sentence_negation([not(L):-true])		--> proper_noun(N,X),negated_verb_phrase(N,X=>L).
+sentence_negation([not(L):-true])		--> proper_noun(N,X),negated_verb_phrase(N,_,_,X=>L).
 
 % Otto negated verb phrase
-negated_verb_phrase(s, M) --> [is],[not],property(s, M).
+negated_verb_phrase(s,before,_,M) --> [is],[not],property(s,M).
+% Unsure why this isn't working -> seems to be working now but I'm still suspicious...
+negated_verb_phrase(s,before,_,M) --> [cannot],iverb(p,M). 
+
+negated_verb_phrase(s,after,object,M) --> [is],[not],property(s,M).
+negated_verb_phrase(s,after,person,M) --> [are],[not],property(s,M).
+negated_verb_phrase(s,after,object,M) --> [cannot],iverb(p,M).
+negated_verb_phrase(s,after,person,M) --> [cannot],iverb(p,M).
+
+negated_verb_phrase(p,after,person,M) --> [are],[not],property(s,M).
+
 negated_verb_phrase(p, M) --> [cannot],property(p, M).
 negated_verb_phrase(N, M) --> [cannot], iverb(N,M).
 
+conjunction(c, before) --> [if].
+conjunction(a, before) --> [and].
 
 % verb_phrase(s,M) --> [can],[do],property(s,M).
-verb_phrase(s,M) --> [is],property(s,M).
-verb_phrase(p,M) --> [are],property(p,M).
-verb_phrase(N,M) --> iverb(N,M).
+verb_phrase(s,before,_,M) --> [is],property(s,M).
+verb_phrase(s,before,_,M) --> [can],iverb(p,M).
+
+verb_phrase(s,after,object,M) --> [is],property(s,M).
+verb_phrase(s,after,person,M) --> [are],property(s,M).
+verb_phrase(s,after,object,M) --> iverb(s,M).
+verb_phrase(s,after,person,M) --> [can],iverb(p,M).
+
+% JUst an idea for now..
+verb(s, before)  --> [is].
+verb(s, after) --> [are].
+verb(can) --> [can].
+
+
+/*
+verb_phrase(s,M,V) --> [is],property(s,M,V).
+*/
 
 property(N,M) --> adjective(N,M).
 property(s,M) --> [a],noun(s,M).
 property(p,M) --> noun(p,M).
 
-determiner(d,X=>B1,X=>B2,X=>H,[(H:-B1,B2)])	--> [if],[something].
-determiner(l,X=>B1,X=>B2,X=>H,[(H:-B1,not(B2))])  --> [if],[something].
-determiner(f,X=>B1,X=>B2,X=>H,[(not(H):-B1,not(B2))])  --> [if],[something].
-determiner(a,X=>B,X=>H,[(H:-B)]) --> [if],[something].
-determiner(i,X=>B,X=>H,[(not(H):-not(B))])	--> [if],[something].
-determiner(s,X=>B,X=>H,[(H:-not(B))])	--> [if],[something].
-determiner(z,X=>B,X=>H,[(not(H):-B)])	--> [if],[something].
-
-
+% property(s,M,V) --> [an],noun(s,M,V).
 
 
 % TO DO: Need expressions for 
@@ -129,8 +176,19 @@ determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
 %determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
-% Harry Potter
-person_determiner(s,X=>B,X=>H,[(H:-B)]) --> [if],[a],[person].
+pronoun(person, before) --> [a],[person].
+pronoun(person, before) --> [someone].
+pronoun(person, after) --> [they].
+
+pronoun(object, before) --> [something].
+pronoun(object, after) --> [it].
+
+adverb(after) --> [then].
+
+/*
+indef_article(pre_consonant) --> [a].
+indef_article(pre_vowel) --> [an].
+*/
 
 % Birds Rulebase
 bird_determiner(s,X=>B,X=>H,[(H:-B)]) --> [if],[something].
