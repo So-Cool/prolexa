@@ -34,13 +34,13 @@ pred(round, 1,[a/round]).
 pred(cold, 1, [a/cold]).
 pred(quiet,1,[a/quiet]).
 
-
 %pred(man,     1,[a/male,n/man]).
 %pred(woman,   1,[a/female,n/woman]).
 %pred(married, 1,[a/married]).
 %pred(bachelor,1,[n/bachelor]).
 %pred(mammal,  1,[n/mammal]).
 pred(bird,    1,[n/bird]).
+pred(thing,	  1,[n/thing]).
 %pred(bat,     1,[n/bat]).
 
 pred(penguin, 1,[n/penguin]).
@@ -65,6 +65,7 @@ noun_s2p(Noun_s,Noun_p):-
 	; Noun_s=man -> Noun_p=men
 	; Noun_s=bird -> Noun_p=birds
 	; Noun_s=human -> Noun_p=humans
+	; Noun_s=thing -> Noun_p=things
 	; atom_concat(Noun_s,s,Noun_p)
 	).
 
@@ -83,6 +84,7 @@ sword --> [].
 sword --> [that]. 
 
 % most of this follows Simply Logical, Chapter 7
+
 
 sentence1([(L:-true)])   --> proper_noun(N,X),verb_phrase(N,_,_,X=>L).
 sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,_,_,X=>L).
@@ -108,19 +110,18 @@ sentence1([(not(H):-not(B))])      --> conjunction(c,Be),pronoun(P,Be),negated_v
 % Example input: if someone is not a penguin then they are a sparrow
 sentence1([(H:-not(B))])      --> conjunction(c,Be),pronoun(P,Be),negated_verb_phrase(N,Be,_,X=>B),adverb(T),pronoun(P,T),verb_phrase(N,T,P,X=>H).
 
+%  A noun phrase sort of... still somewhat hacked but unsure how to clean it up
+sentence1([(not(H):-B)]) 	--> noun(N,X=>B),negated_verb_phrase(N,before,_,X=>H).
+
+% Cold things are quiet..
+sentence1([(H:-B)]) --> adjective(_N,X=>B),[things],verb_phrase(s,after,person,X=>H).
+
+
 
 /*
 Introducing indefinite articles
 sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L,_V).
 */
-
-% sentence1([(not(H):-B)]) 	--> noun(N,B),negated_verb_phrase(N,after,person,X=>H).
-
-% M2 is negated
-
-% determiner(z,X=>B,X=>H,[(not(H):-B)])	--> [if],[something].
-
-sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L).
 
 
 % Handling interpretation of negation
@@ -136,6 +137,8 @@ negated_verb_phrase(s,after,person,M) --> [are],[not],property(s,M).
 negated_verb_phrase(s,after,object,M) --> [cannot],iverb(p,M).
 negated_verb_phrase(s,after,person,M) --> [cannot],iverb(p,M).
 
+
+negated_verb_phrase(p,before,_,M) --> [cannot],verb(do),property(s,M).
 negated_verb_phrase(p,after,person,M) --> [are],[not],property(s,M).
 
 negated_verb_phrase(p, M) --> [cannot],property(p, M).
@@ -146,6 +149,8 @@ conjunction(a, before) --> [and].
 
 % verb_phrase(s,M) --> [can],[do],property(s,M).
 verb_phrase(s,before,_,M) --> [is],property(s,M).
+verb_phrase(s,before,_,M) --> [can],verb(do),property(p,M).
+verb_phrase(s,before,_,M) --> [can],iverb(p,M).
 verb_phrase(s,before,_,M) --> [can],iverb(p,M).
 
 verb_phrase(s,after,object,M) --> [is],property(s,M).
@@ -157,6 +162,7 @@ verb_phrase(s,after,person,M) --> [can],iverb(p,M).
 verb(s, before)  --> [is].
 verb(s, after) --> [are].
 verb(can) --> [can].
+verb(do)  --> [do].
 
 
 /*

@@ -128,7 +128,7 @@ prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
 	% last line could NOT be replaced with the below...
 	% not prove_rb(C,Rulebase,P,_).
 
-prove_rb(A,Rulebase,P0,[p(A,Rule)|P]):-
+prove_rb(A,Rulebase,_P0,[p(A,Rule)|P]):-
 	find_clause((A:-not(B)),Rule,Rulebase),
 	not prove_rb(B,Rulebase,P,_).
 
