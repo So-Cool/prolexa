@@ -88,9 +88,16 @@ add_body_to_rulebase(A,Rs0,[[(A:-true)]|Rs0]).
 %%% meta-interpreter that constructs proofs %%%
 
 % 3d argument is accumulator for proofs
+
+
 prove_rb(true,_Rulebase,P,P):-!.
 
 prove_rb((false,_B),_Rulebase, P, P):-!.
+
+prove_rb([(H:-B)],Rulebase,P0,P):-!,
+        numbervars((H:-B),0,_),
+        add_body_to_rulebase(B,Rulebase,RB2),
+        prove_rb(H,RB2,P0,P).
 
 prove_rb((A,B),Rulebase,P0,P):-!,
 	find_clause((A:-C),Rule,Rulebase),
@@ -144,12 +151,16 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 	find_clause(Clause,Rule,Rules).
 
 % transform instantiated, possibly conjunctive, query to list of clauses
+
+transform([(A:-B)], [(A:-B)]).
 transform((A,B),[(A:-true)|Rest]):-!,
     transform(B,Rest).
+transform(A,[(A:-true)]).
+/*
 transform((not(A),B),[(false:-A)|Rest]):-!,
 	transform(B,Rest).
-transform(A,[(A:-true)]).
 transform(not(A),[(false:-A)]).
+*/
 
 %%% Two more commands: all_rules/1 and all_answers/2
 
