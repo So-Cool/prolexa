@@ -106,9 +106,14 @@ sword --> [that].
 % Cold things are quiet..
 
 
-sentence1(C) --> determiner(N,M1,M2,C,n),noun(N,M1),negated_verb_phrase(N,_,_,M2).
 
 sentence1(C) --> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,_,_,M2).
+
+% sentence1(C) --> determiner(N,M1,M2,C,n),noun(N,M1),negated_verb_phrase(N,_,_,M2).
+
+
+% sentence1([(L:-true)])   --> noun(N,X),verb_phrase(N,_,_,X=>L).
+% sentence1([(L:-true)])   --> noun(N,X),verb_phrase(N,_,_,X=>L).
 
 sentence1([(L:-true)])   --> proper_noun(N,X),verb_phrase(N,_,_,X=>L).
 sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,_,_,X=>L).
@@ -148,10 +153,6 @@ negated_verb_phrase(_,_,_,X) --> [do,not],tverb(p,Y=>X),noun(m,Y).
 negated_verb_phrase(_,_,_,X) --> [cannot],tverb(s,Y=>X),noun(m,Y).
 negated_verb_phrase(_,_,_,X) --> [do,not],tverb(s,Y=>X),noun(m,Y).
 
-
-negated_verb_phrase(p, M) --> [cannot],property(p, M).
-negated_verb_phrase(N, M) --> [cannot], iverb(N,M).
-
 conjunction(c, before) --> [if].
 conjunction(a, before) --> [and].
 
@@ -161,7 +162,8 @@ verb_phrase(s,before,_,M) --> [can],verb(do),property(p,M).
 verb_phrase(s,before,_,M) --> [can],iverb(p,M).
 verb_phrase(s,before,_,M) --> [can],iverb(p,M).
 
-verb_phrase(p,before,_,M) --> property(_,M).
+verb_phrase(p,before,person,M) --> [are],property(_,M).
+
 
 verb_phrase(p,before,_,X) --> tverb(p,Y=>X),noun(p,Y).
 verb_phrase(p,before,_,X) --> tverb(p,Y=>X),noun(m,Y).
@@ -173,11 +175,8 @@ verb_phrase(s,_,_,X) --> [can],tverb(p,Y=>X),noun(m,Y).
 
 verb_phrase(s,after,object,M) --> [is],property(s,M).
 verb_phrase(s,after,person,M) --> [are],property(s,M).
-
 verb_phrase(s,after,object,M) --> iverb(s,M).
 verb_phrase(s,after,person,M) --> [can],iverb(p,M).
-
-
 
 % JUst an idea for now..
 verb(s, before)  --> [is].
@@ -193,9 +192,9 @@ verb_phrase(s,M,V) --> [is],property(s,M,V).
 property(N,M) --> adjective(N,M).
 property(s,M) --> [a],noun(s,M).
 property(p,M) --> noun(p,M).
+property(m,M) --> [made,of],noun(m,M).
 property(_,M) --> [made,of],noun(m,M).
-property(_,M) --> [made,of],noun(s,M).
-property(_,M) --> [made,of],noun(p,M).
+
 % property(s,M,V) --> [an],noun(s,M,V).
 
 
@@ -203,7 +202,9 @@ property(_,M) --> [made,of],noun(p,M).
 determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
-determiner(p,X=>B,X=>H,[(not(H):-B)],n) --> [].
+
+determiner(p,X=>B,X=>H,[(not(H:-B)],n) --> [].
+
 %determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
@@ -252,17 +253,17 @@ qword --> [].
 %qword --> [if]. 
 %qword --> [whether]. 
 
+/*
 question1(Q) --> [who],verb_phrase(s,_,_,X=>Q).
 question1(Q) --> [is], proper_noun(N,X),property(N,X=>Q).
-% question1(Q) --> [is], noun(N,X),property(N,X=>Q).
+question1(Q) --> [is], noun(N,X),property(N,X=>Q).
 question1(Q) --> [does],proper_noun(s,X),verb_phrase(N,_,_,X=>Q).
 question1(Q) --> [does],noun(s,X),verb_phrase(_,_,_,X=>Q).
-question1(Q) --> [are],noun(p,X),verb_phrase(_,_,_,X=>Q).
 question1(Q) --> [can],proper_noun(_,X),verb_phrase(N,_,_,X=>Q).
-question1(Q) --> [are],
-question1(Q) --> [is],determiner(N,M1,M2,Q),noun(N,M1),property(N,M2).
+*/
 
-% is nails made of metal'
+question1(Q) --> [does],determiner(N,M1,M2,Q),noun(_,M1),verb_phrase(_,_,_,M2).
+question1(Q) --> [is],determiner(N,M1,M2,Q),noun(N,M1),property(N,M2).
 
 /*
 question1(Q) --> [does],proper_noun(_,X),verb_phrase(_,X=>Q).
@@ -286,11 +287,8 @@ command(g(retractall(prolexa:stored_rule(_,C)),"I erased it from my memory")) --
 command(g(retractall(prolexa:stored_rule(_,_)),"I am a blank slate")) --> forgetall. 
 command(g(all_rules(Answer),Answer)) --> kbdump. 
 command(g(all_answers(PN,Answer),Answer)) --> tellmeabout,proper_noun(s,PN).
-
 command(g(explain_question_negated(not(Q),_,Answer),Answer)) --> [explain,why],sentence_negation([not(Q):-true]).
-
 command(g(explain_question(Q,_,Answer),Answer)) --> [explain,why],sentence1([(Q:-true)]).
-
 command(g(random_fact(Fact),Fact)) --> getanewfact.
 %command(g(pf(A),A)) --> peterflach. 
 %command(g(iai(A),A)) --> what. 
