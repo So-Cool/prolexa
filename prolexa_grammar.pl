@@ -275,19 +275,21 @@ qword --> [].
 %qword --> [if]. 
 %qword --> [whether]. 
 
-/*
+
 question1(Q) --> [who],verb_phrase(s,_,_,X=>Q).
 question1(Q) --> [is], proper_noun(N,X),property(N,X=>Q).
+/*
 question1(Q) --> [is], noun(N,X),property(N,X=>Q).
 question1(Q) --> [does],proper_noun(s,X),verb_phrase(N,_,_,X=>Q).
 question1(Q) --> [does],noun(s,X),verb_phrase(_,_,_,X=>Q).
-
 */
 
 % This tells me otto cannot conduct electricity...
 question1(Q) --> [can],proper_noun(_,X),verb_phrase(N,_,_,X=>Q).
 question1(Q) --> [can],noun(_,X),verb_phrase(N,_,_,X=>Q). 
 
+
+question1(Q) --> [do],determiner(N,M1,M2,Q),noun(_,M1),verb_phrase(_,_,_,M2).
 question1(Q) --> [does],determiner(N,M1,M2,Q),noun(_,M1),verb_phrase(_,_,_,M2).
 question1(Q) --> [is],determiner(N,M1,M2,Q),noun(N,M1),property(N,M2).
 
