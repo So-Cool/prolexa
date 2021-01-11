@@ -94,6 +94,11 @@ prove_rb(true,_Rulebase,P,P):-!.
 
 prove_rb((false,_B),_Rulebase, P, P):-!.
 
+prove_rb(not([(H:-B)]),Rulebase,P0,P):-!,
+        numbervars((H:-B),0,_),
+        add_body_to_rulebase(B,Rulebase,RB2),
+        prove_rb(not(H),RB2,P0,P).
+
 prove_rb([(H:-B)],Rulebase,P0,P):-!,
         numbervars((H:-B),0,_),
         add_body_to_rulebase(B,Rulebase,RB2),
@@ -151,7 +156,7 @@ find_clause(Clause,Rule,[_Rule|Rules]):-
 	find_clause(Clause,Rule,Rules).
 
 % transform instantiated, possibly conjunctive, query to list of clauses
-
+transform(not([(A:-B)]),[(A:-B)]).
 transform([(A:-B)], [(A:-B)]).
 transform((A,B),[(A:-true)|Rest]):-!,
     transform(B,Rest).
