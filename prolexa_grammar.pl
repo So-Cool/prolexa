@@ -29,6 +29,7 @@ pred(conductive, 1,[a/conductive,n/conductive]).
 pred(insulator, 1,[a/insulator,n/insulator]).
 pred(metal,	1,[a/metal,n/metal]).
 pred(iron,	1,[a/iron,n/iron]).
+pred(plastic, 1,[a/plastic,n/plastic]).
 pred(nail,	1,[a/nail,n/nail,p/nail]).
 pred(wounded, 1,[a/wounded]).
 pred(abnormal, 1,[a/abnormal]).
@@ -197,7 +198,7 @@ verb_phrase(s,after,person,M) --> [are],property(s,M).
 verb_phrase(s,after,object,M) --> iverb(s,M).
 verb_phrase(s,after,person,M) --> [can],iverb(p,M).
 
-% JUst an idea for now..
+% Just an idea for now..
 verb(s, before)  --> [is].
 verb(s, after) --> [are].
 verb(can) --> [can].
@@ -211,7 +212,7 @@ property(N,M) --> adjective(N,M).
 property(s,M) --> [a],noun(s,M).
 property(p,M) --> noun(p,M).
 property(m,M) --> [made,of],noun(m,M).
-property(_,M) --> [made,of],noun(m,M).
+property(s,M) --> [made,of],noun(s,M).
 
 % property(s,M,V) --> [an],noun(s,M,V).
 
