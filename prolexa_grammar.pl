@@ -209,7 +209,7 @@ verb_phrase(s,M,V) --> [is],property(s,M,V).
 */
 
 property(N,M) --> adjective(N,M).
-property(s,M) --> [a],noun(s,M).
+property(s,M) --> indef_article(_),noun(s,M).
 property(p,M) --> noun(p,M).
 property(m,M) --> [made,of],noun(m,M).
 property(s,M) --> [made,of],noun(s,M).
@@ -241,10 +241,10 @@ pronoun(object, after) --> [it].
 
 adverb(after) --> [then].
 
-/*
-indef_article(pre_consonant) --> [a].
-indef_article(pre_vowel) --> [an].
-*/
+
+indef_article(_) --> [a].
+indef_article(_) --> [an].
+
 
 % Birds Rulebase
 bird_determiner(s,X=>B,X=>H,[(H:-B)]) --> [if],[something].
