@@ -110,15 +110,6 @@ sword --> [that].
 
 sentence1(C) --> determiner(N,M1,M2,C),noun(N,M1),verb_phrase(N,_,_,M2).
 sentence1(C) 	--> determiner(N,M1,M2,C,_),noun(N,M1),negated_verb_phrase(N,_,_,M2).
-% sentence1(C) --> determiner(N,M1,M2,C,n),noun(N,M1),negated_verb_phrase(N,_,_,M2).
-
-
-% sentence1([(L:-true)])   --> noun(N,X),verb_phrase(N,_,_,X=>L).
-% sentence1([(L:-true)])   --> noun(N,X),verb_phrase(N,_,_,X=>L).
-
-sentence1([(L:-true)])   --> noun(N,X),verb_phrase(N,_,_,X=>L).
-sentence1([(false:-L)])	--> noun(N,X),negated_verb_phrase(N,_,_,X=>L).
-
 
 sentence1([(L:-true)])   --> proper_noun(N,X),verb_phrase(N,_,_,X=>L).
 sentence1([(false:-L)])	--> proper_noun(N,X),negated_verb_phrase(N,_,_,X=>L).
@@ -129,34 +120,20 @@ sentence1([(H:-B1,not(B2))]) --> conjunction(c,Be),pronoun(_P,_C),verb_phrase(N,
 sentence1([(not(H):-B1,not(B2))]) --> conjunction(c,Be),pronoun(_P,_C),verb_phrase(N,Be,_,X=>B1),conjunction(a,Be),negated_verb_phrase(N,Be,_,X=>B2),adverb(T),pronoun(P,T),negated_verb_phrase(N,T,P,X=>H).
 sentence1([(not(H):-not(B))])      --> conjunction(c,Be),pronoun(P,Be),negated_verb_phrase(N,Be,_,X=>B),adverb(T),pronoun(P,T),negated_verb_phrase(N,T,P,X=>H).
 sentence1([(H:-not(B))])      --> conjunction(c,Be),pronoun(P,Be),negated_verb_phrase(N,Be,_,X=>B),adverb(T),pronoun(P,T),verb_phrase(N,T,P,X=>H).
-
-
-
-% sentence1([(not(H):-B)]) 	--> noun(N,X=>B),negated_verb_phrase(N,before,_,X=>H).
-
 sentence1([(H:-B)]) --> adjective(_N,X=>B),[things],verb_phrase(s,after,person,X=>H).
 
-% Introducing indefinite articles
-% sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L,_V).
-
-
-sentence_negation(C) 	--> neg_determiner(N,M1,M2,C,_),noun(N,M1),negated_verb_phrase(N,_,_,M2).
+/*
+Redundant, I think...
+sentence1([(L:-true)])   --> noun(N,X),verb_phrase(N,_,_,X=>L).
+sentence1([(false:-L)])	--> noun(N,X),negated_verb_phrase(N,_,_,X=>L).
+*/
 
 % Handling interpretation of negation
+sentence_negation(C) 	--> neg_determiner(N,M1,M2,C,_),noun(N,M1),negated_verb_phrase(N,_,_,M2).
 sentence_negation([not(L):-true])		--> proper_noun(N,X),negated_verb_phrase(N,_,_,X=>L).
 
-
-
-% [(not(conduct(A, =>(B, electricity(B)))):-metal(A))]
-sentence_negation([not(C)]) 	--> determiner(N,M1,M2,C,_),noun(N,M1),negated_verb_phrase(N,_,_,M2).
-
-% sentence_negation([(not(A):-B)])	   --> determiner(N,M1,M2,_,_),noun(N,M1),negated_verb_phrase(N,_,_,M2).
-% determiner(N,M1,M2,C,_),noun(N,M1),negated_verb_phrase(N,_,_,M2).
-
-
-% Otto negated verb phrase
+% Negated Verb Phrases - Singlular (Before)
 negated_verb_phrase(s,before,_,M) --> [is],[not],property(s,M).
-% Unsure why this isn't working -> seems to be working now but I'm still suspicious...
 negated_verb_phrase(s,before,_,M) --> [cannot],iverb(p,M). 
 
 negated_verb_phrase(s,after,object,M) --> [is],[not],property(s,M).
@@ -164,7 +141,7 @@ negated_verb_phrase(s,after,person,M) --> [are],[not],property(s,M).
 negated_verb_phrase(s,after,object,M) --> [cannot],iverb(p,M).
 negated_verb_phrase(s,after,person,M) --> [cannot],iverb(p,M).
 
-% Plurals
+% Negated Verb Phrases - Plurals (After)
 negated_verb_phrase(p,before,_,M) --> [cannot],verb(do),property(s,M).
 negated_verb_phrase(p,after,person,M) --> [are],[not],property(s,M).
 
@@ -176,15 +153,14 @@ negated_verb_phrase(_,_,_,X) --> [do,not],tverb(s,Y=>X),noun(m,Y).
 conjunction(c, before) --> [if].
 conjunction(a, before) --> [and].
 
-% verb_phrase(s,M) --> [can],[do],property(s,M).
+% Verb Phrases - Singluar (Before)
+
 verb_phrase(s,before,_,M) --> [is],property(s,M).
 verb_phrase(s,before,_,M) --> [can],verb(do),property(p,M).
 verb_phrase(s,before,_,M) --> [can],iverb(p,M).
 verb_phrase(s,before,_,M) --> [can],iverb(p,M).
 
 verb_phrase(p,before,person,M) --> [are],property(_,M).
-
-
 verb_phrase(p,before,_,X) --> tverb(p,Y=>X),noun(p,Y).
 verb_phrase(p,before,_,X) --> tverb(p,Y=>X),noun(m,Y).
 verb_phrase(s,before,_,X) --> tverb(s,Y=>X),noun(p,Y).
@@ -226,6 +202,7 @@ determiner(s,X=>B,X=>H,[(H:-B)]) --> [].
 
 determiner(p,X=>B,X=>H,[(not(H):-B)],_) --> [].
 determiner(s,X=>B,X=>H,[(not(H):-B)],_) --> [].
+
 %determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
 %determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
@@ -241,29 +218,21 @@ pronoun(object, after) --> [it].
 
 adverb(after) --> [then].
 
-
 indef_article(_) --> [a].
 indef_article(_) --> [an].
 
-
-% Birds Rulebase
-bird_determiner(s,X=>B,X=>H,[(H:-B)]) --> [if],[something].
-bird_determiner(s,X=>B,X=>H,[(H:-B)]) --> [if],[something].
-
-
-neg_determiner(s,X=>B,X=>H,[(not(H):-B)]) --> [every].
-neg_determiner(p,X=>B,X=>H,[(not(H):-B)]) --> [all].
-
+% Proper Nouns
 proper_noun(s,tweety) --> [tweety].
 proper_noun(s,peter) --> [peter].
 proper_noun(s,otto)	--> [otto].
 
-% Birds Rulebase
-proper_noun(s,arthur)	--> [arthur].
-proper_noun(s,bill)	--> [bill].
-proper_noun(s,colin)	--> [colin].
+% Birds Rulebase - Proper Nouns
+proper_noun(s,arthur) --> [arthur].
+proper_noun(s,bill)	  --> [bill].
+proper_noun(s,colin)  --> [colin].
+proper_noun(s,dave)	  --> [colin].
 
-% Harry Potter
+% Harry Potter - Proper Nouns
 proper_noun(s,harry) --> [harry].
 proper_noun(s,dursley) --> [dursley].
 
@@ -276,30 +245,25 @@ qword --> [].
 %qword --> [if]. 
 %qword --> [whether]. 
 
-
 question1(Q) --> [who],verb_phrase(s,_,_,X=>Q).
 question1(Q) --> [is], proper_noun(N,X),property(N,X=>Q).
-/*
-question1(Q) --> [is], noun(N,X),property(N,X=>Q).
-question1(Q) --> [does],proper_noun(s,X),verb_phrase(N,_,_,X=>Q).
-question1(Q) --> [does],noun(s,X),verb_phrase(_,_,_,X=>Q).
-*/
 
 % This tells me otto cannot conduct electricity...
 question1(Q) --> [can],proper_noun(_,X),verb_phrase(N,_,_,X=>Q).
 question1(Q) --> [can],noun(_,X),verb_phrase(N,_,_,X=>Q). 
-
 
 question1(Q) --> [do],determiner(N,M1,M2,Q),noun(_,M1),verb_phrase(_,_,_,M2).
 question1(Q) --> [does],determiner(N,M1,M2,Q),noun(_,M1),verb_phrase(_,_,_,M2).
 question1(Q) --> [is],determiner(N,M1,M2,Q),noun(N,M1),property(N,M2).
 
 /*
-pred2gr(P,1,C/W,X=>Lit):-
-	pred(P,1,L),
-	member(C/W,L),
-	Lit=..[P,X].
+Redunant, I think...
+
+question1(Q) --> [is], noun(N,X),property(N,X=>Q).
+question1(Q) --> [does],proper_noun(s,X),verb_phrase(N,_,_,X=>Q).
+question1(Q) --> [does],noun(s,X),verb_phrase(_,_,_,X=>Q).
 */
+
 
 /*
 question1(Q) --> [does],proper_noun(_,X),verb_phrase(_,X=>Q).
