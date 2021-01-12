@@ -1,7 +1,7 @@
 # Computational Logic for AI Coursework
 ## Otto Brookes & Amarpal Sahota
 
-We have extended Prolexa to handle the following logical puzzlers from [Transformers as Soft Reasoners over Language](https://rule-reasoning.apps.allenai.org/):
+We have extended Prolexa to handle the following logical puzzles from [Transformers as Soft Reasoners over Language](https://rule-reasoning.apps.allenai.org/):
 - Harry Potter (Imaginary Worlds)
 - The Birds Rulebase
 - Attributes with Negation

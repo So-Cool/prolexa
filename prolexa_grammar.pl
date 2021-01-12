@@ -230,7 +230,7 @@ proper_noun(s,otto)	--> [otto].
 proper_noun(s,arthur) --> [arthur].
 proper_noun(s,bill)	  --> [bill].
 proper_noun(s,colin)  --> [colin].
-proper_noun(s,dave)	  --> [colin].
+proper_noun(s,dave)	  --> [dave].
 
 % Harry Potter - Proper Nouns
 proper_noun(s,harry) --> [harry].
@@ -245,12 +245,11 @@ qword --> [].
 %qword --> [if]. 
 %qword --> [whether]. 
 
-question1(Q) --> [who],verb_phrase(s,_,_,X=>Q).
+question1(Q) --> [who],verb_phrase(s,_,_,_X=>Q).
 question1(Q) --> [is], proper_noun(N,X),property(N,X=>Q).
 
-% This tells me otto cannot conduct electricity...
-question1(Q) --> [can],proper_noun(_,X),verb_phrase(N,_,_,X=>Q).
-question1(Q) --> [can],noun(_,X),verb_phrase(N,_,_,X=>Q). 
+question1(Q) --> [can],proper_noun(_,X),verb_phrase(_,_,_,X=>Q).
+question1(Q) --> [can],noun(_N0,X),verb_phrase(_N1,_,_,X=>Q). 
 
 question1(Q) --> [do],determiner(N,M1,M2,Q),noun(_,M1),verb_phrase(_,_,_,M2).
 question1(Q) --> [does],determiner(N,M1,M2,Q),noun(_,M1),verb_phrase(_,_,_,M2).
