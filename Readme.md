@@ -1,3 +1,14 @@
+# Computational Logic for AI Coursework
+## Otto Brookes & Amarpal Sahota
+
+We have extended Prolexa to handle the following logical puzzlers from [Transformers as Soft Reasoners over Language](https://rule-reasoning.apps.allenai.org/):
+- Harry Potter (Imaginary Worlds)
+- The Birds Rulebase
+- Attributes with Negation
+- Conductivity & Counterfactuals
+
+# Repository Information
+
 This repository contains Prolog code for a simple question-answering assistant. The top-level module is `prolexa.pl`, which can either be run in the command line or with speech input and output through the 
 [alexa developer console](https://developer.amazon.com/alexa/console/ask).
 
