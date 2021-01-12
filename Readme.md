@@ -7,6 +7,14 @@ We have extended Prolexa to handle the following logical puzzles from [Transform
 - Attributes with Negation
 - Conductivity & Counterfactuals
 
+Other information:
+- All puzzles should work word-for-word.
+- When querying nouns use the format: 'do nails conduct electricity'
+- When querying proper nouns use format: 'can harry vanish' or 'is athur an ostrich'
+
+We also handle instances such as 'explain why dursley cannot vanish'
+
+
 # Repository Information
 
 This repository contains Prolog code for a simple question-answering assistant. The top-level module is `prolexa.pl`, which can either be run in the command line or with speech input and output through the 

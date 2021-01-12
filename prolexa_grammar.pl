@@ -133,9 +133,12 @@ sentence_negation(C) 	--> neg_determiner(N,M1,M2,C,_),noun(N,M1),negated_verb_ph
 sentence_negation([not(L):-true])		--> proper_noun(N,X),negated_verb_phrase(N,_,_,X=>L).
 
 % Negated Verb Phrases - Singlular (Before)
-negated_verb_phrase(s,before,_,M) --> [is],[not],property(s,M).
-negated_verb_phrase(s,before,_,M) --> [cannot],iverb(p,M). 
 
+negated_verb_phrase(s,before,_,M) --> [is],[not],property(s,M).
+negated_verb_phrase(s,before,_,M) --> [cannot],iverb(p,M).
+negated_verb_phrase(s,before,_,M) --> [not],property(s,M).
+
+negated_verb_phrase(s,after,object,M) --> [not],property(s,M).
 negated_verb_phrase(s,after,object,M) --> [is],[not],property(s,M).
 negated_verb_phrase(s,after,person,M) --> [are],[not],property(s,M).
 negated_verb_phrase(s,after,object,M) --> [cannot],iverb(p,M).
@@ -155,10 +158,15 @@ conjunction(a, before) --> [and].
 
 % Verb Phrases - Singluar (Before)
 
+
 verb_phrase(s,before,_,M) --> [is],property(s,M).
 verb_phrase(s,before,_,M) --> [can],verb(do),property(p,M).
+verb_phrase(_,before,_,M) --> [can],iverb(p,M).
 verb_phrase(s,before,_,M) --> [can],iverb(p,M).
-verb_phrase(s,before,_,M) --> [can],iverb(p,M).
+verb_phrase(s,before,_,M) --> [can],iverb(s,M).
+verb_phrase(s,before,_,M) --> property(s,M).
+verb_phrase(_,before,_,M) --> iverb(p,M).
+
 
 verb_phrase(p,before,person,M) --> [are],property(_,M).
 verb_phrase(p,before,_,X) --> tverb(p,Y=>X),noun(p,Y).
@@ -248,7 +256,10 @@ qword --> [].
 question1(Q) --> [who],verb_phrase(s,_,_,_X=>Q).
 question1(Q) --> [is], proper_noun(N,X),property(N,X=>Q).
 
-question1(Q) --> [can],proper_noun(_,X),verb_phrase(_,_,_,X=>Q).
+
+question1(Q) --> [can],proper_noun(_,X),verb_phrase(p,_,_,X=>Q).
+
+
 question1(Q) --> [can],noun(_N0,X),verb_phrase(_N1,_,_,X=>Q). 
 
 question1(Q) --> [do],determiner(N,M1,M2,Q),noun(_,M1),verb_phrase(_,_,_,M2).
